@@ -1,1 +1,1 @@
-## [live]](https://boom-bo.github.io/web_accumulation/)
+## [live](https://boom-bo.github.io/web_accumulation/)
