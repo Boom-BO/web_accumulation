@@ -1,6 +1,6 @@
 module.exports = {
   // title: 'Primeton VUE组件',
-  title: 'Vue 积累',
+  title: 'Web前端积累',
   // description: '普元 VUE后台系统自定义组件文档',
   description: 'Web前端积累，慢慢好起来了',
   // 注入到当前页面的 HTML <head> 中的标签
