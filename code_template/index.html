@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vscode中快速创建自定义代码模板 | Web前端积累</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/web_accumulation/favicon.ico">
+    <meta name="description" content="Web前端积累，慢慢好起来了">
+    <link rel="preload" href="/web_accumulation/assets/css/0.styles.6ceb3147.css" as="style"><link rel="preload" href="/web_accumulation/assets/js/app.a6c80b78.js" as="script"><link rel="preload" href="/web_accumulation/assets/js/2.73f3c291.js" as="script"><link rel="preload" href="/web_accumulation/assets/js/7.d7fb07fa.js" as="script"><link rel="prefetch" href="/web_accumulation/assets/js/10.4bd3b39e.js"><link rel="prefetch" href="/web_accumulation/assets/js/11.2928f0f8.js"><link rel="prefetch" href="/web_accumulation/assets/js/3.b53b0167.js"><link rel="prefetch" href="/web_accumulation/assets/js/4.bcd513ff.js"><link rel="prefetch" href="/web_accumulation/assets/js/5.e10d58f9.js"><link rel="prefetch" href="/web_accumulation/assets/js/6.740bd7d1.js"><link rel="prefetch" href="/web_accumulation/assets/js/8.96b2d858.js"><link rel="prefetch" href="/web_accumulation/assets/js/9.22fa4c5a.js">
+    <link rel="stylesheet" href="/web_accumulation/assets/css/0.styles.6ceb3147.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/web_accumulation/" class="home-link router-link-active"><!----> <span class="site-name">Web前端积累</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue系列" class="dropdown-title"><span class="title">Vue系列</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue系列" class="mobile-dropdown-title"><span class="title">Vue系列</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/web_accumulation/standard/" class="nav-link">
+  Vue开发规范
+</a></li><li class="dropdown-item"><!----> <a href="/web_accumulation/eslint_auto_format/" class="nav-link">
+  VsCode EsLint自动格式化
+</a></li><li class="dropdown-item"><!----> <a href="/web_accumulation/axios/" class="nav-link">
+  Vue+Axios请求封装
+</a></li><li class="dropdown-item"><!----> <a href="/web_accumulation/code_template/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  自定义代码模板
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="GitHub" class="dropdown-title"><span class="title">GitHub</span> <span class="arrow down"></span></button> <button type="button" aria-label="GitHub" class="mobile-dropdown-title"><span class="title">GitHub</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/Boom-BO" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub地址
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue系列" class="dropdown-title"><span class="title">Vue系列</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue系列" class="mobile-dropdown-title"><span class="title">Vue系列</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/web_accumulation/standard/" class="nav-link">
+  Vue开发规范
+</a></li><li class="dropdown-item"><!----> <a href="/web_accumulation/eslint_auto_format/" class="nav-link">
+  VsCode EsLint自动格式化
+</a></li><li class="dropdown-item"><!----> <a href="/web_accumulation/axios/" class="nav-link">
+  Vue+Axios请求封装
+</a></li><li class="dropdown-item"><!----> <a href="/web_accumulation/code_template/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  自定义代码模板
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="GitHub" class="dropdown-title"><span class="title">GitHub</span> <span class="arrow down"></span></button> <button type="button" aria-label="GitHub" class="mobile-dropdown-title"><span class="title">GitHub</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/Boom-BO" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub地址
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Vscode中快速创建自定义代码模板</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/web_accumulation/code_template/#操作步骤" class="sidebar-link">操作步骤</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vscode中快速创建自定义代码模板"><a href="#vscode中快速创建自定义代码模板" class="header-anchor">#</a> Vscode中快速创建自定义代码模板</h1> <blockquote><p>使用Vscode的用户代码片段功能，来生成自己习惯的代码模板，从而提升开发效率。此文拿vue组件代码模板作为例子，其他如H5代码模板都可按照此方法设置。
+<br> 官方介绍 <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets" target="_blank" rel="noopener noreferrer">Snippets in Visual Studio Code<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></blockquote> <h2 id="操作步骤"><a href="#操作步骤" class="header-anchor">#</a> 操作步骤</h2> <p><strong>1、（macOS系统）选择菜单 &gt; code &gt; 首选项 &gt; 用户片段</strong></p> <img src="/web_accumulation/step1.jpg"> <p>或
+<strong>在vscode中，command+shift+p 打开配置搜索框</strong></p> <img src="/web_accumulation/step11.jpg"> <p><strong>2、找到vue.json打开</strong>∏</p> <img src="/web_accumulation/step2.jpg"> <p><strong>3、在vue.json文件中编辑如下代码</strong></p> <div class="custom-block tip"><p class="custom-block-title">注意</p> <p>prefix 生成模板的关键词
+$0表示最终光标位置<br>
+$1，$2 等指定光标位置，这些数字指定了光标跳转的顺序</p></div> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token punctuation">{</span>
+	<span class="token string">&quot;Print to console&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+		<span class="token comment">// 生成模板的关键词</span>
+		<span class="token string">&quot;prefix&quot;</span><span class="token operator">:</span> <span class="token string">&quot;vue&quot;</span><span class="token punctuation">,</span>
+		<span class="token string">&quot;body&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+			<span class="token string">&quot;&lt;template&gt;&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  &lt;div class=\&quot;demo\&quot;&gt;$0&lt;/div&gt;&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;&lt;/template&gt;&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;&lt;script&gt;&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;export default {&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  name: '',&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  components: {},&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  props: {},&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  data() {&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;    return {&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;    }&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  },&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  computed: {},&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  watch: {},&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  created() {},&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  mounted() {},&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;  methods: {},&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;};&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;&lt;/script&gt;&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;&lt;style lang=\&quot;scss\&quot; scoped&gt;&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;.demo {}&quot;</span><span class="token punctuation">,</span>
+			<span class="token string">&quot;&lt;/style&gt;&quot;</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token string">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;A vue file template&quot;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><div class="custom-block tip"><p class="custom-block-title">成功</p> <p><strong>到此已完成Vue代码模板配置，下面来创建一个.vue文件，输入<code>vue</code>回车来试验一下，能自动生成设置好的代码就成功了</strong></p></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/web_accumulation/assets/js/app.a6c80b78.js" defer></script><script src="/web_accumulation/assets/js/2.73f3c291.js" defer></script><script src="/web_accumulation/assets/js/7.d7fb07fa.js" defer></script>
+  </body>
+</html>
