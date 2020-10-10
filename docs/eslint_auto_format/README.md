@@ -40,6 +40,17 @@
     "js": "prettier",
     "ts": "prettier",
     "stylus": "stylus-supremacy"
+  },
+  // "vetur.format.defaultFormatter.js": "vscode-typescript", // #让vue中的js按编辑器自带的ts格式进行格式化
+  "vetur.format.defaultFormatterOptions": {
+      "js-beautify-html": {
+          // - auto: 仅在超出行长度时才对属性进行换行。
+          // - force: 对除第一个属性外的其他每个属性进行换行。
+          // - force-aligned: 对除第一个属性外的其他每个属性进行换行，并保持对齐。
+          // - force-expand-multiline: 对每个属性进行换行。
+          // - aligned-multiple: 当超出折行长度时，将属性进行垂直对齐。
+          "wrap_attributes": "force-expand-multiline" //#vue组件中html代码格式化样式 对每个属性进行换行
+      }
   }
 ```
 ::: tip

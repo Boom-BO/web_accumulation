@@ -20,7 +20,7 @@
   foo1 = 33333
 ```
 
-## 普通变量命名规范
+### 普通变量命名规范
 
 - 命名方法： 驼峰命名法
 
@@ -36,7 +36,7 @@
 
 
 
-## 常量
+### 常量
 
 - 命名方法： 全部大写
 
@@ -51,7 +51,7 @@ const URL = 'https://www.baidu.com/'
 
 ## 组件命名规范
 
-#### 官方文档推荐及使用遵循规则
+### 官方文档推荐及使用遵循规则
 
 `PascalCase`（单词首字母大写命名）是最通用的声明约定
 
@@ -83,7 +83,7 @@ const URL = 'https://www.baidu.com/'
 
 
 
-## `method` 方法命名命名规范
+### `method` 方法命名命名规范
 
 - 驼峰式命名, 统一使用动词或者动词+名词形式
 
@@ -222,7 +222,7 @@ const URL = 'https://www.baidu.com/'
 
 
 
-## `views` 下的文件命名
+### `views` 下的文件命名
 
 - 只有一个文件的情况下不会出现文件夹, 而是直接放在 `views` 目录下面, 如 `index.vue`
 
@@ -234,7 +234,7 @@ const URL = 'https://www.baidu.com/'
 
 
 
-## `props` 命名
+### `props` 命名
 
 在声明 `prop` 的时候, 其命名应该始终使用 `camelCase`, 而在模板中应该始终使用 `kebab-case`
 
@@ -260,7 +260,7 @@ props: {
 
 
 
-## 例外情况
+### 例外情况
 
 1. 作用域不大临时变量可以简写, 比如：`str`, `num`, `bol`, `obj`, `fun`, `arr`
 
@@ -268,8 +268,8 @@ props: {
 
 
 
-# 结构化规范
-## 目录文件夹及子文件规范
+## 结构化规范
+### 目录文件夹及子文件规范
 
 - 以下统一管理处均对应相应模块
 - 以下全局文件文件均以 `index.js` 导出, 并在 `main.js` 中导入
@@ -287,6 +287,8 @@ src                               源码目录
 |-- mock                             模拟接口, 临时存放
 |-- router                           路由, 统一管理
 |-- store                            vuex, 统一管理
+|-- styles                           样式文件, 统一管理
+|-- uitls                            公共函数文件
 |-- views                            视图目录
 |   |-- staffWorkbench                  视图模块名
 |   |-- |-- staffWorkbench.vue             模块入口页面
@@ -296,30 +298,33 @@ src                               源码目录
 
 
 
-## `vue` 文件基本结构
+### `vue` 文件基本结构
 
 ```html
 <template>
-    <div>
-      <!--必须在div中编写页面-->
-    </div>
+  <div class="demo">
+     <!--必须在div中编写页面-->
+  </div>
 </template>
+
 <script>
 export default {
-    components : {
-    },
-    data () {
-        return {
-        }
-    },
-    mounted() {
-    },
-    methods: {
+  components: {},
+  props: {},
+  data() {
+    return {
     }
-}
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  computed: {},
+  watch: {}
+};
 </script>
 <!--声明语言, 并且添加scoped-->
 <style lang="scss" scoped>
+.demo {}
 </style>
 ```
 
@@ -388,26 +393,27 @@ export default {
 如下所示：
 
 ```js
+- name
+- mixins
 - components
 - props
 - data
 - computed
+- watch
 - created
 - mounted
 - metods
-- filter
-- watch
 ```
 
 
 
-# 注释规范
+## 注释规范
 
 代码注释在一个项目的后期维护中显的尤为重要, 所以我们要为每一个被复用的组件编写组件使用说明, 为组件中每一个方法编写方法说明
 
 
 
-## 务必添加注释列表
+### 务必添加注释列表
 
 1. 公共组件使用说明
 
@@ -425,7 +431,7 @@ export default {
 
 
 
-## 单行注释
+### 单行注释
 
 注释单独一行, 不要在代码后的同一行内加注释。例如：
 
@@ -442,7 +448,7 @@ export default {
 
 
 
-## 多行注释
+### 多行注释
 
 ```html
 组件使用说明, 和调用说明
@@ -461,7 +467,7 @@ export default {
 
 
 
-# 编码规范
+## 编码规范
 
 优秀的项目源码, 即使是多人开发, 看代码也如出一人之手。统一的编码规范, 可使代码更易于阅读, 易于理解, 易于维护。尽量按照 **ESLint** 格式要求编写代码
 
@@ -469,7 +475,7 @@ export default {
 
 ## 源码风格
 
-#### 使用 ES6 风格编码
+### 使用 ES6 风格编码
 
 1. 定义变量使用 `let` ,定义常量使用 `const`
 
@@ -588,7 +594,7 @@ export default {
 
 
 
-## 指令规范
+### 指令规范
 
 1. 指令有缩写一律采用缩写形式
 
@@ -672,7 +678,7 @@ export default {
 
 
 
-## `Props` 规范
+### `Props` 规范
 
 ```js
 // bad 这样做只有开发原型系统时可以接受

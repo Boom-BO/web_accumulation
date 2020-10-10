@@ -13,10 +13,16 @@ module.exports = {
   },
   themeConfig: {
     nav:[
-      { text: 'Vue开发规范', link: '/standard/' }, // 内部链接 以docs为根目录
-      { text: 'VsCode EsLint自动格式化', link: '/eslint_auto_format/' },
-      { text: 'Vue+Axios请求封装', link: '/axios/' },
-      // 下拉列表
+      {
+        text: 'Vue系列',
+        items: [
+          { text: 'Vue开发规范', link: '/standard/' }, // 内部链接 以docs为根目录
+          { text: 'VsCode EsLint自动格式化', link: '/eslint_auto_format/' },
+          { text: 'Vue+Axios请求封装', link: '/axios/' },
+          { text: '自定义代码模板', link: '/code_template/' }
+        ]
+      },
+      // 下拉列表   
       {
         text: 'GitHub',
         items: [
