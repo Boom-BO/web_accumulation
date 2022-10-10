@@ -11,5 +11,8 @@
   "license": "MIT",
   "devDependencies": {
     "vuepress": "^1.5.4"
+  },
+  "dependencies": {
+    "vuepress-sidebar-atuo": "^1.0.4"
   }
 }

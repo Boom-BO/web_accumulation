@@ -1,3 +1,7 @@
+// const { getChildren } = require('vuepress-sidebar-atuo')
+const accumulate = require('./config/accumulate')
+const algorithm = require('./config/algorithm')
+const codeBlack = require('./config/codeBlack')
 module.exports = {
 	// title: 'Primeton VUE组件',
 	title: '前端积累',
@@ -44,8 +48,36 @@ module.exports = {
 				items: [{ text: 'GitHub地址', link: 'https://github.com/Boom-BO' }]
 			}
 		],
-		sidebar: 'auto',
-		sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
-		lastUpdated: 'Last Updated' // 文档更新时间：每个文件git最后提交的时间
+		sidebar: {
+			'/standard/': 'auto',
+			'/eslint_auto_format/': 'auto',
+			'/axios/': 'auto',
+			'/code_template/': 'auto',
+			'/accumulate/': accumulate,
+			'/codeBlack/': codeBlack,
+			'/algorithm/': [
+				{
+					title: '简单',
+					collapsable: false,
+					children: algorithm.simple
+				},
+				{
+					title: '中等',
+					collapsable: false,
+					children: algorithm.medium
+				}
+			]
+		},
+		// {
+		// 	'/standard/': 'auto',
+		// 	'/eslint_auto_format/': 'auto',
+		// 	'/axios/': 'auto',
+		// 	'/code_template/': 'auto',
+		// 	'/accumulate/': accumulate,
+		// 	'/algorithm/': algorithm,
+		// 	'/codeBlack/': codeBlack
+		// },
+		sidebarDepth: 3 // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
+		// lastUpdated: 'Last Updated' // 文档更新时间：每个文件git最后提交的时间
 	}
 }
