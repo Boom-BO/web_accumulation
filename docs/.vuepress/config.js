@@ -1,8 +1,8 @@
 module.exports = {
 	// title: 'Primeton VUE组件',
-	title: 'Web前端积累',
+	title: '前端积累',
 	// description: '普元 VUE后台系统自定义组件文档',
-	description: 'Web前端积累，慢慢好起来了',
+	description: '种一棵树最好的时间是十年前，其次就是现在',
 	// 注入到当前页面的 HTML <head> 中的标签
 	head: [
 		['link', { rel: 'icon', href: '/favicon.ico' }] // 增加一个自定义的 favicon(网页标签的图标)
@@ -22,8 +22,8 @@ module.exports = {
 					{ text: '自定义代码模板', link: '/code_template/' }
 				]
 			},
-			{ text: '前端积累', link: '/accumulate/' },
-			{ text: '前端算法', link: '/algorithm/' },
+			{ text: '知识积累', link: '/accumulate/' },
+			{ text: '算法', link: '/algorithm/' },
 			{ text: '代码块', link: '/codeBlack/' },
 			{
 				text: '开源库',

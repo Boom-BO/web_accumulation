@@ -15,12 +15,6 @@
 
 这类代码块也通常比较偏，所以在今后积累的比较多了，这也是很有价值的内容，可以快速学习到很多内容！
 
-如果对这个项目有兴趣的话,可以给我的[项目](https://github.com/OBKoro1/codeBlack)点个 Star。
+如果对这个项目有兴趣的话,可以给我的[项目](https://github.com/Boom-BO/web_accumulation)点个 Star。
 
-### 来社区关注我,不错过最新文章：
-
-- [掘金](https://juejin.im/user/58714f0eb123db4a2eb95372/posts)
-
-- [segmentfault](https://segmentfault.com/u/obkoro1/articles)
-- [微信公众号](https://github.com/OBKoro1/articleImg_src/blob/master/juejin/1631b6f52f7e7015.jpeg?raw=true)
   <!-- 特殊字符串：用于修改/删除markdown的结尾提示语-->

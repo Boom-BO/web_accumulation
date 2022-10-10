@@ -1,18 +1,19 @@
 ---
 home: true
-heroImage: /logo.gif
+heroImage: /dance.gif
 actionText: 瞅瞅 →
 actionLink: /standard/
 features:
-- title: Stay hungry, stay foolish.
-  details: Stay hungry, stay foolish.
-- title: You build it, you run it.
-  details: You build it, you run it.
-- title: Talk is cheap. Show me the code.
-  details: Talk is cheap. Show me the code.
+  - title: Stay hungry, stay foolish.
+    details: Stay hungry, stay foolish.
+  - title: You build it, you run it.
+    details: You build it, you run it.
+  - title: Talk is cheap. Show me the code.
+    details: Talk is cheap. Show me the code.
 footer: MIT Licensed | Copyright © 2020-present WU BO
 ---
-<!-- 
+
+<!--
 # vuepress-blog
 > a vuepress blog about qiufeihong
 
@@ -35,7 +36,7 @@ npm run build
 npm run d
 
 # pm2 deploy
-npm run server 
+npm run server
 
 
 ### main page -->

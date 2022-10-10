@@ -132,4 +132,4 @@ codepen 的[demo](https://codepen.io/OBKoro1/pen/ZoVxgQ);
 3. 减少选择器的个数（避免层层嵌套）;
    <!-- 特殊字符串：用于修改/删除markdown的结尾提示语-->
 
-### 点个[Star](https://boom-bo.github.io/web_accumulation)支持我一下~
+### 点个[Star](https://github.com/Boom-BO/web_accumulation)支持我一下~
