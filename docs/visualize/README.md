@@ -56,9 +56,9 @@ getScale = () => {
 
 <strong>Demo 介绍：</strong><br/>
 技术栈：JQ + Echarts<br/>
-项目-《<a href="/code/visualize/%E5%A4%A7%E5%B1%8F%E6%96%B9%E6%A1%88/index.html" target="_blank">大屏方案一</a>》：简单的框架，带有基础自适应功能与框架样式。其案例为《<a href="/code/visualize/XXXX%E9%9B%86%E5%9B%A2%E5%AE%89%E5%85%A8%E7%94%9F%E4%BA%A7%E5%A4%A7%E5%B1%8F/index.html" target="_blank">大屏 Demo1</a>》。<br/>
-项目-《<a href="/code/visualize/%E5%A4%A7%E5%B1%8F%E6%96%B9%E6%A1%882/theme.html" target="_blank">大屏方案二</a>》：带有基础自适应功能与框架样式基础上增加了 Echarts 地图与主题切换功能，其案例为《<a href="/code/visualize/XXX%E5%A4%A7%E5%B1%8F/index.html" target="_blank">大屏 Demo2</a>》，支持滚屏显示。<br/>
-另外我们整理了一些案例集锦效果图，请点击查看《<a href="/code/visualize/可视化大屏UI案例集锦.pdf" target="_blank">可视化大屏 UI 案例集锦.pdf</a>》
+项目-《<a href="/web_accumulation/code/visualize/%E5%A4%A7%E5%B1%8F%E6%96%B9%E6%A1%88/index.html" target="_blank">大屏方案一</a>》：简单的框架，带有基础自适应功能与框架样式。其案例为《<a href="/web_accumulation/code/visualize/XXXX%E9%9B%86%E5%9B%A2%E5%AE%89%E5%85%A8%E7%94%9F%E4%BA%A7%E5%A4%A7%E5%B1%8F/index.html" target="_blank">大屏 Demo1</a>》。<br/>
+项目-《<a href="/web_accumulation/code/visualize/%E5%A4%A7%E5%B1%8F%E6%96%B9%E6%A1%882/theme.html" target="_blank">大屏方案二</a>》：带有基础自适应功能与框架样式基础上增加了 Echarts 地图与主题切换功能，其案例为《<a href="/web_accumulation/code/visualize/XXX%E5%A4%A7%E5%B1%8F/index.html" target="_blank">大屏 Demo2</a>》，支持滚屏显示。<br/>
+另外我们整理了一些案例集锦效果图，请点击查看《<a href="/web_accumulation/code/visualize/可视化大屏UI案例集锦.pdf" target="_blank">可视化大屏 UI 案例集锦.pdf</a>》
 
 ## 3D 可视化大屏
 
