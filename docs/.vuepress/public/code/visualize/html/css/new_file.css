@@ -1,0 +1,53 @@
+.center_time_box{
+	display: inherit;
+}
+.new_prescription{
+	position: relative;
+	width: 50%;
+]}
+.new_ordinary{
+	font-size: 12px;
+}
+.new_title_box{
+	margin-bottom: 10!important;
+}
+#tijiao{
+	    padding: 10px;
+}
+.new_footer ul{
+	display: inherit;
+}
+.new_footer ul>li{
+	width: 100%;
+	font-size: 10px;
+}
+.center_time_box li{
+	font-size: 12px;
+}
+.center_name_box>li>span{
+	font-size: 10px;
+}
+.detail_footer{
+	padding: 20px 0;
+}
+.new_footer{
+	font-size: 16px;
+}
+.center_name_box>li{
+	width: inherit;
+}
+.new_rp {
+	font-size: 18px;
+}
+.center_name_box>li{
+	font-size: 10px;
+}
+.new_diagnosis>span{
+	font-size: 10px;
+}
+.table_text{
+	font-size: 10px;
+}
+.detail_rp{
+	font-size: 14px;
+}

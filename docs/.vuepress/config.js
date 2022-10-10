@@ -26,6 +26,7 @@ module.exports = {
 					{ text: '自定义代码模板', link: '/code_template/' }
 				]
 			},
+			{ text: '可视化大屏', link: '/visualize/' },
 			{ text: '知识积累', link: '/accumulate/' },
 			{ text: '算法', link: '/algorithm/' },
 			{ text: '代码块', link: '/codeBlack/' },
@@ -50,6 +51,7 @@ module.exports = {
 		],
 		sidebar: {
 			'/standard/': 'auto',
+			'/visualize/': 'auto',
 			'/eslint_auto_format/': 'auto',
 			'/axios/': 'auto',
 			'/code_template/': 'auto',

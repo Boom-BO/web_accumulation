@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./css/normalize.css" />
+		<link rel="stylesheet" href="./css/common.css" />
+		<link rel="stylesheet" href="./css/index.css" />
+		<link rel="stylesheet" href="./css/animate.min.css" />
+		<title>航天三江安全生产综合管理系统</title>
+		<style type="text/css"></style>
+	</head>
+
+	<body>
+		<div class="AVS scale-wrapper">
+			<div id="loading">
+				<div class="loading_img">
+					<!-- 加载动画 -->
+					<img class="loading-ring-o" src="images/loading-ring-o.png" />
+					<img class="loading-ring-i" src="images/loading-ring-i.png" />
+				</div>
+			</div>
+			<div class="title-bar">
+				<img src="images/logo.png" alt="" class="logo" />
+				<p class="title-name">XXXX集团安全生产综合管理系统</p>
+				<span id="time"></span>
+			</div>
+			<div class="content">
+				<div class="c-safe">
+					<p class="charts-title">安全文化</p>
+					<ul class="safectr-list"></ul>
+					<div class="btn-row">
+						<div class="btn" type="legal">法律法规</div>
+						<div class="btn" type="data">安全资料</div>
+					</div>
+				</div>
+				<div class="c-danger-work">
+					<p class="charts-title">危险作业场所在线监测</p>
+					<div class="dw-info">
+						<ul class="btn-row clearfix"></ul>
+						<ul class="warehouse-list clearfix"></ul>
+						<div id="monitor-line"></div>
+					</div>
+				</div>
+				<div class="c-plan">
+					<p class="plan-name">
+						<img src="images/company.png" alt="" />
+						<span>集团公司计划管理</span>
+					</p>
+					<div class="progress-item" type="company">
+						<p class="info clearfix">
+							<span class="rate"
+								>责任令完成率<span class="rate-value">43%</span></span
+							>
+							<span class="num"
+								>总个数：<span class="num-value">1932</span>（个）</span
+							>
+						</p>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<p class="info clearfix">
+							<span class="rate"
+								>年度计划完成情况<span class="rate-value">43%</span></span
+							>
+							<span class="num"
+								>总个数：<span class="num-value">1932</span>（个）</span
+							>
+						</p>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+					</div>
+					<p class="plan-name">
+						<img src="images/feiji.png" alt="" />
+						<span>时间计划管理</span>
+					</p>
+					<div class="progress-item" type="aerospace">
+						<p class="info clearfix">
+							<span class="rate"
+								>月度计划完成情况<span class="rate-value">43%</span></span
+							>
+							<span class="num"
+								>总个数：<span class="num-value">1932</span>（个）</span
+							>
+						</p>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<p class="info clearfix">
+							<span class="rate"
+								>月度计划完成情况<span class="rate-value">43%</span></span
+							>
+							<span class="num"
+								>总个数：<span class="num-value">1932</span>（个）</span
+							>
+						</p>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+					</div>
+				</div>
+				<div class="c-status">
+					<div class="tabs clearfix"></div>
+					<div class="charts-wrapper clearfix">
+						<div id="danger-bar"></div>
+						<div id="warning-chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/browser.min.js"></script>
+		<script src="js/browser-polyfill.min.js"></script>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="./js/echarts.min.js"></script>
+		<script type="text/babel">
+			let monitorLine = null
+			let monitorLineOption = null
+			let dangerChart = null
+			let dangerChartOption = null
+			let warningChart = null
+			let warningChartOption = null
+			// let warningPie = null
+
+			$(function () {
+				// 页面自适应缩放
+				scalePage()
+				// 清除loading
+				clearLoading()
+				// 倒计时组件
+				timeInit()
+				// 安全文化
+				safectrInit()
+				// 危险作业场所检测-单位列表
+				orgListInit()
+				// 危险作业场所检测-仓库列表
+				warehouseListInit()
+				monitorLineChartInit()
+				// 计划进度条模块渲染
+				planInit()
+				// tab标签动态渲染
+				tabsInit()
+				// 重大危险源柱形图渲染
+				dangerBarInit()
+				// 隐患问题整改情况渲染
+				warningChartInit()
+				$('.title-bar .title-name').click(function () {
+					// 标题点击全屏
+					fullScreen()
+				})
+			})
+
+			function clearLoading() {
+				//删除加载动画
+				$('#loading').fadeOut(1000)
+				setTimeout(function () {
+					$('#loading').remove()
+				}, 1300)
+			}
+
+			function timeInit() {
+				setInterval(function () {
+					let date = new Date()
+					$('#time').text('实时数据：' + getFormatDate())
+				}, 1000)
+			}
+
+			function getFormatDate() {
+				let nowDate = new Date()
+				let year = nowDate.getFullYear()
+				let month =
+					nowDate.getMonth() + 1 < 10
+						? '0' + (nowDate.getMonth() + 1)
+						: nowDate.getMonth() + 1
+				let date =
+					nowDate.getDate() < 10 ? '0' + nowDate.getDate() : nowDate.getDate()
+				let hour =
+					nowDate.getHours() < 10
+						? '0' + nowDate.getHours()
+						: nowDate.getHours()
+				let minute =
+					nowDate.getMinutes() < 10
+						? '0' + nowDate.getMinutes()
+						: nowDate.getMinutes()
+				let second =
+					nowDate.getSeconds() < 10
+						? '0' + nowDate.getSeconds()
+						: nowDate.getSeconds()
+				return (
+					year +
+					'-' +
+					month +
+					'-' +
+					date +
+					' ' +
+					hour +
+					':' +
+					minute +
+					':' +
+					second
+				)
+			}
+
+			function getScale() {
+				// 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+				const width = 1920
+				const height = 1080
+				let ww = window.innerWidth / width
+				let wh = window.innerHeight / height
+				return ww < wh ? ww : wh
+			}
+			// 页面渲染计算比例缩放
+			function scalePage() {
+				let setScale = debounce(function () {
+					// 获取到缩放比，设置它
+					let scale = getScale()
+					$('.scale-wrapper').css({
+						transform: 'scale(' + scale + ') translate(-50%, -50%)',
+						'-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+					})
+				}, 200)
+				setScale()
+				window.addEventListener('resize', setScale)
+			}
+			// 防抖
+			function debounce(fun, delay) {
+				let timer = null
+				return function () {
+					if (timer) {
+						clearTimeout(timer)
+					}
+					timer = setTimeout(fun, delay)
+				}
+			}
+			//全屏
+			function fullScreen() {
+				var element = document.documentElement
+				if (element.requestFullscreen) {
+					element.requestFullscreen()
+				} else if (element.msRequestFullscreen) {
+					element.msRequestFullscreen()
+				} else if (element.mozRequestFullScreen) {
+					element.mozRequestFullScreen()
+				} else if (element.webkitRequestFullscreen) {
+					element.webkitRequestFullscreen()
+				}
+			}
+
+			function orgListInit() {
+				const orgList = [
+					{
+						id: '1',
+						name: '单位'
+					},
+					{
+						id: '2',
+						name: '单位'
+					},
+					{
+						id: '3',
+						name: '单位'
+					},
+					{
+						id: '4',
+						name: '单位'
+					},
+					{
+						id: '5',
+						name: '单位'
+					},
+					{
+						id: '6',
+						name: '单位'
+					}
+				]
+				let liDom = ''
+				$.each(orgList, function (index, item) {
+					liDom +=
+						'<li class="org-btn" org-id="' +
+						item.id +
+						'">' +
+						item.name +
+						(index + 1) +
+						'</li>'
+				})
+				$('.c-danger-work .dw-info .btn-row').append(liDom)
+				let self = this
+				$('.c-danger-work .dw-info .btn-row').on(
+					'click',
+					'.org-btn',
+					function (e) {
+						$('.c-danger-work .dw-info .btn-row .active').removeClass('active')
+						$(e.currentTarget).addClass('active')
+						const orgId = $(e.currentTarget).attr('org-id')
+						console.log('orgListInit -> orgId', orgId)
+						// 动态改动数据-例如
+						monitorLineOption.series[0].data[1] = Math.floor(
+							Math.random() * 100 + 10
+						)
+						monitorLineOption.series[1].data[2] = Math.floor(
+							Math.random() * 100 + 10
+						)
+						monitorLineOption.series[2].data[3] = Math.floor(
+							Math.random() * 100 + 10
+						)
+						monitorLine.setOption(monitorLineOption)
+					}
+				)
+				setTimeout(function () {
+					$($('.c-danger-work .dw-info .btn-row .org-btn')[0]).trigger('click')
+				}, 1000)
+			}
+
+			function warehouseListInit() {
+				const whList = [
+					{
+						id: '1',
+						name: '这是个名称超长的库房'
+					},
+					{
+						id: '2',
+						name: '库房'
+					},
+					{
+						id: '3',
+						name: '库房'
+					},
+					{
+						id: '4',
+						name: '库房'
+					},
+					{
+						id: '5',
+						name: '库房'
+					},
+					{
+						id: '6',
+						name: '库房'
+					},
+					{
+						id: '7',
+						name: '库房'
+					},
+					{
+						id: '8',
+						name: '库房'
+					},
+					{
+						id: '9',
+						name: '库房'
+					}
+				]
+				let liDom = ''
+				$.each(whList, function (index, item) {
+					liDom +=
+						'<li class="warehouse-item-wrapper">' +
+						'<div class="warehouse-item clearfix" wh-id="' +
+						item.id +
+						'">' +
+						'<img src="images/warehouse.png" alt="" class="whitem-icon">' +
+						'</div>' +
+						'<p class="wh-item-label">' +
+						item.name +
+						(index + 1) +
+						'</p>' +
+						'</li>'
+				})
+				$('.c-danger-work .dw-info .warehouse-list').append(liDom)
+				$('.c-danger-work .dw-info .warehouse-list').on(
+					'click',
+					'.warehouse-item',
+					function (e) {
+						$('.c-danger-work .dw-info .warehouse-list .active').removeClass(
+							'active'
+						)
+						$(e.currentTarget).addClass('active')
+						const whId = $(e.currentTarget).attr('wh-id')
+						console.log('orgListInit -> whId', whId)
+						// 动态改动数据-例如
+						monitorLineOption.series[0].data[1] = Math.floor(
+							Math.random() * 100 + 10
+						)
+						monitorLineOption.series[1].data[2] = Math.floor(
+							Math.random() * 100 + 10
+						)
+						monitorLineOption.series[2].data[3] = Math.floor(
+							Math.random() * 100 + 10
+						)
+						monitorLine.setOption(monitorLineOption)
+					}
+				)
+				setTimeout(function () {
+					$(
+						$('.c-danger-work .dw-info .warehouse-list .warehouse-item')[0]
+					).trigger('click')
+				}, 1000)
+			}
+
+			function monitorLineChartInit() {
+				monitorLine = echarts.init(document.getElementById('monitor-line'))
+				const colors = ['#00D69C', '#9034E1', '#F6AC61']
+				// const highlightColor = ['#AA9FFF', '#609CFE']
+				const xData = [
+					'00:00',
+					'03:00',
+					'06:00',
+					'09:00',
+					'12:00',
+					'15:00',
+					'18:00',
+					'21:00'
+				]
+				const status = '正常'
+				const data1 = [13, 1, 4, 44, 45, 322, 76, 120]
+				const data2 = [25, 54, 34, 344, 35, 53, 60, 250]
+				const data3 = [120, 19, 2, 32, 123, 23, 136, 20]
+				monitorLineOption = {
+					color: colors,
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {
+							// type: 'cross',
+							// crossStyle: {
+							//     color: '#fff'
+							// },
+							// lineStyle: {
+							//     type: 'dashed'
+							// },
+							lineStyle: {
+								color: {
+									type: 'linear',
+									x: 0,
+									y: 0,
+									x2: 0,
+									y2: 1,
+									colorStops: [
+										{
+											offset: 0,
+											color: 'rgba(0, 255, 233,0)'
+										},
+										{
+											offset: 0.5,
+											color: 'rgba(255, 255, 255,1)'
+										},
+										{
+											offset: 1,
+											color: 'rgba(0, 255, 233,0)'
+										}
+									],
+									global: false
+								}
+							}
+						}
+					},
+					grid: {
+						left: 25,
+						right: 25,
+						bottom: 25,
+						top: 50,
+						containLabel: true
+					},
+					legend: {
+						icon: 'rect',
+						data: ['气体浓度', '温度', '湿度'],
+						orient: 'horizontal',
+						show: true,
+						left: 180,
+						top: 8,
+						textStyle: {
+							color: '#4BD9FD'
+						},
+						itemWidth: 10,
+						itemHeight: 10,
+						itemGap: 40
+					},
+					xAxis: {
+						type: 'category',
+						data: xData,
+						splitLine: {
+							show: false
+						},
+						axisTick: {
+							show: false
+						},
+						axisLine: {
+							lineStyle: {
+								color: '#ffffff30',
+								width: 0.5
+							}
+						},
+						axisLabel: {
+							color: '#fff',
+							textStyle: {
+								fontSize: 12
+							}
+						},
+						boundaryGap: false
+					},
+					yAxis: {
+						type: 'value',
+						// max: max_value>=100? max_value + 100: max_value+10,
+						// max: max_value > 100 ? max_value * 2 : max_value + 10,
+						// interval: 10,
+						// nameLocation: "center",
+
+						name: '当前库是否正常：' + status,
+						nameTextStyle: {
+							color: '#4BD9FD',
+							fontSize: 12,
+							lineHeight: 30,
+							align: 'left',
+							padding: [0, 0, 0, -30]
+						},
+						axisLabel: {
+							formatter: '{value} ',
+							textStyle: {
+								color: '#f6f6f6', //X轴文字颜色
+								fontSize: 13
+							}
+						},
+						axisLine: {
+							lineStyle: {
+								color: '#ffffff30',
+								width: 0.5
+							}
+						},
+						axisTick: {
+							show: false
+						},
+						splitLine: {
+							show: true,
+							lineStyle: {
+								color: '#ffffff30'
+							}
+						}
+					},
+					series: [
+						{
+							name: '气体浓度',
+							type: 'line',
+							smooth: true,
+							symbol: 'circle',
+							symbolSize: function (value, params) {
+								if (params.dataIndex === data1.length - 1) {
+									return 15
+								} else {
+									return 0
+								}
+							},
+							label: {
+								show: true,
+								position: 'top',
+								textStyle: {
+									color: '#00D69C',
+									fontSize: 16
+								},
+								formatter: function (params) {
+									if (params.dataIndex === data1.length - 1) {
+										return params.value
+									} else {
+										return ''
+									}
+								}
+							},
+							itemStyle: {
+								borderColor: '#fff',
+								borderWidth: 2
+							},
+							lineStyle: {
+								width: 3
+							},
+							data: data1
+						},
+						{
+							name: '温度',
+							type: 'line',
+							smooth: true,
+							symbol: 'circle',
+							symbolSize: function (value, params) {
+								if (params.dataIndex === data1.length - 1) {
+									return 15
+								} else {
+									return 0
+								}
+							},
+							label: {
+								show: true,
+								position: 'top',
+								textStyle: {
+									color: '#9034E1',
+									fontSize: 16
+								},
+								formatter: function (params) {
+									if (params.dataIndex === data1.length - 1) {
+										return params.value
+									} else {
+										return ''
+									}
+								}
+							},
+							itemStyle: {
+								borderColor: '#fff',
+								borderWidth: 2
+							},
+							lineStyle: {
+								width: 3
+							},
+							data: data2
+						},
+						{
+							name: '湿度',
+							type: 'line',
+							smooth: true,
+							symbol: 'circle',
+							symbolSize: function (value, params) {
+								if (params.dataIndex === data1.length - 1) {
+									return 15
+								} else {
+									return 0
+								}
+							},
+							label: {
+								show: true,
+								position: 'top',
+								textStyle: {
+									color: '#F6AC61',
+									fontSize: 16
+								},
+								formatter: function (params) {
+									if (params.dataIndex === data1.length - 1) {
+										return params.value
+									} else {
+										return ''
+									}
+								}
+							},
+							itemStyle: {
+								borderColor: '#fff',
+								borderWidth: 2
+							},
+							lineStyle: {
+								width: 3
+							},
+							data: data3
+						}
+					]
+				}
+				monitorLine.setOption(monitorLineOption)
+
+				let toolTipIndex = 0 // 轮播所在下标
+				setInterval(function () {
+					// toolTip轮播
+					monitorLine.dispatchAction({
+						type: 'showTip',
+						seriesIndex: 0,
+						dataIndex: toolTipIndex
+					})
+					toolTipIndex++
+					if (
+						monitorLine.series &&
+						toolTipIndex > monitorLine.series[0].data.length
+					) {
+						toolTipIndex = 0
+					}
+				}, 1500)
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					monitorLine.resize()
+				})
+			}
+
+			function planInit() {
+				// 集团公司计划管理数据
+				const companyData = [
+					{
+						id: '1',
+						amount: 1932,
+						rote: '86%'
+					},
+					{
+						id: '2',
+						amount: 1932,
+						rote: '23%'
+					}
+				]
+				$($('.c-plan .progress-item[type=company] .rate-value')[0]).text(
+					companyData[0].rote
+				)
+				$($('.c-plan .progress-item[type=company] .rate-value')[1]).text(
+					companyData[1].rote
+				)
+				$($('.c-plan .progress-item[type=company] .progress')[0]).css(
+					'width',
+					companyData[0].rote
+				)
+				$($('.c-plan .progress-item[type=company] .progress')[1]).css(
+					'width',
+					companyData[1].rote
+				)
+
+				// 航天三江计划管理
+				const aerospaceData = [
+					{
+						id: '1',
+						amount: 1932,
+						rote: '59%'
+					},
+					{
+						id: '2',
+						amount: 1932,
+						rote: '25%'
+					}
+				]
+				$($('.c-plan .progress-item[type=aerospace] .rate-value')[0]).text(
+					aerospaceData[0].rote
+				)
+				$($('.c-plan .progress-item[type=aerospace] .rate-value')[1]).text(
+					aerospaceData[1].rote
+				)
+				$($('.c-plan .progress-item[type=aerospace] .progress')[0]).css(
+					'width',
+					aerospaceData[0].rote
+				)
+				$($('.c-plan .progress-item[type=aerospace] .progress')[1]).css(
+					'width',
+					aerospaceData[1].rote
+				)
+				// })
+			}
+
+			function tabsInit() {
+				const tabsData = [
+					{
+						id: '1',
+						name: '重大危险源、一般危险情况',
+						type: 'a'
+					},
+					{
+						id: '2',
+						name: '隐患问题整改情况',
+						type: 'b'
+					}
+				]
+				let tabDom = ''
+				$.each(tabsData, function (index, item) {
+					tabDom +=
+						'<div class="tab" type="' + item.type + '">' + item.name + '</div>'
+				})
+				$('.c-status .tabs').append(tabDom)
+				$('.c-status .tabs').on('click', '.tab', function (e) {
+					$('.c-status .tabs .active').removeClass('active')
+					const type = $(e.currentTarget).attr('type')
+					console.log('tabsInit -> type', type)
+					$(e.currentTarget).addClass('active')
+					if (type === 'a') {
+						$('.c-status .charts-wrapper').css('margin-left', '0')
+					} else {
+						$('.c-status .charts-wrapper').css('margin-left', '-100%')
+					}
+				})
+				$($('.c-status .tabs .tab')[0]).trigger('click')
+				// setInterval(() => {
+
+				// }, interval);
+			}
+			// 重大危险源柱形图渲染
+			function dangerBarInit() {
+				let dangerChart = echarts.init(document.getElementById('danger-bar'))
+				const xDatas = [
+					'单位1',
+					'单位2',
+					'单位3',
+					'单位4',
+					'单位5',
+					'单位6',
+					'单位7',
+					'单位8',
+					'单位9'
+				]
+				dangerChartOption = {
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {
+							type: 'shadow'
+						},
+						textStyle: {
+							align: 'left'
+						},
+						confine: true
+					},
+					grid: {
+						// top: 'middle',
+						left: '3%',
+						right: '4%',
+						bottom: '3%',
+						top: '22%',
+						containLabel: true
+					},
+					legend: {
+						data: ['重大危险源', '一般危险情况'],
+						left: 20,
+						top: 5,
+						itemWidth: 10,
+						itemHeight: 10,
+						textStyle: {
+							color: '#f6f6f6',
+							fontSize: 14
+						}
+					},
+					xAxis: [
+						{
+							type: 'category',
+							data: xDatas,
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#f6f6f6', //X轴文字颜色
+									fontSize: 13
+								}
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#42447070',
+									width: 0.5
+								}
+							},
+							axisTick: {
+								show: false
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'value',
+							name: '',
+							axisLabel: {
+								formatter: '{value} ',
+								textStyle: {
+									color: '#f6f6f6', //X轴文字颜色
+									fontSize: 13
+								}
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff30',
+									width: 0.5
+								}
+							},
+							axisTick: {
+								show: false
+							},
+							splitLine: {
+								show: true,
+								lineStyle: {
+									color: '#ffffff30'
+								}
+							}
+						}
+					],
+					series: [
+						{
+							name: '重大危险源',
+							type: 'bar',
+							barMaxWidth: 20,
+							itemStyle: {
+								normal: {
+									// barBorderRadius: 5,
+									color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+										{
+											offset: 0,
+											color: '#F3C478'
+										},
+										{
+											offset: 1,
+											color: '#F6AD62'
+										}
+									])
+								}
+							},
+							data: [330, 430, 570, 520, 500, 540, 550, 530, 560, 580, 530, 550]
+						},
+						{
+							name: '一般危险情况',
+							type: 'bar',
+							barMaxWidth: 20,
+							itemStyle: {
+								normal: {
+									// barBorderRadius: 5,
+									color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+										{
+											offset: 0,
+											color: '#0ECDF7'
+										},
+										{
+											offset: 1,
+											color: '#0574E9'
+										}
+									])
+								}
+							},
+							data: [100, 150, 200, 150, 180, 210, 250, 270, 310, 280, 250, 320]
+						}
+					]
+				}
+				dangerChart.setOption(dangerChartOption)
+				let toolTipIndex = 0 // 轮播所在下标
+
+				setInterval(function () {
+					// toolTip轮播
+					dangerChart.dispatchAction({
+						type: 'showTip',
+						seriesIndex: 0,
+						dataIndex: toolTipIndex
+					})
+					toolTipIndex++
+					if (toolTipIndex > dangerChartOption.series[0].data.length) {
+						toolTipIndex = 0
+					}
+				}, 1500)
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					dangerChart.resize()
+				})
+			}
+
+			function warningChartInit() {
+				warningChart = echarts.init(document.getElementById('warning-chart'))
+				const xDatas = [
+					'单位1',
+					'单位2',
+					'单位3',
+					'单位4',
+					'单位5',
+					'单位6',
+					'单位7',
+					'单位8',
+					'单位9'
+				]
+				//
+				const warningNumData = [
+					{
+						value: 42,
+						name: '一般隐患'
+					},
+					{
+						value: 23,
+						name: '重大隐患'
+					}
+				]
+				const warningTypeData = [
+					{
+						value: 20,
+						name: '隐患类型一',
+						selected: true
+					},
+					{
+						value: 23,
+						name: '隐患类型二'
+					},
+					{
+						value: 31,
+						name: '隐患类型三'
+					}
+				]
+				warningChartOption = {
+					title: [
+						{
+							text: '重大隐患分类',
+							left: '31.5%',
+							bottom: '10%',
+							textStyle: {
+								color: '#fff',
+								fontWeight: 'normal',
+								fontSize: 14
+							}
+						}
+					],
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {
+							type: 'shadow'
+						},
+						textStyle: {
+							align: 'left'
+						},
+						confine: true
+					},
+					grid: {
+						// top: 'middle',
+						left: '50%',
+						right: '4%',
+						bottom: '3%',
+						top: '10%',
+						containLabel: true
+					},
+					legend: [
+						{
+							data: ['隐患数量', '整改数量'],
+							left: '50%',
+							top: 0,
+							itemWidth: 10,
+							itemHeight: 10,
+							textStyle: {
+								color: '#f6f6f6',
+								fontSize: 14
+							}
+						},
+						{
+							data: ['一般隐患', '重大隐患'],
+							left: '5.5%',
+							bottom: '10%',
+							itemWidth: 10,
+							itemHeight: 10,
+							textStyle: {
+								color: '#f6f6f6',
+								fontSize: 14
+							}
+						}
+					],
+					xAxis: [
+						{
+							type: 'category',
+							data: xDatas,
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#f6f6f6', //X轴文字颜色
+									fontSize: 13
+								}
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#42447070',
+									width: 0.5
+								}
+							},
+							axisTick: {
+								show: false
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'value',
+							name: '',
+							axisLabel: {
+								formatter: '{value} ',
+								textStyle: {
+									color: '#f6f6f6', //X轴文字颜色
+									fontSize: 13
+								}
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff30',
+									width: 0.5
+								}
+							},
+							axisTick: {
+								show: false
+							},
+							splitLine: {
+								show: true,
+								lineStyle: {
+									color: '#ffffff30'
+								}
+							}
+						}
+					],
+					series: [
+						{
+							name: '隐患数量',
+							type: 'bar',
+							stack: 'warning',
+							barMaxWidth: 20,
+							itemStyle: {
+								normal: {
+									// barBorderRadius: 5,
+									color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+										{
+											offset: 0,
+											color: '#0ECDF7'
+										},
+										{
+											offset: 1,
+											color: '#0574E9'
+										}
+									])
+								}
+							},
+							data: [330, 430, 570, 520, 500, 540, 550, 530, 560, 580, 530, 550]
+						},
+						{
+							name: '整改数量',
+							type: 'bar',
+							stack: 'warning',
+							barMaxWidth: 20,
+							itemStyle: {
+								normal: {
+									// barBorderRadius: 5,
+									color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+										{
+											offset: 0,
+											color: '#b1a7fa'
+										},
+										{
+											offset: 1,
+											color: '#9183ff'
+										}
+									])
+								}
+							},
+							data: [100, 150, 200, 150, 180, 210, 250, 270, 310, 280, 250, 320]
+						},
+						{
+							type: 'pie',
+							center: ['12%', '50%'],
+							radius: ['40%', '50%'],
+							color: ['#00AEFF', '#FF6D82'],
+							startAngle: 180,
+							// selectedMode: 'single',
+							labelLine: {
+								length: 10,
+								length2: 50,
+								lineStyle: {
+									type: 'dashed'
+								}
+							},
+							label: {
+								normal: {
+									formatter: '{b|{d}%}',
+									padding: [0, -58, 25, -55],
+									rich: {
+										b: {
+											fontSize: 15
+										}
+									}
+								}
+							},
+							data: warningNumData
+						},
+						{
+							type: 'pie',
+							name: '隐患类别分布',
+							center: ['35%', '50%'],
+							radius: ['40%', '50%'],
+							color: ['#2BC191', '#00AEFF', '#FEC006'],
+							startAngle: 90,
+							selectedMode: 'single',
+							label: {
+								normal: {
+									show: false,
+									position: 'center',
+									formatter: '{d}\n{b}'
+								},
+								emphasis: {
+									show: true,
+									textStyle: {
+										fontSize: 18
+									}
+								}
+							},
+							data: warningTypeData
+						}
+					]
+				}
+				warningChart.setOption(warningChartOption)
+				// warningChart.on("pieselectchanged", function(e) {
+				//     console.log("warningChartInit -> e.dataIndex", e)
+				// });
+
+				let toolTipIndex = 0 // 轮播所在下标
+				setInterval(function () {
+					// toolTip轮播
+					warningChart.dispatchAction({
+						type: 'showTip',
+						seriesIndex: 0,
+						dataIndex: toolTipIndex
+					})
+					toolTipIndex++
+					if (
+						warningChart.series &&
+						toolTipIndex > warningChart.series[0].data.length
+					) {
+						toolTipIndex = 0
+					}
+				}, 1500)
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					warningChart.resize()
+				})
+			}
+
+			function safectrInit(data = []) {
+				const safectrData = [
+					{
+						icon: 'shengchan',
+						label: '安全生产方针',
+						info: '安全第一   预防为主   以人为本   系统管理'
+					},
+					{
+						icon: 'bulb',
+						label: '安全核心理念',
+						info: '安全是生命   安全是责任   安全是效益'
+					},
+					{
+						icon: 'rocket',
+						label: '安全愿景',
+						info: '打造国内一流的安全型企业'
+					},
+					{
+						icon: 'balance',
+						label: '安全道德观',
+						info: '不伤害自己   不伤害他人   不被他人伤害   保护他人不被伤害'
+					},
+					{
+						icon: 'love',
+						label: '安全责任理念',
+						info: '宪政同责   一岗双责   齐抓共管   失职谴责'
+					}
+				]
+				renderBtns(data)
+				$('.c-safe .btn-row').on('click', '.btn', e => {
+					$('.c-safe .btn.active').removeClass('active')
+					const type = $(e.currentTarget).attr('type')
+					$(e.currentTarget).addClass('active')
+					if (type === 'legal') {
+						renderBtns(safectrData)
+					} else {
+						const safectrData1 = [
+							{
+								icon: 'shengchan',
+								label: '安全生产方1',
+								info: '安全第一   预防为主   以人为本   系统管理1'
+							},
+							{
+								icon: 'bulb',
+								label: '安全核心理1',
+								info: '安全是生命   安全是责任   安全是效益1'
+							},
+							{
+								icon: 'rocket',
+								label: '安全愿1',
+								info: '打造国内一流的安全型企业1'
+							},
+							{
+								icon: 'balance',
+								label: '安全道德1',
+								info: '不伤害自己   不伤害他人   不被他人伤害   保护他人不被伤害1111111111'
+							},
+							{
+								icon: 'love',
+								label: '安全责任理1',
+								info: '宪政同责   一岗双责   齐抓共管   失职谴责1'
+							}
+						]
+						renderBtns(safectrData1)
+					}
+				})
+				$($('.c-safe .btn-row .btn')[0]).trigger('click')
+			}
+			function renderBtns(data = []) {
+				$('.c-safe .safectr-list').empty()
+				let safectrDom = ''
+				$.each(data, (index, item) => {
+					safectrDom +=
+						'<li class="safectr-item">' +
+						'<img src="images/' +
+						item.icon +
+						'.png" alt="" class="icon">' +
+						'<span class="label">' +
+						item.label +
+						'</span>' +
+						'<span class="info">' +
+						item.info +
+						'</span>' +
+						'</li>'
+				})
+				$('.c-safe .safectr-list').append(safectrDom)
+			}
+		</script>
+	</body>
+</html>

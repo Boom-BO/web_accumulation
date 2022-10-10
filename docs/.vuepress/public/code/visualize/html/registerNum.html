@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./css/normalize.css">
+		<link rel="stylesheet" href="./css/common.css">
+		<link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css">
+		<link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.css">
+		<link rel="stylesheet" href="./css/animate.min.css">
+		<link rel="stylesheet" href="assets/layui/css/layui.css">
+		<link rel="stylesheet" href="./css/list.css">
+
+		<title>科协一家数据汇总</title>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		<div class="mkj theme-wrapper scale-wrapper">
+			<div id="loading">
+				<div class="loading_img">
+					<!-- 加载动画 -->
+					<img class="loading-ring-o" src="images/loading-ring-o.png">
+					<img class="loading-ring-i" src="images/loading-ring-i.png">
+				</div>
+			</div>
+			<div class="title-bar">
+				<div class="back"><a href="index.html">返回</a></div>
+				<p class="title-name">各单位注册人数排行</p>
+				<span id="time"></span>
+				<!-- <div class="nav-btn">运营管理平台</div> -->
+			</div>
+			<div class="content clearfix">
+				<div class="header"></div>
+				<div class="contain">
+					<div class="card">
+						<div class="card-contain">
+							<div class="tab-title">
+								<div class="active">中国科协</div>
+								<div>地方科协</div>
+								<div>全国学会</div>
+							</div>
+							<div class="tab-contain" style="height: calc(100% - 100px);">
+								<div class="select-div">
+									<ul class="list">
+										<li class="title" style="color: #58A6FE;">组织机构：<input id="orgSel" type="text" onclick="showMenu(); return false;"
+											 readonly value="" />
+									</ul>
+									<div id="menuContent" class="menuContent">
+										<ul id="treeDemo" class="ztree" style="margin-top:0; "></ul>
+									</div>
+								</div>
+								<div class="table-div" style="margin-top: 60px;">
+									<table>
+										<thead>
+											<tr>
+												<th>单位名称</th>
+												<th>注册人数</th>
+											</tr>
+										</thead>
+										<tbody id='tbody-num'>
+										</tbody>
+									</table>
+									<div class="pagination-div">
+										<div id="pagination"></div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="./js/es5-shim.min.js"></script>
+		<script type="text/javascript" src="./js/es5-sham.min.js"></script>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="assets/layui/layui.js"></script>
+		<script src="js/template-web.js"></script>
+		<script src="js/jquery.ztree.core.js"></script>
+		<script id="num-template" type="text/html">
+			{{each list}}
+				<tr>
+					<td>{{$value.orgName}}</td>
+					<td>{{$value.registerNumber}}</td>
+				</tr>
+			{{/each}}
+			<li id="moreLi" style="display: none;" onclick="$(this).find('dl').toggle();"><a href="javascript:;">...</a><dl style="display: none;" id="selctDl"></dl></li>
+		</script>
+
+		<script type="text/javascript">
+			var curMenu = null,
+				zTree_Menu = null;
+			let curTab = '3741'
+			let totalNum = 0
+			var zNodes = [];
+			var data = [];
+			let curNum = 0
+			var setting = {
+				view: {
+					showLine: false,
+					showIcon: false,
+					selectedMulti: false,
+					dblClickExpand: false,
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				callback: {
+					onExpand: function(event, treeId, treeNode, clickFlag) {
+						//alert("treeId自动编号：" + treeNode.tId + ", 节点id是：" + treeNode.id + ", 节点文本是：" + treeNode.name);  
+						$.ajax({
+							url: "/default/statistics/getOrgByParentId.sts", //请求的action路径
+							type: 'post',
+							data: JSON.stringify({
+								"parentId": treeNode.id
+							}),
+							error: function() { //请求失败处理函数
+								alert('请求失败');
+							},
+							success: function(data) {
+								//添加子节点到指定的父节点
+								var jsondata = data.data.orgList.map((obj, index) => {
+									if(obj.isParent == 1){
+										return {
+											id: obj.orgId,
+											pId: '0',
+											name: obj.orgName,
+											children: []
+										}
+									} else {
+										return {
+											id: obj.orgId,
+											pId: '0',
+											name: obj.orgName
+										}
+									}
+
+								});
+								var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+								//treeNode.halfCheck = false;
+								var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null); //获取指定父节点
+								if (parentZNode.children.length == 0) {
+									newNode = treeObj.addNodes(parentZNode, jsondata, false);
+									$('#treeDemo').css('display', 'block')
+									$('#treeDemo').css('max-height', '750px');
+								}
+
+							}
+						});
+					},
+					onClick: onClick
+				}
+			};
+
+			function onClick(e, treeId, treeNode) {
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+					nodes = zTree.getSelectedNodes(),
+					v = "";
+				nodes.sort(function compare(a, b) {
+					return a.id - b.id;
+				});
+				for (var i = 0, l = nodes.length; i < l; i++) {
+					v += nodes[i].name + ",";
+				}
+				if (v.length > 0) v = v.substring(0, v.length - 1);
+				var orgObj = $("#orgSel");
+				orgObj.attr("value", v);
+				hideMenu()
+				initData(treeNode.id, curTab)
+			}
+
+
+			function showMenu() {
+				var orgObj = $("#orgSel");
+				var cityOffset = $("#orgSel").offset();
+				$("#menuContent").slideDown("fast");
+
+				$("body").bind("mousedown", onBodyDown);
+			}
+
+			function hideMenu() {
+				$("#menuContent").fadeOut("fast");
+				$("body").unbind("mousedown", onBodyDown);
+			}
+
+			function onBodyDown(event) {
+				if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length >
+						0)) {
+					hideMenu();
+				}
+			}
+			$(function() {
+				scalePage()
+				clearLoading()
+				timeInit()
+				getOrgByParentId('3741')
+				$('.tab-title div').click(function() {
+					$(this).siblings('div').removeClass('active');
+					$(this).addClass('active');
+					var divindex = $(this).index(); //第二种方式获取
+					if (divindex == 0) {
+						curTab = '3741'
+						getOrgByParentId('3741')
+					} else if (divindex == 1) {
+						curTab = '2000000004'
+						getOrgByParentId('2000000004')
+					} else {
+						curTab = '2000000003'
+						getOrgByParentId('2000000003')
+					}
+
+				})
+
+			})
+			clearLoading = () => {
+				$('#loading').fadeOut(1000)
+				setTimeout(function() {
+					$('#loading').remove()
+				}, 1300);
+
+			}
+			timeInit = () => {
+				setInterval(() => {
+					clearLoading()
+				}, 1000)
+
+				let date = new Date()
+				let timer = getFormatDate()
+				$('#time').text('数据更新时间：' + timer)
+			}
+			getFormatDate = () => {
+				let nowDate = new Date();
+				let year = nowDate.getFullYear();
+				let month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+				let date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+				let hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+				let minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+				let second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+				return year + "-" + month + "-" + date;
+			}
+			getScale = () => {
+				// 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+				const width = 1920
+				const height = 1080
+				let ww = window.innerWidth / width
+				let wh = window.innerHeight / height
+				return ww < wh ? ww : wh
+			}
+			// 页面渲染计算比例缩放
+			scalePage = () => {
+				setScale = debounce(() => {
+					// 获取到缩放比，设置它
+					let scale = this.getScale()
+					$('.scale-wrapper').css({
+						'transform': 'scale(' + scale + ') translate(-50%, -50%)',
+						'-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+					})
+				}, 200)
+				setScale()
+				window.addEventListener('resize', setScale)
+			}
+			// 防抖
+			debounce = (fun, delay) => {
+				let timer
+				return function() {
+					if (timer) {
+						clearTimeout(timer)
+					}
+					timer = setTimeout(fun, delay)
+				}
+			}
+			getOrgByParentId = (id) => {
+				$.ajax({
+					url: '/default/statistics/getOrgByParentId.sts',
+					type: 'post',
+					data: JSON.stringify({
+						"parentId": id
+					}),
+					success: function(result) {
+						zNodes = result.data.orgList.map((obj, index) => {
+							if (obj.isParent == 1) {
+								return {
+									id: obj.orgId,
+									pId: id,
+									name: obj.orgName,
+									children: []
+								}
+							} else {
+								return {
+									id: obj.orgId,
+									pId: id,
+									name: obj.orgName
+								}
+							}
+
+						})
+						var treeObj = $("#treeDemo");
+						$.fn.zTree.init(treeObj, setting, zNodes);
+						zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
+						curMenu = zTree_Menu.getNodes()[0];
+						//默认选中第一个部门
+						$("#orgSel").attr("value", curMenu.name);
+						//获取人数(中国科协)
+						initData(curTab, curTab)
+					}
+
+				})
+			}
+
+			initData = (id, groupOrgId) => {
+
+				$.ajax({
+					url: '/default/statistics/orgRegisterNumber.sts',
+					type: 'post',
+					data: JSON.stringify({
+						"orgId": id,
+						'groupOrgId': groupOrgId
+					}),
+					success: function(result) {
+
+						data = result.data.registerNumberList
+						totalNum = data.length
+						let showData = []
+						layui.use(['laypage', 'layer'], function() {
+							var laypage = layui.laypage,
+								layer = layui.layer;
+							//完整功能
+							laypage.render({
+								elem: 'pagination',
+								count: totalNum,
+								limit: 14,
+								layout: ['count', 'prev', 'page', 'next'],
+								jump: function(ele) {
+									let showData = []
+									// showData = data.filter((obj, index) => index > (ele.curr - 1) * ele.limit && index < ele.curr * ele.limit)
+									// 	debugger
+									showData = data.concat().splice(ele.curr * ele.limit - ele.limit, ele.limit)
+									let html = template('num-template', {
+										list: showData
+									})
+									$('#tbody-num').html(html);
+								}
+							});
+						})
+					}
+
+				})
+
+
+			}
+			back = () => {
+				let showData = []
+				curNum = curNum - 1; //第二种方式获取
+				showData = data.filter((obj, index) => index > (curNum * 12 - 1) && index < (curNum + 1) * 12)
+				let html = template('num-template', {
+					list: showData
+				})
+				$('#tbody-num').html(html);
+				console.log($('.pagination .active').prev())
+				$('.pagination .active').prev().addClass('active').siblings('li').removeClass('active')
+			}
+			prev = () => {
+				let showData = []
+				curNum = curNum + 1; //第二种方式获取
+				showData = data.filter((obj, index) => index > (curNum * 12 - 1) && index < (curNum + 1) * 12)
+				let html = template('num-template', {
+					list: showData
+				})
+				console.log($('.pagination .active').next())
+				$('.pagination .active').next().addClass('active').siblings('li').removeClass('active')
+				$('#tbody-num').html(html);
+			}
+		</script>
+	</body>
+
+</html>

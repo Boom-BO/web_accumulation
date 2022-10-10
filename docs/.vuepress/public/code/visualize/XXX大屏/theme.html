@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./css/normalize.css" />
+		<link rel="stylesheet" href="./css/common.css" />
+		<link rel="stylesheet" href="./css/theme-info.css" />
+		<link rel="stylesheet" href="./css/animate.min.css" />
+		<title>项目主题驾驶舱</title>
+		<style type="text/css"></style>
+	</head>
+
+	<body>
+		<div class="theme-info theme-wrapper scale-wrapper">
+			<div id="loading">
+				<div class="loading_img">
+					<!-- 加载动画 -->
+					<img class="loading-ring-o" src="images/loading-ring-o.png" />
+					<img class="loading-ring-i" src="images/loading-ring-i.png" />
+				</div>
+			</div>
+			<div class="title-bar">
+				<p class="title-name">项目主题驾驶舱</p>
+				<span id="time"></span>
+				<div class="nav-btn">运营管理平台</div>
+			</div>
+			<div class="content">
+				<div id="c-map"></div>
+				<div class="c-left">
+					<div class="chart-item">
+						<p class="charts-title">项目分布图</p>
+						<div id="pj-dn"></div>
+						<!-- <div class="pj-dn-info"></div> -->
+					</div>
+					<div class="divider"></div>
+					<div class="chart-item">
+						<p class="charts-title">项目类型分布</p>
+						<div id="pj-type-dn"></div>
+					</div>
+					<div class="divider"></div>
+					<div class="chart-item">
+						<p class="charts-title">项目停工分布</p>
+						<div id="pj-stop-dn"></div>
+					</div>
+				</div>
+				<!-- <div class="c-center">
+                <div id="china-map"></div>
+            </div> -->
+				<div class="c-right">
+					<div class="chart-item">
+						<p class="charts-title">项目建设分布图</p>
+						<div id="pj-build-dn"></div>
+						<!-- <div class="pj-dn-info"></div> -->
+					</div>
+					<div class="divider"></div>
+					<div class="chart-item">
+						<table class="area-table" border cellspacing="0">
+							<thead>
+								<tr>
+									<td colspan="5">区域</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>华东区域</td>
+									<td>华南区域</td>
+									<td>华北区域</td>
+									<td>华中区域</td>
+									<td>华西区域</td>
+								</tr>
+								<tr>
+									<td>巴基斯坦</td>
+									<td>泰国</td>
+									<td>美国</td>
+									<td>日本</td>
+									<td>...</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="area-table" border cellspacing="0">
+							<thead>
+								<tr>
+									<td colspan="2">基本清单</td>
+									<td colspan="2"><span class="load-more">查看更多</span></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="types">
+									<td id="option0" class="active">全部</td>
+									<td id="option1">在建</td>
+									<td id="option1">筹建</td>
+									<td id="option1">停建</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="table-list-wrapper">
+							<!-- <ul class="table-list animate__animated animate__fadeInRight">
+                        </ul> -->
+						</div>
+					</div>
+				</div>
+				<div class="c-date">
+					<span class="date-wrapper">2</span>
+					<span class="date-wrapper">0</span>
+					<span class="date-wrapper">2</span>
+					<span class="date-wrapper">0</span>
+					<span class="date-line">－</span>
+					<span class="date-wrapper">0</span>
+					<span class="date-wrapper">6</span>
+				</div>
+				<p class="c-total">项目总额：<span>243,236.00</span></p>
+				<div class="c-num clearfix">
+					<p><span>本月开工：</span><span>243</span></p>
+					<p><span>本月完工：</span><span>100</span></p>
+				</div>
+				<div class="c-bottom">
+					<div id="bar-chart"></div>
+				</div>
+			</div>
+		</div>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="./js/echarts.min.js"></script>
+		<script src="./js/china.js"></script>
+		<script src="./js/global.js"></script>
+		<script type="text/javascript">
+			let pjBuildDnChart = null
+			let pjDn = null
+			let pjTypeDn = null
+			let pjStopDn = null
+			let pjInfo = null
+			let pjBuildDn = null
+			let cMapOption = null
+			let barOption = null
+			$(function () {
+				resetTheme()
+				scalePage()
+				clearLoading()
+				timeInit()
+				// 项目分布图
+				pjDnInit()
+				// 项目类型分布图
+				pjTypeDnInit()
+				// 项目停工分布图
+				pjStopDnInit()
+				// 项目建设分布图
+				pjBuildDnInit()
+				// 右侧表格tab切换
+				tableTabsInit()
+
+				// 地图渲染
+				mapInit()
+
+				// 柱状图
+				barinit()
+				scalePage()
+				//
+				// progressChartsInit()
+				// statisticsInit()
+				// bChartsInit()
+				//全屏
+				// $("#fullScreen").on("click",function(){
+				//     fullScreen();
+				// })
+				// //退出全屏
+				// $("#exitFullScreen").on("click",function(){
+				//     exitFullscreen();
+				// })
+			})
+
+			clearLoading = () => {
+				//删除加载动画
+				$('#loading').fadeOut(1000)
+				setTimeout(function () {
+					$('#loading').remove()
+				}, 1300)
+			}
+
+			timeInit = () => {
+				setInterval(() => {
+					let date = new Date()
+					$('#time').text(getFormatDate)
+				}, 1000)
+			}
+			getFormatDate = () => {
+				let nowDate = new Date()
+				let year = nowDate.getFullYear()
+				let month =
+					nowDate.getMonth() + 1 < 10
+						? '0' + (nowDate.getMonth() + 1)
+						: nowDate.getMonth() + 1
+				let date =
+					nowDate.getDate() < 10 ? '0' + nowDate.getDate() : nowDate.getDate()
+				let hour =
+					nowDate.getHours() < 10
+						? '0' + nowDate.getHours()
+						: nowDate.getHours()
+				let minute =
+					nowDate.getMinutes() < 10
+						? '0' + nowDate.getMinutes()
+						: nowDate.getMinutes()
+				let second =
+					nowDate.getSeconds() < 10
+						? '0' + nowDate.getSeconds()
+						: nowDate.getSeconds()
+				return (
+					year +
+					'-' +
+					month +
+					'-' +
+					date +
+					' ' +
+					hour +
+					':' +
+					minute +
+					':' +
+					second
+				)
+			}
+			getScale = () => {
+				// 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+				const width = 1920
+				const height = 1080
+				let ww = window.innerWidth / width
+				let wh = window.innerHeight / height
+				return ww < wh ? ww : wh
+			}
+			// 页面渲染计算比例缩放
+			scalePage = () => {
+				setScale = debounce(() => {
+					// 获取到缩放比，设置它
+					let scale = this.getScale()
+					$('.scale-wrapper').css({
+						transform: 'scale(' + scale + ') translate(-50%, -50%)',
+						'-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+					})
+				}, 200)
+				setScale()
+				window.addEventListener('resize', setScale)
+			}
+			// 防抖
+			debounce = (fun, delay) => {
+				let timer
+				return function () {
+					if (timer) {
+						clearTimeout(timer)
+					}
+					timer = setTimeout(fun, delay)
+				}
+			}
+
+			// 项目分布图渲染
+			pjDnInit = () => {
+				const pjDnData = [
+					{
+						num: 23,
+						value: 233.23,
+						name: '重大项目'
+					},
+					{
+						num: 421,
+						value: 213.79,
+						name: '非重大项目'
+					}
+				]
+				let pjDnChart = echarts.init(document.getElementById('pj-dn'))
+				pjDn = {
+					grid: {
+						left: 15,
+						top: 20,
+						bottom: 20,
+						right: 15
+					},
+					legend: {
+						show: true,
+						orient: 'vertical',
+						top: 0,
+						right: 10,
+						itemWidth: 10,
+						itemHeight: 10,
+						itemGap: 0,
+						formatter: name => {
+							let curItem = pjDnData.filter(item => item.name === name)
+							console.log('pjDnInit -> curItem', curItem)
+							let arr = [
+								'{n|' + name + '：' + curItem[0].num + '}',
+								'{m|' + curItem[0].value + '} {u|亿}'
+							]
+							return arr.join('\n\n')
+						},
+						textStyle: {
+							color: '#fff',
+							fontSize: 14,
+							rich: {
+								n: {
+									fontSize: 18,
+									color: '#fff',
+									padding: [0, 15, 50, 0]
+								},
+								m: {
+									fontSize: 38,
+									color: '#20FDFA',
+									align: 'left',
+									verticalAlign: 'bottom',
+									padding: [0, 0, 0, -15]
+								},
+								u: {
+									fontSize: 18,
+									color: '#20FDFA',
+									verticalAlign: 'bottom'
+								}
+							}
+						}
+					},
+					series: [
+						{
+							type: 'pie',
+							center: ['30%', '50%'],
+							radius: ['40%', '50%'],
+							color: ['#FF6D82', '#00AEFF'],
+							startAngle: 210,
+							// selectedMode: 'single',
+							labelLine: {
+								length: 10,
+								length2: 50,
+								lineStyle: {
+									type: 'dashed'
+								}
+							},
+							label: {
+								normal: {
+									formatter: '{b|{d}%}',
+									padding: [0, -58, 25, -55],
+									rich: {
+										b: {
+											fontSize: 15
+										}
+									}
+								}
+							},
+							data: pjDnData
+						}
+					]
+				}
+				pjDnChart.setOption(pjDn)
+
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					pjDnChart.resize()
+				})
+			}
+
+			// 项目类型分布图渲染
+			pjTypeDnInit = () => {
+				const pjTypeDnData = [
+					{
+						name: '核电',
+						value: 200,
+						selected: true
+					},
+					{
+						name: '军工',
+						value: 400
+					},
+					{
+						name: '民用',
+						value: 242
+					}
+				]
+				let pjTypeDnChart = echarts.init(document.getElementById('pj-type-dn'))
+				pjTypeDn = {
+					title: {
+						text: 742,
+						subtext: ' 总数',
+						textStyle: {
+							color: '#00FFFE',
+							fontSize: 30
+						},
+						subtextStyle: {
+							fontSize: 20,
+							color: '#00FFFE'
+						},
+						x: '28.5%',
+						y: '37%'
+					},
+					grid: {
+						left: 15,
+						top: 20,
+						bottom: 20,
+						right: 15
+					},
+					legend: {
+						show: true,
+						orient: 'vertical',
+						top: 100,
+						right: 60,
+						textStyle: {
+							color: '#00FFFE',
+							fontSize: 13,
+							fontWeight: 'bold'
+						},
+						formatter: name => {
+							let curItem = pjTypeDnData.filter(item => item.name === name)
+							return name + '：' + curItem[0].value
+						}
+					},
+					series: [
+						{
+							type: 'pie',
+							center: ['35%', '50%'],
+							radius: ['52%', '65%'],
+							color: ['#2BC191', '#00AEFF', '#FEC006'],
+							startAngle: 90,
+							selectedMode: 'single',
+							label: {
+								show: false,
+								position: 'center'
+							},
+							labelLine: {
+								show: false
+							},
+							data: pjTypeDnData
+						}
+					]
+				}
+				pjTypeDnChart.setOption(pjTypeDn)
+
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					pjTypeDnChart.resize()
+				})
+			}
+
+			pjStopDnInit = () => {
+				let pjStopDnChart = echarts.init(document.getElementById('pj-stop-dn'))
+				let data1 = []
+				let data2 = []
+				for (let i = 0; i < 30; i++) {
+					data1.push(Math.floor(Math.random() * 500 + 20))
+					data2.push(Math.floor(Math.random() * 500 + 20))
+				}
+				// const pjStopDnData = []
+				pjStopDn = {
+					color: ['#336ECF', '#FC41A8'],
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {
+							// type: 'cross',
+							// crossStyle: {
+							//     color: '#fff'
+							// },
+							// lineStyle: {
+							//     type: 'dashed'
+							// },
+							lineStyle: {
+								color: {
+									type: 'linear',
+									x: 0,
+									y: 0,
+									x2: 0,
+									y2: 1,
+									colorStops: [
+										{
+											offset: 0,
+											color: 'rgba(0, 255, 233,0)'
+										},
+										{
+											offset: 0.5,
+											color: 'rgba(255, 255, 255,1)'
+										},
+										{
+											offset: 1,
+											color: 'rgba(0, 255, 233,0)'
+										}
+									],
+									global: false
+								}
+							}
+						}
+					},
+					grid: {
+						left: 15,
+						right: 15,
+						bottom: 20,
+						top: 30,
+						containLabel: true
+					},
+					// legend: {
+					//     data: ['主营收入曲线', '利润总额曲线', '资产总额曲线'],
+					//     orient: 'horizontal',
+					//     show: true,
+					//     right: 20,
+					//     top: 0,
+					//     textStyle: {
+					//         color: '#fff',
+					//         fontWeight: 'blod'
+					//     },
+					//     borderRadius: 10
+					// },
+					xAxis: {
+						type: 'category',
+						data: [
+							'01',
+							'02',
+							'03',
+							'04',
+							'05',
+							'06',
+							'07',
+							'08',
+							'09',
+							'10',
+							'11',
+							'12',
+							'13',
+							'14',
+							'15',
+							'16',
+							'17',
+							'18',
+							'19',
+							'20',
+							'21',
+							'22',
+							'23',
+							'24',
+							'25',
+							'26',
+							'27',
+							'28',
+							'29',
+							'30'
+						],
+						splitLine: {
+							show: false
+						},
+						axisTick: {
+							show: false
+						},
+						axisLine: {
+							show: false
+						},
+						axisLabel: {
+							color: '#fff',
+							textStyle: {
+								fontSize: 12
+							}
+						}
+					},
+					yAxis: {
+						type: 'value',
+						// max: max_value>=100? max_value + 100: max_value+10,
+						// max: max_value > 100 ? max_value * 2 : max_value + 10,
+						// interval: 10,
+						// nameLocation: "center",
+						axisLabel: {
+							color: '#fff',
+							textStyle: {
+								fontSize: 12
+							}
+						},
+						splitLine: {
+							show: true,
+							lineStyle: {
+								color: '#424470'
+							}
+						},
+						axisTick: {
+							show: false
+						},
+						axisLine: {
+							show: false
+						}
+					},
+					series: [
+						{
+							name: '停工项目数',
+							type: 'line',
+							smooth: true,
+							symbol: 'none',
+							data: data1,
+							areaStyle: {
+								normal: {
+									color: new echarts.graphic.LinearGradient(
+										0,
+										0,
+										0,
+										1,
+										[
+											{
+												offset: 0,
+												color: '#336ECF30'
+											},
+											{
+												offset: 1,
+												color: 'rgba(108,80,243,0)'
+											}
+										],
+										false
+									),
+									shadowColor: '#336ECF90',
+									shadowBlur: 20
+								}
+							}
+						},
+						{
+							name: '停工项目总额',
+							type: 'line',
+							smooth: true,
+							symbol: 'none',
+							data: data2,
+							areaStyle: {
+								normal: {
+									color: new echarts.graphic.LinearGradient(
+										0,
+										0,
+										0,
+										1,
+										[
+											{
+												offset: 0,
+												color: '#FC41A830'
+											},
+											{
+												offset: 1,
+												color: 'rgba(108,80,243,0)'
+											}
+										],
+										false
+									),
+									shadowColor: '#FC41A890',
+									shadowBlur: 20
+								}
+							}
+						}
+					]
+				}
+				pjStopDnChart.setOption(pjStopDn)
+				let toolTipIndex = 0 // 轮播所在下标
+
+				setInterval(() => {
+					// toolTip轮播
+					pjStopDnChart.dispatchAction({
+						type: 'showTip',
+						seriesIndex: 0,
+						dataIndex: toolTipIndex
+					})
+					toolTipIndex++
+					if (toolTipIndex > pjStopDn.series[0].data.length) {
+						toolTipIndex = 0
+					}
+				}, 2000)
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					pjStopDnChart.resize()
+				})
+			}
+
+			pjBuildDnInit = () => {
+				const pjBuildDnData = [
+					{
+						num: 55,
+						value: 230.2,
+						name: '在建'
+					},
+					{
+						num: 280,
+						value: 624.5,
+						name: '待建'
+					}
+				]
+				pjBuildDnChart = echarts.init(document.getElementById('pj-build-dn'))
+				pjBuildDn = {
+					grid: {
+						left: 15,
+						top: 20,
+						bottom: 20,
+						right: 15
+					},
+					legend: {
+						show: true,
+						orient: 'vertical',
+						top: 0,
+						right: 30,
+						itemWidth: 10,
+						itemHeight: 10,
+						itemGap: 0,
+						textStyle: {
+							color: '#fff',
+							fontSize: 14
+						},
+						formatter: name => {
+							let curItem = pjBuildDnData.filter(item => item.name === name)
+							let arr = [
+								'{n|' + name + '：' + curItem[0].num + '}',
+								'{m|' + curItem[0].value + '} {u|亿}'
+							]
+							return arr.join('\n\n')
+						},
+						textStyle: {
+							rich: {
+								n: {
+									fontSize: 18,
+									color: '#fff',
+									padding: [0, 15, 50, 0]
+								},
+								m: {
+									fontSize: 38,
+									color: '#20FDFA',
+									align: 'left',
+									verticalAlign: 'bottom',
+									padding: [0, 0, 0, -15]
+								},
+								u: {
+									fontSize: 18,
+									color: '#20FDFA',
+									verticalAlign: 'bottom'
+								}
+							}
+						}
+					},
+					series: [
+						{
+							type: 'pie',
+							center: ['30%', '50%'],
+							radius: ['40%', '50%'],
+							color: ['#FF6D82', '#00AEFF'],
+							startAngle: 210,
+							// selectedMode: 'single',
+							labelLine: {
+								length: 10,
+								length2: 50,
+								lineStyle: {
+									type: 'dashed'
+								}
+							},
+							label: {
+								normal: {
+									formatter: '{b|{d}%}',
+									padding: [0, -58, 25, -55],
+									rich: {
+										b: {
+											fontSize: 15
+										}
+									}
+								}
+							},
+							data: pjBuildDnData
+						}
+					]
+				}
+				pjBuildDnChart.setOption(pjBuildDn)
+
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					pjBuildDnChart.resize()
+				})
+			}
+			tableTabsInit = () => {
+				$('.area-table .types').on('click', 'td', e => {
+					$('.area-table .types .active').removeClass('active')
+					$(e.currentTarget).addClass('active')
+					const id = $(e.currentTarget).attr('id')
+					listDataInit()
+				})
+				$($('.area-table .types td')[0]).trigger('click')
+				let listIndex = 1
+				setInterval(() => {
+					$($('.area-table .types td')[listIndex]).trigger('click')
+					listIndex += 1
+					if (listIndex === 4) {
+						listIndex = 0
+					}
+				}, 5000)
+			}
+			listDataInit = () => {
+				const listData = [
+					{
+						id: '1',
+						status: '在建',
+						amount: Math.floor(Math.random() * 500 + 20),
+						info: '甘肃XXX产业园办公及生活项目'
+					},
+					{
+						id: '2',
+						status: '在建',
+						amount: Math.floor(Math.random() * 500 + 20),
+						info: 'PPP项目经营性固定建设实施项目'
+					},
+					{
+						id: '3',
+						status: '停工',
+						amount: Math.floor(Math.random() * 500 + 20),
+						info: 'XXX分公司属地化建设项目'
+					},
+					{
+						id: '4',
+						status: '在建',
+						amount: Math.floor(Math.random() * 500 + 20),
+						info: '甘肃XXX产业园办公及生活项目'
+					},
+					{
+						id: '5',
+						status: '在建',
+						amount: Math.floor(Math.random() * 500 + 20),
+						info: 'PPP项目经营性固定建设实施项目'
+					},
+					{
+						id: '6',
+						status: '停工',
+						amount: Math.floor(Math.random() * 500 + 20),
+						info: 'XXX分公司属地化建设项目'
+					},
+					{
+						id: '7',
+						status: '在建',
+						amount: Math.floor(Math.random() * 500 + 20),
+						info: '甘肃XXX产业园办公及生活项目'
+					},
+					{
+						id: '8',
+						status: '筹建',
+						amount: Math.floor(Math.random() * 500 + 20),
+						info: 'PPP项目经营性固定建设实施项目'
+					}
+				]
+				$('.table-list-wrapper .table-list').addClass('animate__fadeOutLeft')
+				setTimeout(() => {
+					$('.table-list-wrapper .table-list').remove()
+					let liDom =
+						'<ul class="table-list animate__animated animate__fadeInRight">'
+					$.each(listData, (index, item) => {
+						liDom +=
+							'<li class="list-item">' +
+							'' +
+							(index + 1) +
+							'、<span class="' +
+							(item.status === '在建'
+								? 'default'
+								: item.status === '筹建'
+								? 'warning'
+								: 'danger') +
+							'">' +
+							item.status +
+							' ' +
+							item.amount +
+							' </span><span>' +
+							item.info +
+							'</span>' +
+							'</li>'
+					})
+					liDom += '</div>'
+					$('.table-list-wrapper').append(liDom)
+				}, 300)
+			}
+
+			mapInit = () => {
+				let cMap = echarts.init(document.getElementById('c-map'))
+				var data = [
+					{
+						name: '北京',
+						value: 200,
+						value2: 22,
+						value3: 33
+					},
+					{
+						name: '天津',
+						value: 42,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '河北',
+						value: 102,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '山西',
+						value: 81,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '内蒙古',
+						value: 47,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '辽宁',
+						value: 67,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '吉林',
+						value: 82,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '黑龙江',
+						value: 123,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '上海',
+						value: 24,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '江苏',
+						value: 92,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '浙江',
+						value: 114,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '安徽',
+						value: 109,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '福建',
+						value: 116,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '江西',
+						value: 91,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '山东',
+						value: 119,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '河南',
+						value: 137,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '湖北',
+						value: 116,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '湖南',
+						value: 114,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '重庆',
+						value: 91,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '四川',
+						value: 125,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '贵州',
+						value: 62,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '云南',
+						value: 83,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '西藏',
+						value: 9,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '陕西',
+						value: 80,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '甘肃',
+						value: 56,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '青海',
+						value: 10,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '宁夏',
+						value: 18,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '新疆',
+						value: 180,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '广东',
+						value: 123,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '广西',
+						value: 59,
+						value2: 11,
+						value3: 31
+					},
+					{
+						name: '海南',
+						value: 14,
+						value2: 11,
+						value3: 31
+					}
+				]
+
+				var geoCoordMap = {}
+
+				/*获取地图数据*/
+				cMap.showLoading()
+				var mapFeatures = echarts.getMap('china').geoJson.features
+				cMap.hideLoading()
+				mapFeatures.forEach(function (v) {
+					// 地区名称
+					var name = v.properties.name
+					// 地区经纬度
+					geoCoordMap[name] = v.properties.cp
+				})
+				var max = 480,
+					min = 9 // todo
+				var maxSize4Pin = 100,
+					minSize4Pin = 20
+
+				var convertData = function (data) {
+					var res = []
+					for (var i = 0; i < data.length; i++) {
+						var geoCoord = geoCoordMap[data[i].name]
+						if (geoCoord) {
+							res.push({
+								name: data[i].name,
+								value: geoCoord.concat(data[i].value)
+							})
+						}
+					}
+					return res
+				}
+				cMapOption = {
+					tooltip: {
+						padding: 0,
+						enterable: true,
+						transitionDuration: 1,
+						textStyle: {
+							color: '#000',
+							decoration: 'none'
+						},
+						// position: function (point, params, dom, rect, size) {
+						//   return [point[0], point[1]];
+						// },
+						formatter: function (params) {
+							var tipHtml = ''
+							tipHtml =
+								'<div style="position: relative;display:inline-block;min-width: 200px;max-width: 600px; height: 130px;padding: 0 15px; background:linear-gradient(0deg,rgba(14,106,178,0.44),rgba(31,53,127,0.44),rgba(25,123,202,0.44))">' +
+								'<div style="position: absolute;top: -2px;left: -2px; width: 15px;height: 15px;border-top: 3px solid #117EC8; border-left: 3px solid #117EC8;"></div>' +
+								'<div style="position: absolute;top: -2px;right: -2px; width: 15px;height: 15px;border-top: 3px solid #117EC8; border-right: 3px solid #117EC8;"></div>' +
+								'<div style="position: absolute;bottom: -2px;left: -2px; width: 15px;height: 15px;border-bottom: 3px solid #117EC8; border-left: 3px solid #117EC8;"></div>' +
+								'<div style="position: absolute;bottom: -2px;right: -2px; width: 15px;height: 15px;border-bottom: 3px solid #117EC8; border-right: 3px solid #117EC8;"></div>' +
+								'<p style="margin: 15px 0 0 0; font-size: 14px;font-weight: 500;color: #fff;line-height: 20px;">' +
+								'<span style="color: #74BDD8;">项目数量：</span>' +
+								' <span style="font-size: 20px;font-weight: bold;">' +
+								params.data.value +
+								'</span>' +
+								'</p>' +
+								'<p style="margin: 15px 0 0 0; font-size: 14px;font-weight: 500;color: #fff;line-height: 20px;">' +
+								'<span style="color: #74BDD8;">项目总额：</span>' +
+								'<span style="font-size: 20px;font-weight: bold;">' +
+								params.data.value2 +
+								'亿' +
+								'</span>' +
+								'</p>' +
+								'<p style="margin: 15px 0 0 0; font-size: 14px;font-weight: 500;color: #fff;line-height: 20px;">' +
+								'<span style="color: #74BDD8;">开工项目数：</span>' +
+								'<span style="font-size: 20px;font-weight: bold;">' +
+								params.data.value3 +
+								'</span>' +
+								'</p>' +
+								'</div>'
+							// setTimeout(function() {
+							//     tooltipCharts(params.name);
+							// }, 10);
+							return tipHtml
+						}
+					},
+					visualMap: {
+						show: true,
+						min: 0,
+						max: 200,
+						left: '5%',
+						bottom: 80,
+						calculable: true,
+						seriesIndex: [0],
+						inRange: {
+							color: ['#04387b', '#467bc0'] // 蓝绿
+						}
+					},
+					geo: {
+						show: true,
+						map: 'china',
+						// left: 0,
+						// right: 0,
+						// boundingCoords: [
+						//     // 定位左上角经纬度
+						//     [65, 10],
+						//     // 定位右下角经纬度
+						//     [150, 55]
+						// ],
+						top: 80,
+						label: {
+							normal: {
+								show: false
+							},
+							emphasis: {
+								show: false
+							}
+						},
+						zoom: 1.25, //当前视角的缩放比例
+						roam: false, //是否开启平游或缩放
+						// scaleLimit: { //滚轮缩放的极限控制
+						//     min: 0.3,
+						//     max: 8
+						// },
+						itemStyle: {
+							areaColor: '#023677',
+							borderColor: '#1180c7',
+							shadowBlur: 20,
+							shadowOffsetX: 0,
+							shadowOffsetY: 20,
+							emphasis: {
+								areaColor: '#4499d0'
+							}
+						},
+						z: 1
+					},
+					series: [
+						{
+							name: '',
+							type: 'map',
+							map: 'china',
+							showLegendSymbol: false, // 存在legend时显示
+							label: {
+								normal: {
+									show: false
+								},
+								emphasis: {
+									show: false
+								}
+							},
+							roam: false, //是否开启平游或缩放
+							zoom: 1.25,
+							z: 2,
+							itemStyle: {
+								normal: {
+									areaColor: '#023677',
+									borderColor: '#3ea5e6'
+								},
+								emphasis: {
+									areaColor: '#4499d0'
+								}
+							},
+							animation: false,
+							data: data
+						},
+						{
+							name: '散点',
+							type: 'scatter',
+							coordinateSystem: 'geo',
+							data: convertData(data),
+							symbolSize: function (val) {
+								return val[2] / 10
+							},
+							label: {
+								normal: {
+									show: true,
+									position: 'right',
+									formatter: '{b}'
+								},
+								emphasis: {
+									show: true
+								}
+							},
+							itemStyle: {
+								normal: {
+									color: '#fff'
+								}
+							},
+							tooltip: {
+								show: false
+							}
+						},
+						{
+							name: '点',
+							type: 'scatter',
+							coordinateSystem: 'geo',
+							zlevel: 6,
+							tooltip: {
+								show: false
+							}
+						},
+						{
+							name: 'Top 10',
+							type: 'effectScatter',
+							coordinateSystem: 'geo',
+							data: convertData(
+								data
+									.sort(function (a, b) {
+										return b.value - a.value
+									})
+									.slice(0, 10)
+							),
+							symbolSize: function (val) {
+								return val[2] / 6
+							},
+							showEffectOn: 'render',
+							rippleEffect: {
+								brushType: 'stroke'
+							},
+							hoverAnimation: true,
+							label: {
+								normal: {
+									formatter: '{b}',
+									position: 'left',
+									show: false
+								}
+							},
+							itemStyle: {
+								normal: {
+									color: 'yellow',
+									shadowBlur: 10,
+									shadowColor: 'yellow'
+								}
+							},
+							tooltip: {
+								show: false
+							},
+							zlevel: 1
+						}
+					]
+				}
+				cMap.setOption(cMapOption)
+				let toolTipIndex = 0 // 轮播所在下标
+
+				let index = -1
+				var timer = setInterval(function () {
+					// 隐藏提示框
+					cMap.dispatchAction({
+						type: 'hideTip',
+						seriesIndex: 0,
+						dataIndex: index
+					})
+					// 显示提示框
+					cMap.dispatchAction({
+						type: 'showTip',
+						seriesIndex: 0,
+						dataIndex: index + 1
+					})
+					// 取消高亮指定的数据图形
+					cMap.dispatchAction({
+						type: 'downplay',
+						seriesIndex: 0,
+						dataIndex: index
+					})
+					// 高亮指定的数据图形
+					cMap.dispatchAction({
+						type: 'highlight',
+						seriesIndex: 0,
+						dataIndex: index + 1
+					})
+					index++
+					if (index > 13) {
+						index = -1
+					}
+				}, 3000)
+				cMap.on('mousemove', function (e) {
+					clearInterval(timer)
+					cMap.dispatchAction({
+						type: 'downplay',
+						seriesIndex: 0
+					})
+					cMap.dispatchAction({
+						type: 'highlight',
+						seriesIndex: 0,
+						dataIndex: e.dataIndex
+					})
+					cMap.dispatchAction({
+						type: 'showTip',
+						seriesIndex: 0,
+						dataIndex: e.dataIndex
+					})
+				}) //---------------------------------------------鼠标移入静止播放
+				cMap.on('mouseout', function (e) {
+					clearInterval(timer)
+					cMap.dispatchAction({
+						type: 'downplay',
+						seriesIndex: 0,
+						dataIndex: e.dataIndex
+					}) //鼠标移出后先把上次的高亮取消
+					timer = setInterval(function () {
+						// 隐藏提示框
+						cMap.dispatchAction({
+							type: 'hideTip',
+							seriesIndex: 0,
+							dataIndex: index
+						})
+						// 显示提示框
+						cMap.dispatchAction({
+							type: 'showTip',
+							seriesIndex: 0,
+							dataIndex: index + 1
+						})
+						// 取消高亮指定的数据图形
+						cMap.dispatchAction({
+							type: 'downplay',
+							seriesIndex: 0,
+							dataIndex: index
+						})
+						// 高亮指定的数据图形
+						cMap.dispatchAction({
+							type: 'highlight',
+							seriesIndex: 0,
+							dataIndex: index + 1
+						})
+						index++
+						if (index > 13) {
+							index = -1
+						}
+					}, 3000)
+				})
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					cMap.resize()
+				})
+			}
+
+			barinit = () => {
+				let barChart = echarts.init(document.getElementById('bar-chart'))
+				const months = [
+					'1月',
+					'2月',
+					'3月',
+					'4月',
+					'5月',
+					'6月',
+					'7月',
+					'8月',
+					'9月',
+					'10月',
+					'11月',
+					'12月'
+				]
+				barOption = {
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {
+							type: 'shadow'
+						},
+						confine: true
+					},
+					grid: {
+						// top: 'middle',
+						left: '3%',
+						right: '4%',
+						bottom: '3%',
+						top: '22%',
+						containLabel: true
+					},
+					legend: {
+						data: ['项目总数', '储备项目数', '在建项目数', '竣工项目数'],
+						left: 20,
+						top: 5,
+						itemWidth: 10,
+						itemHeight: 10,
+						textStyle: {
+							color: '#f6f6f6',
+							fontSize: 14
+						}
+					},
+					xAxis: [
+						{
+							type: 'category',
+							data: months,
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#f6f6f6', //X轴文字颜色
+									fontSize: 13
+								}
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#42447070',
+									width: 0.5
+								}
+							},
+							axisTick: {
+								show: false
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'value',
+							name: '',
+							axisLabel: {
+								formatter: '{value} ',
+								textStyle: {
+									color: '#f6f6f6', //X轴文字颜色
+									fontSize: 13
+								}
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#42447070',
+									width: 0.5
+								}
+							},
+							axisTick: {
+								show: false
+							},
+							splitLine: {
+								show: true,
+								lineStyle: {
+									color: '#42447070'
+								}
+							}
+						}
+					],
+					series: [
+						{
+							name: '项目总数',
+							type: 'bar',
+							itemStyle: {
+								normal: {
+									// barBorderRadius: 5,
+									color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+										{
+											offset: 0,
+											color: '#0ECFF8'
+										},
+										{
+											offset: 1,
+											color: '#0570E9'
+										}
+									])
+								}
+							},
+							data: [330, 430, 570, 520, 500, 540, 550, 530, 560, 580, 530, 550]
+						},
+						{
+							name: '储备项目数',
+							type: 'bar',
+							itemStyle: {
+								normal: {
+									// barBorderRadius: 5,
+									color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+										{
+											offset: 0,
+											color: '#932AE1'
+										},
+										{
+											offset: 1,
+											color: '#303E8C'
+										}
+									])
+								}
+							},
+							data: [100, 150, 200, 150, 180, 210, 250, 270, 310, 280, 250, 320]
+						},
+						{
+							name: '在建项目数',
+							type: 'bar',
+							itemStyle: {
+								normal: {
+									// barBorderRadius: 5,
+									color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+										{
+											offset: 0,
+											color: '#F3C478'
+										},
+										{
+											offset: 1,
+											color: '#F6AD62'
+										}
+									])
+								}
+							},
+							data: [80, 60, 120, 280, 150, 230, 210, 190, 170, 200, 150, 110]
+						},
+						{
+							name: '竣工项目数',
+							type: 'bar',
+							itemStyle: {
+								normal: {
+									// barBorderRadius: 5,
+									color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+										{
+											offset: 0,
+											color: '#A0FFD3'
+										},
+										{
+											offset: 1,
+											color: '#6CFFA7'
+										}
+									])
+								}
+							},
+							data: [150, 220, 250, 190, 170, 100, 90, 70, 80, 100, 130, 120]
+						}
+					]
+				}
+				barChart.setOption(barOption)
+				let toolTipIndex = 0 // 轮播所在下标
+
+				setInterval(() => {
+					// toolTip轮播
+					barChart.dispatchAction({
+						type: 'showTip',
+						seriesIndex: 0,
+						dataIndex: toolTipIndex
+					})
+					toolTipIndex++
+					if (toolTipIndex > barOption.series[0].data.length) {
+						toolTipIndex = 0
+					}
+				}, 1500)
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					pjBuildDnChart.resize()
+				})
+			}
+		</script>
+	</body>
+</html>
