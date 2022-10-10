@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: /dance.gif
-actionText: 瞅瞅 →
+actionText: Music →
 actionLink: /standard/
 features:
   - title: Stay hungry, stay foolish.
