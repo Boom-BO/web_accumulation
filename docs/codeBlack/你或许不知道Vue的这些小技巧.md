@@ -437,5 +437,3 @@ export default new Router({
 本文的内容很多都在 Vue 文档里面有过说明，推荐大家可以多看看 Vue 文档，不止看教程篇，还有文档的 Api 什么的，也都可以看。然后其实还有两三点想写的，因为预计篇幅都会比较长一点，所以准备留到以后的文章里面吧~
 
 <!-- 特殊字符串：用于修改/删除markdown的结尾提示语-->
-
-### 点个[Star](https://github.com/OBKoro1/codeBlack)支持我一下~

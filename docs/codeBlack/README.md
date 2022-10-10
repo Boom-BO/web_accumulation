@@ -24,5 +24,3 @@
 - [segmentfault](https://segmentfault.com/u/obkoro1/articles)
 - [微信公众号](https://github.com/OBKoro1/articleImg_src/blob/master/juejin/1631b6f52f7e7015.jpeg?raw=true)
   <!-- 特殊字符串：用于修改/删除markdown的结尾提示语-->
-
-### 点个[Star](https://github.com/OBKoro1/codeBlack)支持我一下~

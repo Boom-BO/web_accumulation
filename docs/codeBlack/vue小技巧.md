@@ -144,5 +144,3 @@ vue 框架还有一个[风格指南](https://cn.vuejs.org/v2/style-guide/)推荐
 ![vue风格指南](https://github.com/OBKoro1/articleImg_src/blob/master/juejin/160fff0ec0147156?raw=true)
 
 <!-- 特殊字符串：用于修改/删除markdown的结尾提示语-->
-
-### 点个[Star](https://github.com/OBKoro1/codeBlack)支持我一下~

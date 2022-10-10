@@ -19,12 +19,12 @@ module.exports = {
 					{ text: 'Vue开发规范', link: '/standard/' }, // 内部链接 以docs为根目录
 					{ text: 'VsCode EsLint自动格式化', link: '/eslint_auto_format/' },
 					{ text: 'Vue+Axios请求封装', link: '/axios/' },
-					{ text: '自定义代码模板', link: '/code_template/' },
-					{ text: '前端积累', link: '/accumulate/' },
-					{ text: '前端算法', link: '/algorithm/' },
-					{ text: '代码块', link: '/codeBlack/' }
+					{ text: '自定义代码模板', link: '/code_template/' }
 				]
 			},
+			{ text: '前端积累', link: '/accumulate/' },
+			{ text: '前端算法', link: '/algorithm/' },
+			{ text: '代码块', link: '/codeBlack/' },
 			{
 				text: '开源库',
 				items: [

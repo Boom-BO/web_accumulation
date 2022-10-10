@@ -105,5 +105,3 @@ store.dispatch('nameAction', '传过去的新名字')
 如此之简单，快点来试试吧！
 
 <!-- 特殊字符串：用于修改/删除markdown的结尾提示语-->
-
-### 点个[Star](https://github.com/OBKoro1/codeBlack)支持我一下~
