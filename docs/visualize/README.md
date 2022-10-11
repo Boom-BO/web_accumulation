@@ -4,6 +4,10 @@
 传统的信息展示方式，远不能满足如今信息大爆炸似增长的时代，而数据可视化大屏实现方案的优点就是能够汇聚海量信息、并且实现实时数据更新交互。  
 优秀的大屏可视化制作方案则能够为企业形象加分。大屏数据公司可以通过制作 3D 动态地图突出企业的优势，也能通过建模，3D 化显示企业的整个地理地形，展示企业的风貌和文化建设。
 
+::: tip
+划到最后有案例 Demo 可以看哦 :point_down:
+:::
+
 ## 布局
 
 在日常开发过程中我们可以发现，不同客户对项目中可视化页面的要求不一样，并没有想要单纯的应用在 LED 大屏或 LCD 大屏上去展示，部分客户会希望把可视化图形应用在 PC 端门户或者后台系统控制台上。所以我们希望在布局方面灵活应用以下两种方案。
@@ -33,7 +37,7 @@ scalePage = () => {
 // 防抖
 debounce = (fun, delay) => {
 	let timer
-	return function() {
+	return function () {
 		if (timer) {
 			clearTimeout(timer)
 		}
@@ -53,6 +57,11 @@ getScale = () => {
 ## Demo
 
 开发项目过程中，我们前端 UI 部门积累了一些快速开发的框架模板与实例，可以根据自己项目需要选择模板进行专注于页面内容的快速开发。我们还搜罗了一些可视化大屏效果图供大家参考。
+:::tip
+<strong>先看下有复杂动态效果的案例（数据已脱敏）：</strong><br/>
+<a href="/web_accumulation/code/visualize/大数据大屏/directory_chain.html" target="_blank">《某大数据中心可视化大屏》</a>
+<a href="/web_accumulation/code/visualize/带threejs的大屏/index.html" target="_blank">《某大数据链可视化大屏》</a>
+:::
 
 <strong>Demo 介绍：</strong><br/>
 技术栈：JQ + Echarts<br/>

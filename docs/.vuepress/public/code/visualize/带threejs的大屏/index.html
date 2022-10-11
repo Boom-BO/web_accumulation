@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./css/animate.min.css">
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/swiper-bundle.css">
+		<link rel="stylesheet" href="./css/normalize.css">
+		<link rel="stylesheet" href="./css/common.css">
+		<link rel="stylesheet" href="./css/mkj.css">
+
+		<title>数据资源链</title>
+		<style type="text/css">
+			#middle-echarts {
+				width: 100%;
+				height: 300px;
+				position: absolute;
+				z-index: 9;
+				top: 15px;
+				transform: rotate(-6deg);
+			}
+
+			#middle-echarts2 {
+				width: 100%;
+				height: 300px;
+				position: absolute;
+				z-index: 9;
+				top: 15px;
+				transform: rotate(-6deg);
+			}
+
+			#row {
+				position: absolute;
+				z-index: 1;
+			}
+
+			.imgWrap .yuanpan1 {
+				width: 100%;
+				display: block;
+				/* margin: 100px auto; */
+				/* animation: imgRotate 5s infinite linear; */
+				position: absolute;
+				/* bottom: 100px; */
+				left: 50%;
+			}
+
+			.imgWrap2 .yuanpan2 {
+				width: 100%;
+				display: block;
+				/* animation: imgRotate 5s infinite linear; */
+				position: absolute;
+				bottom: 0px;
+				left: 50%;
+			}
+
+			.imgWrap {
+				width: 50%;
+				position: absolute;
+				bottom: 30%;
+				left: 0;
+				/* transform: rotateX(80deg); */
+				z-index: 1;
+			}
+
+			.imgWrap2 {
+				width: 50%;
+				position: absolute;
+				bottom: 14%;
+				left: 0;
+				transform: rotateX(34deg);
+				z-index: 1;
+			}
+
+			.imgWrapTop {
+				width: 80%;
+				position: absolute;
+				top: 55px;
+				left: 10%;
+				transform: rotateX(76deg) rotateY(-6deg);
+				z-index: 1;
+				opacity: 0.8;
+			}
+
+			.imgWrapTop2 {
+				width: 80%;
+				position: absolute;
+				top: 65px;
+				left: 10%;
+				transform: rotateX(77deg) rotateY(-6deg);
+				z-index: 1;
+				opacity: 0.8;
+			}
+
+			.imgWrapTop3 {
+				width: 86%;
+				position: absolute;
+				top: 35px;
+				left: 7%;
+				transform: rotateX(75deg) rotateY(-6deg);
+				z-index: 1;
+				opacity: 0.8;
+			}
+
+			.imgWrapTop .yuanpan3 {
+				width: 100%;
+				display: block;
+				margin: 100px auto;
+				animation: imgRotate 5s infinite linear;
+				position: absolute;
+				top: 0;
+				left: 0%;
+			}
+
+			.imgWrapTop2 .yuanpan4 {
+				width: 94%;
+				display: block;
+				margin: 100px auto;
+				animation: imgRotate 5s infinite linear;
+				position: absolute;
+				top: 10px;
+				left: 3%;
+			}
+
+			.imgWrapTop3 .yuanpan5 {
+				width: 100%;
+				display: block;
+				margin: 100px auto;
+				animation: imgRotate 5s infinite linear;
+				position: absolute;
+				top: 10px;
+				left: 0%;
+			}
+
+			.imgWrapTop4 {
+				width: 22%;
+				position: absolute;
+				top: 38px;
+				left: 39%;
+				transform: rotateX(75deg) rotateY(-6deg);
+				z-index: 10;
+				opacity: 1;
+			}
+
+			.imgWrapTop5 {
+				width: 22%;
+				position: absolute;
+				top: 33px;
+				left: 39%;
+				transform: rotateX(75deg) rotateY(-6deg);
+				z-index: 11;
+				opacity: 1;
+			}
+
+			.imgWrapTop6 {
+				width: 22%;
+				position: absolute;
+				top: 29px;
+				left: 39%;
+				transform: rotateX(75deg) rotateY(-6deg);
+				z-index: 12;
+				opacity: 1;
+			}
+
+			.imgWrapTop7 {
+				width: 22%;
+				position: absolute;
+				top: 95px;
+				left: 39%;
+
+				z-index: 13;
+				opacity: 0;
+				animation: heart 2s ease-in-out 2s infinite normal;
+			}
+
+			.imgWrapTop8 {
+				width: 22%;
+				position: absolute;
+				top: 95px;
+				left: 39%;
+				transform: rotateX(40deg) rotateY(-6deg);
+				z-index: 14;
+				opacity: 0;
+				animation: heart 2s ease-in-out 1s infinite normal;
+			}
+
+			.yuanpan5 {
+				width: 100%;
+			}
+
+			@keyframes imgRotate {
+				0% {
+					transform: rotate(0deg);
+				}
+
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+
+			@keyframes heart {
+				0% {
+					transform: translate(0, -10px) rotateX(40deg) rotateY(-6deg);
+					opacity: 0;
+				}
+
+				20% {
+					transform: translate(0, -10px) rotateX(40deg) rotateY(-6deg);
+					opacity: 0.8;
+				}
+
+				80% {
+					transform: translate(-8px, -80px) rotateX(40deg) rotateY(-6deg);
+				}
+
+				100% {
+					transform: translate(-10px, -100px) rotateX(40deg) rotateY(-6deg);
+					opacity: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mkj theme-wrapper scale-wrapper">
+			<div id="loading">
+				<div class="loading_img">
+					<!-- 加载动画 -->
+					<img class="loading-ring-o" src="images/loading-ring-o.png">
+					<img class="loading-ring-i" src="images/loading-ring-i.png">
+				</div>
+			</div>
+			<div class="title-bar">
+				<p class="title-name">数据资源链</p>
+				<div class="time_div" id="timeNow"></div>
+				<div class="time_div" id="time"></div>
+				<!-- <div class="nav-btn">运营管理平台</div> -->
+			</div>
+			<div class="contain clearfix">
+				<div class="c-left">
+					<div class="card">
+						<div class="card-header">
+							<div class="head-title">数据资源情况</div>
+							<div class="head-li">
+								<ul>
+									<li class="active">日</li>
+									<li>周</li>
+									<li>月</li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-name">
+							<p>信息备案</p>
+						</div>
+						<div class="tips">
+							应用系统增加TOP5
+						</div>
+						<div id="recordDiv">
+						</div>
+						<div class="tips">
+							数据库增加TOP5
+						</div>
+						<div class="top-3">
+							<div>
+								<img src="images/top2.png" style="transform: translate(0px, -10px);" />
+								<div class="top-title">
+									<div>司法局</div>
+									<div>6576879</div>
+								</div>
+
+							</div>
+							<div>
+								<img src="images/top1.png" />
+								<div class="top-title">
+									<div>市场监督局</div>
+									<div>7828019</div>
+								</div>
+							</div>
+							<div>
+								<img src="images/top3.png" style="transform: translate(0px, -10px);" />
+								<div class="top-title">
+									<div>知识产权局</div>
+									<div>6576879</div>
+								</div>
+							</div>
+						</div>
+						<div class='td-title'>
+							<span style="width: 10%;">排名</span>
+							<span style="width: 60%;">名称</span>
+							<span style="width: 18%;">人数</span>
+						</div>
+						<div id="dataBaseDiv">
+
+						</div>
+						<div class="divider"></div>
+						<div class="card-name">
+							<p>资源探查</p>
+						</div>
+						<div class="tz">
+							<div>
+								<div id="tzDiv"></div>
+								<div class="imgDiv">
+									<div class="name">探针</div>
+									<div class="num">15</div>
+									<img src="images/brite.png" />
+								</div>
+								<div class="legend">
+									<span class="zc"></span>
+									<span>正常探针</span>
+									<span class="zcnum">14</span>
+								</div>
+								<div class="legend">
+									<span class="fzc"></span>
+									<span>异常探针</span>
+									<span class="fzcnum">1</span>
+								</div>
+							</div>
+							<div>
+								<div id="hxDiv"></div>
+								<div class="imgDiv">
+									<div class="name">元数据</div>
+									<div class="num">8</div>
+									<img src="images/brite.png" />
+								</div>
+								<div class="legend">
+									<span class="hx"></span>
+									<span>核心元数据</span>
+									<span class="hxnum">6</span>
+								</div>
+								<div class="legend">
+									<span class="fhx"></span>
+									<span>非核心元数据</span>
+									<span class="fhxnum">2</span>
+								</div>
+							</div>
+						</div>
+						<div class="tips">
+							核心元数据增加TOP5
+						</div>
+						<table class="table">
+							<thead>
+								<tr>
+									<th width="55">排名</th>
+									<th>名称</th>
+									<th>活跃人数</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><img src="images/huangguan@2x.png" />1</td>
+									<td>区生态环保局</td>
+									<td>99880</td>
+								</tr>
+								<tr>
+									<td><img src="./images/huangguan3-copy-copy-copy-copy-copy@2x.png" />2</td>
+									<td>区生态环保局</td>
+									<td>99880</td>
+								</tr>
+								<tr>
+									<td><img src="images/huangguan_1@2x.png" />3</td>
+									<td>区生态环保局</td>
+									<td>99880</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>区生态环保局</td>
+									<td>99880</td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td>区生态环保局</td>
+									<td>99880</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="c-center" style="overflow: hidden;">
+					<div class="current_items" id="current_items">
+					</div>
+					<div class="probe-div">
+						<div class="moveDiv" style="width: 200%;height: 100%;position:relative">
+							<div style="position: relative;width: 50%;height: 100%;float: left;">
+								<div id="middle-echarts">
+
+								</div>
+								<div id="row" style="width: 300px;height: 200px;position: absolute;bottom: 52%;">
+
+								</div>
+								<div class="imgWrap">
+									<img class="yuanpan1" src="./images/middle/down.png">
+								</div>
+								<div class="imgWrap2">
+									<img class="yuanpan2" src="./images/middle/ra.png">
+								</div>
+								<div class="imgWrapTop">
+									<img class="yuanpan3" src="./images/middle/topMiddleCircle.png">
+								</div>
+								<div class="imgWrapTop2">
+									<img class="yuanpan4" src="./images/middle/middleCircle.png">
+								</div>
+								<div class="imgWrapTop3">
+									<img class="yuanpan5" src="./images/middle/outMiddleCircle.png">
+								</div>
+								<div class="imgWrapTop4">
+									<img class="yuanpan5" src="./images/bottomCircle.png">
+								</div>
+								<div class="imgWrapTop4">
+									<img class="yuanpan5" src="./images/bottomCircle.png">
+								</div>
+
+								<div class="imgWrapTop5">
+									<img class="yuanpan5" src="./images/middleCircle.png">
+								</div>
+								<div class="imgWrapTop6">
+									<img class="yuanpan5" src="./images/topCircle.png">
+								</div>
+								<div class="imgWrapTop7">
+									<img class="yuanpan5" src="./images/middle/dizuo.png">
+								</div>
+								<div class="imgWrapTop8">
+									<img class="yuanpan5" src="./images/middle/dizuo.png">
+								</div>
+							</div>
+							<div style="position: relative;width: 50%;height: 100%;float: left;">
+								<div id="middle-echarts2">
+
+								</div>
+								<div id="row2" style="width: 300px;height: 200px;position: absolute;bottom: 52%;">
+
+								</div>
+								<div class="imgWrap">
+									<img class="yuanpan1" src="./images/middle/down.png">
+								</div>
+								<div class="imgWrap2">
+									<img class="yuanpan2" src="./images/middle/ra.png">
+								</div>
+								<div class="imgWrapTop">
+									<img class="yuanpan3" src="./images/middle/topMiddleCircle.png">
+								</div>
+								<div class="imgWrapTop2">
+									<img class="yuanpan4" src="./images/middle/middleCircle.png">
+								</div>
+								<div class="imgWrapTop3">
+									<img class="yuanpan5" src="./images/middle/outMiddleCircle.png">
+								</div>
+								<div class="imgWrapTop4">
+									<img class="yuanpan5" src="./images/bottomCircle.png">
+								</div>
+								<div class="imgWrapTop4">
+									<img class="yuanpan5" src="./images/bottomCircle.png">
+								</div>
+
+								<div class="imgWrapTop5">
+									<img class="yuanpan5" src="./images/middleCircle.png">
+								</div>
+								<div class="imgWrapTop6">
+									<img class="yuanpan5" src="./images/topCircle.png">
+								</div>
+								<div class="imgWrapTop7">
+									<img class="yuanpan5" src="./images/middle/dizuo.png">
+								</div>
+								<div class="imgWrapTop8">
+									<img class="yuanpan5" src="./images/middle/dizuo.png">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-name">
+							<p>数据资产评估</p>
+						</div>
+						<div class="estimateDiv" id="estimateDiv">
+
+						</div>
+
+						<!-- <div class="radarDivs"> -->
+						<div class="swiper-container bottomSwiper">
+							<div class="swiper-wrapper">
+							</div>
+
+						</div>
+						<!-- </div> -->
+					</div>
+				</div>
+				<div class="c-right">
+					<div class="card">
+						<div class="card-header">
+							<div class="head-title">数据资产化情况</div>
+							<div class="head-li">
+								<ul>
+									<li class="active">日</li>
+									<li>周</li>
+									<li>月</li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-name">
+							<p>登记确权</p>
+						</div>
+						<div class="registerDiv">
+							<img src="images/menu.png" />
+							<div class="registerItem">
+								<div>上链目录数量</div>
+								<div class="num">451532</div>
+								<div>+155</div>
+							</div>
+						</div>
+						<div class="registerDiv">
+							<img src="images/ziyuan.png" />
+							<div class="registerItem">
+								<div>资源确权数量</div>
+								<div class="num">234998</div>
+								<div>+155</div>
+							</div>
+						</div>
+
+						<div class="tips">
+							编目数量上升率TOP5
+						</div>
+						<div class="pieDiv">
+							<img src="images/dizuo.png" />
+							<div id="categoryDiv">
+
+							</div>
+						</div>
+
+
+						<div class="divider"></div>
+						<div class="card-name">
+							<p>数据应用</p>
+						</div>
+						<div class="tips">
+							可信共享交换次数TOP5
+						</div>
+						<div id='shareDiv'></div>
+						<div class="rateAndTime" id="rateAndTime">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="./js/es5-shim.min.js"></script>
+		<script src="./js/three.js"></script>
+		<script type="text/javascript" src="./js/es5-sham.min.js"></script>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="js/swiper-bundle.js"></script>
+		<script src="./js/template-web.js"></script>
+		<script src="./js/echarts.min.js"></script>
+		<script src="./js/echarts-gl.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/infoRecord.js"></script>
+		<script src="./js/dataBaseTop5.js"></script>
+		<script src="./js/radarInit.js"></script>
+		<script src="./js/categoryInit.js"></script>
+		<script src="./js/shareNum.js"></script>
+		<script src="./js/middle.js"></script>
+		<script src="./js/rateAndTimeBarInit.js"></script>
+		<script src="./js/resourcePreview.js"></script>
+		<script id="currentItems-template" type="text/html">
+			<div class="item-label">
+				<p>本月新增</p>
+				<span class="item-divider"></span>
+				<p>当前累计</p>
+			</div>
+			{{each list}}
+				<div>
+					<p class="orgName">{{$value.name}}</p>
+					<div class="item-num">
+						<p>{{$value.newAddNum}}</p>
+						<p>{{$value.currentNum}}</p>
+					</div>
+				</div>
+			{{/each}}
+			
+		</script>
+		<script id="share-template" type="text/html">
+			{{each list}}
+				<div>
+					<div class="imgDiv"><img src="images/deng.png" width="47" height="47"/></div>
+					<div class="items">
+						<div style="display: flex;"><div>{{$value.name}}</div><div>{{$value.value}}</div></div>
+						<div id="share{{$index}}"></div>
+					</div>
+					
+				</div>
+			{{/each}}
+			
+		</script>
+
+		<script type="text/javascript">
+			let cMapOption = null
+			$(function() {
+				scalePage()
+				clearLoading()
+				timeInit()
+				// 信息备案
+				infoRecordInit()
+				// 数据库增加top5
+				dataBaseInit()
+				// 中间最上面本月新增+当前累计
+				currentItems()
+				initRadarDivs()
+
+				// 编目数量上升率top5
+				categoryInit()
+				// 可信共享交换次数TOP5
+				shareNumInit()
+				// 自动审核共享率和平均共享时间
+				rateAndTimeInit()
+				middleInit()
+				middleInit2()
+				rowInit()
+				rowInit2()
+				draw()
+				var mySwiper = new Swiper('.swiper-container.bottomSwiper', {
+					autoplay: true, //等同于以下设置
+					slidesPerView: 3,
+					spaceBetween: 10,
+					// loop:true,
+					init: true,
+					breakpoints: {
+						'@0.00': {
+							slidesPerView: 1,
+							spaceBetween: 10,
+						},
+						'@0.75': {
+							slidesPerView: 2,
+							spaceBetween: 20,
+						},
+						'@1.00': {
+							slidesPerView: 3,
+							spaceBetween: 30,
+						}
+					}
+				});
+				$(".head-li ul li").click(function() {
+					$(this).siblings('li').removeClass('active');
+					$(this).addClass('active');
+				})
+				var flag = true
+				var timer = null
+
+				function autoPlay() {
+					timer = setInterval(function() {
+						if (flag) {
+							$(".moveDiv").animate({
+								left: '-100%'
+							})
+							flag = !flag
+						} else {
+							$(".moveDiv").animate({
+								left: '0'
+							})
+							flag = !flag
+						}
+					}, 10000)
+				}
+				autoPlay()
+				var container = document.querySelector(".moveDiv");
+				container.onmouseenter = function() {
+					clearInterval(timer);
+				}
+				container.onmouseleave = function() {
+					autoPlay();
+				}
+			})
+			// 本月新增和当前累计
+			currentItems = () => {
+				let data = [{
+					name: '上链机构',
+					newAddNum: '672',
+					currentNum: '672'
+				}, {
+					name: '上链应用系统',
+					newAddNum: '72',
+					currentNum: '672'
+				}, {
+					name: '上链数据库',
+					newAddNum: '672',
+					currentNum: '6725'
+				}, {
+					name: '上链数据资源',
+					newAddNum: '672',
+					currentNum: '67255'
+				}, {
+					name: '上链资源目录',
+					newAddNum: '672',
+					currentNum: '672'
+				}, {
+					name: '共享交换次数',
+					newAddNum: '672',
+					currentNum: '6724'
+				}]
+				let html = template('currentItems-template', {
+					list: data
+				})
+				$('#current_items').append(html);
+			}
+			// 自动审核共享率和平均共享时间
+			rateAndTimeInit = () => {
+				let list = [{
+					name: '自动审核共享率',
+					value: 70.3
+				}, {
+					name: '平均共享时间',
+					value: 3.5
+				}];
+				let html = template('share-template', {
+					list: list
+				})
+				$('#rateAndTime').append(html);
+				rateAndTimeBarInit(list)
+			}
+			initRadarDivs = () => {
+				let html = ''
+				let data = [{
+						name: '劳动保障管理信息系统',
+						num: '1'
+					},
+					{
+						name: '上海市道路交通信息系统',
+						num: '2'
+					},
+					{
+						name: '上海市道路交通信息系统',
+						num: '3'
+					},
+					{
+						name: '劳动保障管理信息系统',
+						num: '4'
+					},
+					{
+						name: '上海市道路交通信息系统',
+						num: '5'
+					},
+				]
+
+
+				data.forEach((obj, i) => {
+					html += "<div class='swiper-slide'>";
+					html += '<div class="name">' + obj.name
+					for (let i = 0; i < obj.num; i++) {
+						html += '<img src="images/star-five-light.png" />'
+					}
+					for (let i = 0; i < 5 - obj.num; i++) {
+						html += '<img src="images/star-five.png" />'
+					}
+					html += '</div>'
+					html += "<div class='radarDiv radarDiv' id = 'radarDiv" + i + "'></div></div>"
+				})
+				$(".swiper-wrapper").html(html)
+				data.forEach((obj, i) => {
+					radarInit(i)
+				})
+			}
+			clearLoading = () => {
+
+				// 接口全部加载完成
+				// if (getUseByWeekStatus && getAreaStatus && getActiveByWeekStatus && getMsgStatus && getWorkflow) {
+				// 	//删除加载动画
+				$('#loading').fadeOut(1000)
+				setTimeout(function() {
+					$('#loading').remove()
+				}, 1300);
+				// }
+
+			}
+			timeInit = () => {
+				setInterval(() => {
+					let date = new Date()
+					let timerNow = getFormatDate()
+					$('#timeNow').text('当前时间：' + timerNow)
+				}, 1000)
+
+				let date = new Date()
+				let timer = getFormatDate()
+				$('#time').text('数据更新时间：' + timer)
+			}
+			getFormatDate = () => {
+				let nowDate = new Date();
+				let year = nowDate.getFullYear();
+				let month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+				let date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+				let hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+				let minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+				let second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+				return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+			}
+			getScale = () => {
+				// 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+				const width = 1920
+				const height = 1080
+				let ww = window.innerWidth / width
+				let wh = window.innerHeight / height
+				return ww < wh ? ww : wh
+			}
+			// 页面渲染计算比例缩放
+			scalePage = () => {
+				setScale = debounce(() => {
+					// 获取到缩放比，设置它
+					let scale = this.getScale()
+					$('.scale-wrapper').css({
+						'transform': 'scale(' + scale + ') translate(-50%, -50%)',
+						'-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+					})
+				}, 200)
+				setScale()
+				window.addEventListener('resize', setScale)
+			}
+			// 防抖
+			debounce = (fun, delay) => {
+				let timer
+				return function() {
+					if (timer) {
+						clearTimeout(timer)
+					}
+					timer = setTimeout(fun, delay)
+				}
+			}
+		</script>
+	</body>
+
+</html>
