@@ -12,7 +12,7 @@ module.exports = [
 	// '/accumulate/tool/ESLint插件',
 	'/accumulate/JS/JS基础-继承',
 	'/accumulate/JS/JS基础-call和apply还有bind.md',
-	'/accumulate/tool/koroFileHeader',
+	// '/accumulate/tool/koroFileHeader',
 	'/accumulate/ES6/js调用栈机制与ES6尾调用优化介绍',
 	'/accumulate/ES6/论普通函数和箭头函数的区别以及箭头函数的注意事项和不适用场景',
 	'/accumulate/JS/手摸手教你使用WebSocket',
