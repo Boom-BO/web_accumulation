@@ -9,7 +9,7 @@
 }
 
 .iconfont {
-	font-family: "iconfont" !important;
+	font-family: 'iconfont' !important;
 	font-size: 16px;
 	font-style: normal;
 	-webkit-font-smoothing: antialiased;
@@ -27,7 +27,7 @@ html {
 	font-size: 12px;
 	width: 100%;
 	height: 100%;
-	background-color: #0D0E40;
+	background-color: #090254;
 }
 
 body {
@@ -36,8 +36,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
-	font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+		'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 	box-sizing: border-box;
+	background-color: #090254;
 }
 
 ::-moz-selection {
@@ -137,12 +139,12 @@ textarea {
 .clearfix:after,
 .clearfix:before {
 	content: '';
-	display: table
+	display: table;
 }
 
 .clearfix:after {
 	clear: both;
-	display: block
+	display: block;
 }
 
 .pull-left {
@@ -173,7 +175,6 @@ textarea {
 	color: #999 !important;
 }
 
-
 /* 加载旋转动画 */
 #loading {
 	width: 100%;
@@ -182,7 +183,7 @@ textarea {
 	background: url(../images/darken-bg.png) no-repeat center/cover;
 	top: 0;
 	left: 0;
-	z-index: 999
+	z-index: 999;
 }
 
 #loading .loading_img {
@@ -304,29 +305,9 @@ textarea {
 	content: '';
 	width: 3px;
 	height: 100%;
-	background-color: #31A5FD;
+	background-color: #31a5fd;
 	border-radius: 2px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .num-tip {
 	position: absolute;
@@ -361,10 +342,10 @@ textarea {
 	line-height: 90px;
 	font-size: 40px;
 	font-weight: 600;
-	color: #FFFFFF;
+	color: #ffffff;
 	letter-spacing: 10px;
 	/* text-shadow: 2px 2px 9px #01153B; */
-	background: linear-gradient(180deg, #C9D2EB 0%, #3DA3F6 100%);
+	background: linear-gradient(180deg, #c9d2eb 0%, #3da3f6 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
@@ -377,10 +358,10 @@ textarea {
 	width: 400px;
 	font-size: 24px;
 	color: #ffffff;
-	background: linear-gradient(270deg, #173678, #174CA7);
+	background: linear-gradient(270deg, #173678, #174ca7);
 	font-size: 18px;
 	font-family: PingFang SC;
-	background: linear-gradient(180deg, #2B6BA9 0%, #B9C6E3 100%);
+	background: linear-gradient(180deg, #2b6ba9 0%, #b9c6e3 100%);
 	background: url(../images/time-bg.png) no-repeat;
 }
 
@@ -400,11 +381,24 @@ textarea {
 	font-size: 22px;
 	color: #fff;
 	font-weight: 400;
-	background: linear-gradient(181deg, rgba(0, 65, 143, 1) 0%, rgba(7, 42, 98, 1) 100%);
+	background: linear-gradient(
+		181deg,
+		rgba(0, 65, 143, 1) 0%,
+		rgba(7, 42, 98, 1) 100%
+	);
 	/* border-radius:10px; */
-	clip-path: polygon(8% 0%, 92% 0%, 100% 25%, 100% 75%, 92% 100%, 8% 100%, 0% 75%, 0% 25%);
+	clip-path: polygon(
+		8% 0%,
+		92% 0%,
+		100% 25%,
+		100% 75%,
+		92% 100%,
+		8% 100%,
+		0% 75%,
+		0% 25%
+	);
 	cursor: pointer;
-	transition: all .3s;
+	transition: all 0.3s;
 }
 
 .title-bar .nav-btn:hover {
@@ -424,14 +418,13 @@ textarea {
 	text-align: center;
 }
 
-
 /* btn  hover动画效果 */
 .btn-hover-animate {
 	position: relative;
 }
 
 .btn-hover-animate::after {
-	content: "";
+	content: '';
 	position: absolute;
 	width: 100%;
 	padding-top: 100%;
@@ -479,7 +472,7 @@ textarea {
 }
 
 .scale-wrapper {
-	transition: all .5s;
+	transition: all 0.5s;
 	position: relative;
 	padding: 20px 0;
 	background: url(../images/darken-bg.png) no-repeat center/cover;
@@ -516,14 +509,14 @@ textarea {
 	height: calc(50% - 10px);
 	margin: auto;
 	/* background-size: 100% 99%; */
-	background: linear-gradient(to left, #65E7FF, #65E7FF) left top no-repeat,
-		linear-gradient(to bottom, #65E7FF, #65E7FF) left top no-repeat,
-		linear-gradient(to left, #65E7FF, #65E7FF) right top no-repeat,
-		linear-gradient(to bottom, #65E7FF, #65E7FF) right top no-repeat,
-		linear-gradient(to left, #65E7FF, #65E7FF) left bottom no-repeat,
-		linear-gradient(to bottom, #65E7FF, #65E7FF) left bottom no-repeat,
-		linear-gradient(to left, #65E7FF, #65E7FF) right bottom no-repeat,
-		linear-gradient(to left, #65E7FF, #65E7FF) right bottom no-repeat;
+	background: linear-gradient(to left, #65e7ff, #65e7ff) left top no-repeat,
+		linear-gradient(to bottom, #65e7ff, #65e7ff) left top no-repeat,
+		linear-gradient(to left, #65e7ff, #65e7ff) right top no-repeat,
+		linear-gradient(to bottom, #65e7ff, #65e7ff) right top no-repeat,
+		linear-gradient(to left, #65e7ff, #65e7ff) left bottom no-repeat,
+		linear-gradient(to bottom, #65e7ff, #65e7ff) left bottom no-repeat,
+		linear-gradient(to left, #65e7ff, #65e7ff) right bottom no-repeat,
+		linear-gradient(to left, #65e7ff, #65e7ff) right bottom no-repeat;
 	background-size: 2px 20px, 20px 2px, 2px 20px, 20px 2px;
 	box-shadow: 0 0 20px #1d4eab inset;
 	margin-bottom: 10px;
@@ -537,20 +530,25 @@ textarea {
 	position: relative;
 }
 
-.card .card-title>a {
+.card .card-title > a {
 	position: absolute;
 	right: 20px;
 	top: 30%;
-	color: #FAFAFA;
+	color: #fafafa;
 }
 
 .card .card-title p {
 	font-size: 24px;
 	font-weight: 600;
-	color: #61D2EC;
+	color: #61d2ec;
 	text-align: center;
 	line-height: 40px;
-	background: linear-gradient(0deg, #0075FF 0%, #00E9FF 46.3134765625%, #0086FF 100%);
+	background: linear-gradient(
+		0deg,
+		#0075ff 0%,
+		#00e9ff 46.3134765625%,
+		#0086ff 100%
+	);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
@@ -564,13 +562,13 @@ textarea {
 
 .tab-title div {
 	flex: 1;
-	color: #58A6FE;
+	color: #58a6fe;
 	text-align: center;
 	cursor: pointer;
 }
 
 .tab-title .active {
-	color: #FFFFFF;
+	color: #ffffff;
 }
 
 .layui-laydate .layui-this {
