@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css 转圈</title>
+  <style>
+    .turn{
+      width:100px;
+      height: 100px;
+      background: aqua;
+      animation:turn 1s linear infinite;      
+      margin: 100px auto;
+    }
+    /* 
+      turn : 定义的动画名称
+      1s : 动画时间
+      linear : 动画以何种运行轨迹完成一个周期
+      infinite :规定动画应该无限次播放
+     */
+    @keyframes turn{
+      0%{-webkit-transform:rotateX(0deg);}
+      100%{-webkit-transform:rotateX(360deg);}
+    }
+  </style>
+</head>
+<body>
+  <div class="turn"></div>
+</body>
+</html>

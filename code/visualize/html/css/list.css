@@ -1,0 +1,340 @@
+.contain {
+	display: flex;
+	margin-bottom: 10px;
+	height: calc(100% - 110px);
+}
+
+.contain .card,
+.contain .card-contain {
+	height: 100%;
+}
+
+.tab-title {
+	background: transparent;
+}
+
+.tab-title div {
+	font-size: 20px;
+	font-weight: bold;
+	background: linear-gradient(0deg, #07285D 0%, #004291 100%);
+	border-radius: 2px;
+	/* padding: 10px; */
+	height: 50px;
+	line-height: 50px;
+	margin: 0 40px;
+	cursor: pointer;
+}
+
+.tab-title .active {
+	color: #FFFFFF;
+	border: 1px solid #00D2FF;
+}
+
+.tab-contain {
+	margin: 0 45px 15px 45px;
+	/* border: 1px solid rgba(139, 216, 238, .3); */
+	padding: 20px;
+	height: calc(100% - 40px);
+}
+
+.select-div {
+	position: relative;
+	display: flex;
+}
+
+.select-div input {
+	border: 1px solid rgba(80, 173, 247, .6);
+	height: 40px;
+	padding-left: 15px;
+	color: #FEFEFE;
+	display: inline-block;
+	background: transparent !important;
+	font-size: 20px;
+	border-radius: 5px;
+	flex: 1;
+}
+
+input:focus {
+	outline: none;
+}
+
+.select-div span {
+	color: #58A6FE;
+	font-size: 18px;
+	line-height: 22px;
+}
+
+.ztree li a.curSelectedNode span {
+	color: #FFFFFF;
+}
+
+.select-div>ul {
+	position: absolute;
+	padding: 0 10px;
+	overflow: auto;
+	background: #101957;
+}
+
+.select-div .list .title {
+	color: #FFFFFF;
+	font-size: 18px;
+	float: left;
+}
+
+.menuContent {
+	position: absolute;
+	display: none;
+	top: 40px;
+	left: 100px;
+	width: 235px;
+	border: 1px solid rgba(80, 173, 247, .6);
+	z-index: 99;
+}
+
+.ztree {
+	padding: 0 2px;
+	overflow: auto;
+}
+
+.ztree::-webkit-scrollbar {
+	display: none;
+	scrollbar-width: none; // firefox下滚动条不显示
+	-ms-overflow-style: none; // IE下滚动条不显示
+}
+
+#treeDemo li:first-child a:first-child span {
+	color: #FEFEFE;
+}
+
+.ztree li {
+	background: #101957;
+	padding: 5px 0;
+}
+
+.ztree li a.curSelectedNode {
+	background-color: transparent;
+	border: none;
+	height: 24px;
+}
+
+.tab-contain .select-div select,
+.tab-contain .select-div select:hover,
+.tab-contain .select-div select:focus {
+	background: transparent;
+	border: 1px solid rgba(80, 173, 247, .6);
+	padding: 5px;
+	color: rgb(255 255 255 / .6);
+	min-width: 200px;
+	border-radius: 5px;
+	font-size: 18px;
+}
+
+.tab-contain .table-div {
+	/* margin-top: 60px; */
+	height: 100%;
+	position: relative;
+}
+
+.tab-contain .table-div table {
+	width: 100%;
+	border: 1px solid rgba(139, 216, 238, .3);
+}
+
+.tab-contain .table-div table th {
+	color: #58A6FE;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.tab-contain .table-div table td {
+	color: #58A6FE;
+	font-size: 20px;
+	text-align: center;
+	padding: 10px 0;
+	width: 50%;
+}
+
+.tab-contain .table-div tbody tr:nth-child(even) {
+	background: rgba(0, 104, 183, .14);
+}
+
+.pagination-div {
+	text-align: center;
+	position: absolute;
+	/* bottom: 0; */
+	margin: 0;
+	width: 100%;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+	background: transparent;
+	color: #58A6FE;
+	border: none;
+	font-size: 20px;
+}
+
+.pagination>li>a:hover {
+	color: #FFFFFF;
+	background: #58A6FE;
+	border-radius: 5px;
+}
+
+.back {
+	position: absolute;
+	left: 36px;
+	top: 60px;
+	font-size: 18px;
+	background: linear-gradient(181deg, #00418F 0%, #072A62 100%);
+	padding: 10px;
+	border-radius: 20px;
+	z-index: 19;
+}
+
+.back a {
+	color: #fff;
+	padding: 10px 45px;
+}
+
+.daterangepicker td.active,
+.daterangepicker td.active:focus,
+.daterangepicker td.active:hover {
+	background-color: #1F5C9D;
+}
+
+.btn-search,
+.btn-search:hover,.btn-search:focus {
+	font-size: 20px;
+	/* font-weight: bold; */
+	background: linear-gradient(0deg, #07285D 0%, #004291 100%);
+	border-radius: 2px;
+	padding: 10px 0px;
+	border-radius: 5px;
+	display: block;
+	text-align: center;
+	width: 110px;
+	height: 45px;
+	color: #FEFEFE;
+}
+
+.date-div .row>div {
+	margin-top: 5px;
+}
+
+.form-group {
+	margin-bottom: 0;
+}
+
+.date-input {
+	background-color: transparent;
+	height: 45px !important;
+	color: #EAFDFD !important;
+	border: 1px solid #1d59a4 !important;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.ztree li span {
+	line-height: 22px;
+}
+
+.ztree li span.button.switch.root_open,
+.ztree li span.button.switch.noline_open {
+	background: url(zTreeStyle/img/minus.png) no-repeat 50%;
+	background-size: 18px;
+}
+
+.ztree li span.button.switch.root_close,
+.ztree li span.button.switch.noline_close {
+	background: url(zTreeStyle/img/add.png) no-repeat 50%;
+	background-size: 18px;
+	min-width: auto;
+	min-height: auto;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+	background: transparent;
+	color: #58A6FE;
+}
+
+.pagination {
+	margin: 10px 0;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+	border-radius: 5px;
+}
+
+.tab-first-div {
+	display: flex;
+	border-bottom: 2px solid rgb(17 37 105 / 70%);
+	background: #142D75;
+	margin: 10px 92px;
+}
+
+.tab-first-div div {
+	color: #58A6FE;
+	font-size: 24px;
+	padding: 20px;
+	font-weight: bold;
+}
+
+.tab-first-div .active {
+	color: #FFFFFF;
+	background: linear-gradient(0deg, #07285D 0%, #004291 100%);
+}
+
+.ztree li span.button.switch {
+	min-width: auto;
+	min-height: auto;
+}
+
+.layui-laypage a,
+.layui-laypage span {
+	background-color: transparent;
+	font-size: 18px;
+	border: none;
+}
+
+.layui-laypage a {
+	text-decoration: none;
+	color: #58A6FE;
+	font-size: 20px;
+	border: none;
+	background-color: transparent;
+}
+
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+	background-color: rgb(88 166 254 / 58%);
+}
+
+.layui-laypage .layui-laypage-count {
+	padding-top: 5px;
+	color: #58A6FE;
+}
+
+.layui-laypage .layui-laypage-spr {
+	color: #58A6FE;
+	font-weight: 700;
+	border: none;
+}
+
+.layui-laypage a:hover {
+	color: #ffffff;
+}
+.daterangepicker .daterangepicker_input input {
+    padding-left: 11px;
+    padding-right: 34px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

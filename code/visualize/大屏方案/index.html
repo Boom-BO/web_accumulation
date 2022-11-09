@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./css/normalize.css" />
+		<link rel="stylesheet" href="./css/common.css" />
+		<link rel="stylesheet" href="./css/index.css" />
+		<link rel="stylesheet" href="./css/animate.min.css" />
+		<title>XXXXXXX平台</title>
+		<style type="text/css"></style>
+	</head>
+
+	<body>
+		<div class="AVS scale-wrapper">
+			<div id="loading">
+				<div class="loading_img">
+					<!-- 加载动画 -->
+					<img class="loading-ring-o" src="images/loading-ring-o.png" />
+					<img class="loading-ring-i" src="images/loading-ring-i.png" />
+				</div>
+			</div>
+			<div class="title-bar">
+				<img src="images/logo.png" alt="" class="logo" />
+				<p class="title-name">XXXXXXX平台</p>
+				<span id="time"></span>
+			</div>
+			<div class="content">
+				<div class="c-safe"></div>
+				<div class="c-danger-work"></div>
+				<div class="c-plan"></div>
+				<div class="c-status"></div>
+			</div>
+		</div>
+		<script src="js/browser.min.js"></script>
+		<script src="js/browser-polyfill.min.js"></script>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="./js/echarts.min.js"></script>
+		<script type="text/babel">
+			$(function () {
+				// 页面自适应缩放
+				scalePage()
+				// 清除loading
+				clearLoading()
+				// 倒计时组件
+				timeInit()
+				$('.title-bar .title-name').click(function () {
+					// 标题点击全屏
+					fullScreen()
+				})
+			})
+
+			function clearLoading() {
+				//删除加载动画
+				$('#loading').fadeOut(1000)
+				setTimeout(function () {
+					$('#loading').remove()
+				}, 1300)
+			}
+
+			function timeInit() {
+				setInterval(function () {
+					let date = new Date()
+					$('#time').text('实时数据：' + getFormatDate())
+				}, 1000)
+			}
+
+			function getFormatDate() {
+				let nowDate = new Date()
+				let year = nowDate.getFullYear()
+				let month =
+					nowDate.getMonth() + 1 < 10
+						? '0' + (nowDate.getMonth() + 1)
+						: nowDate.getMonth() + 1
+				let date =
+					nowDate.getDate() < 10 ? '0' + nowDate.getDate() : nowDate.getDate()
+				let hour =
+					nowDate.getHours() < 10
+						? '0' + nowDate.getHours()
+						: nowDate.getHours()
+				let minute =
+					nowDate.getMinutes() < 10
+						? '0' + nowDate.getMinutes()
+						: nowDate.getMinutes()
+				let second =
+					nowDate.getSeconds() < 10
+						? '0' + nowDate.getSeconds()
+						: nowDate.getSeconds()
+				return (
+					year +
+					'-' +
+					month +
+					'-' +
+					date +
+					' ' +
+					hour +
+					':' +
+					minute +
+					':' +
+					second
+				)
+			}
+
+			function getScale() {
+				// 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+				const width = 1920
+				const height = 1080
+				let ww = window.innerWidth / width
+				let wh = window.innerHeight / height
+				return ww < wh ? ww : wh
+			}
+			// 页面渲染计算比例缩放
+			function scalePage() {
+				let setScale = debounce(function () {
+					// 获取到缩放比，设置它
+					let scale = getScale()
+					$('.scale-wrapper').css({
+						transform: 'scale(' + scale + ') translate(-50%, -50%)',
+						'-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+					})
+				}, 200)
+				setScale()
+				window.addEventListener('resize', setScale)
+			}
+			// 防抖
+			function debounce(fun, delay) {
+				let timer = null
+				return function () {
+					if (timer) {
+						clearTimeout(timer)
+					}
+					timer = setTimeout(fun, delay)
+				}
+			}
+			//全屏
+			function fullScreen() {
+				var element = document.documentElement
+				if (element.requestFullscreen) {
+					element.requestFullscreen()
+				} else if (element.msRequestFullscreen) {
+					element.msRequestFullscreen()
+				} else if (element.mozRequestFullScreen) {
+					element.mozRequestFullScreen()
+				} else if (element.webkitRequestFullscreen) {
+					element.webkitRequestFullscreen()
+				}
+			}
+		</script>
+	</body>
+</html>

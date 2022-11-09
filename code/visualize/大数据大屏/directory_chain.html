@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/directory_chain.css">
+    <link rel="stylesheet" href="./js/swiper/swiper.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <title>大数据资源服务平台 - 目录链</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <!-- scale-wrapper -->
+    <div class="directory-chains scale-wrapper">
+        <div id="loading">
+            <div class="loading_img">
+                <!-- 加载动画 -->
+                <img class="loading-ring-o" src="images/loading-ring-o.png">
+                <img class="loading-ring-i" src="images/loading-ring-i.png">
+            </div>
+        </div>
+        <div class="title-bar">
+            <p class="title-name" id='title-title'>大数据资源服务平台-目录链</p>
+            <!-- <span id="time"></span> -->
+            <div class="back-btn"></div>
+        </div>
+        <div class="content clearfix">
+            <div class="assets-area">
+                <div class="subtitle-bar"><span>目录链资产视图</span></div>
+                <div class="assets">
+                    <div class="triangle">
+                        <div class="box">
+                            <div class="surface1"></div>
+                            <div class="surface2"></div>
+                            <div class="surface3"></div>
+                            <div class="surface4"></div>
+                        </div>
+                    </div>
+                    <div class="point-line">
+                    </div>
+                    <div class="point-line">
+                    </div>
+                    <div class="point-line">
+                    </div>
+                    <div class="point-line">
+                    </div>
+                    <div class="data-box orgs">
+                    </div>
+                    <div class="data-box datalist">
+                    </div>
+                    <div class="data-box app">
+                    </div>
+                    <div class="data-box storage">
+                    </div>
+                    <!-- <div class="data-box"></div>
+                    <div class="data-box"></div>
+                    <div class="data-box"></div> -->
+                </div>
+            </div>
+            <div class="overview-area">
+                <div class="subtitle-bar"><span>目录链运行概览</span></div>
+                <div class="overview">
+                    <div class="overview-left">
+                        <div class="t-title">开放链</div>
+                        <ul>
+                            <li>
+                                <div class="t-name">节点数</div>
+                                <div class="t-num"><span>-</span><span>个</span></div>
+                            </li>
+                            <li>
+                                <div class="t-name">智能合约数</div>
+                                <div class="t-num"><span>-</span><span>个</span></div>
+                            </li>
+                            <li>
+                                <div class="t-name">记录数</div>
+                                <div class="t-num"><span class="changing-num">-</span><span>条</span></div>
+                            </li>
+                            <div class="rockit-line left"></div>
+                        </ul>
+                    </div>
+                    <div class="overview-c">
+                        <div class="overview-c-top">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td></td>
+                                        <td>上链目录</td>
+                                        <td>上链需求</td>
+                                        <td>上链归集任务</td>
+                                        <td>上链可共享资源</td>
+                                        <td>上链安全共享资源</td>
+                                        <td>上链共享次数</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="month-list">
+                                        <td>本月新增</td>
+                                    </tr>
+                                    <tr class="total-list">
+                                        <td>当前累计</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="overview-c-circle">
+                            <div class="overview-circle"></div>
+                                <!-- 圆环 -->
+                            <div class="loop-pie">
+                                <div class="loop-pie-line loop-pie-r">
+                                    <div class="loop-pie-c loop-pie-rm" id="loop-rc"></div>
+                                </div>
+                                <div class="loop-pie-line loop-pie-l">
+                                    <div class="loop-pie-c loop-pie-lm" id="loop-lc"></div>
+                                </div>
+                            </div>
+                            <div class="line-radius-all"></div>
+                            <ul class="overview-pannel"></ul>
+                            <div class="overview-c-pic animate__animated animate__bounce animate__delay-1s"></div>
+                            <!-- <div class="line-radius active"></div> -->
+                        </div>
+                    </div>
+                    <div class="overview-right">
+                        <div class="t-title">信创链</div>
+                        <ul>
+                            <li>
+                                <div class="t-name">节点数</div>
+                                <div class="t-num"><span>-</span><span>个</span></div>
+                            </li>
+                            <li>
+                                <div class="t-name">智能合约数</div>
+                                <div class="t-num"><span>-</span><span>个</span></div>
+                            </li>
+                            <li>
+                                <div class="t-name">记录数</div>
+                                <div class="t-num"><span class="changing-num">-</span><span>条</span></div>
+                            </li>
+                        </ul>
+                        <div class="rockit-line right"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="apply-area">
+                <div class="subtitle-bar"><span>目录链共享应用场景</span></div>
+                <div class="apply clearfix">
+                   <div class="apply-total clearfix">
+                   </div>
+                    <div class="table-header">
+                        <p>场景名称</p>
+                        <p>共享需求满足度</p>
+                        <p>共享/安全共享次数</p>
+                    </div>
+                    <ul class="line-charts">
+                    </ul>
+                </div>
+            </div>
+            <div class="org-area">
+                <div class="subtitle-bar"><span>部门目录块</span></div>
+                <div class="org-swiper swiper-container">
+                    <div class="swiper-wrapper" id="swiper-wrapper">
+                    </div>
+                    <!-- 如果需要分页器 -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/swiper/swiper.min.js"></script>
+    <script src="./js/utils.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            scalePage()
+            clearLoading()
+            // timeInit()
+            setTimeout(() => {
+                $('.overview-area').css('visibility', 'visible')
+                contentInit()
+            }, 500);
+            //全屏
+            $("#title-title").on("click",function(){
+                fullScreen();
+            })
+            //退出全屏
+            // $("#exitFullScreen").on("click",function(){
+            //     exitFullscreen();
+            // })
+            let mySwiper = new Swiper ('.swiper-container', {
+                direction: 'horizontal', // 垂直切换选项
+                speed: 1000, // 切换速度
+                loop: true, // 循环模式选项
+                autoplay: {
+                    delay: 10000 // 3秒切换一次
+                },
+                observer: true,
+                observeParents: true,
+                // 用户操作swiper之后，是否禁止autoplay
+                disableOnInteraction: false,
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable :true
+                }
+            })   
+        })
+        contentInit = () =>{
+            // 目录链资产视图渲染
+            assetsAreaRander()
+            // 目录链运行概览渲染
+            overViewRander()
+            // 目录链共享应用场景
+            shareScenesRander()
+            // 部门目录块渲染
+            orgsAllRander()
+            circleRander()
+            // loadingAni()
+        }
+
+        clearLoading = () => {
+            //删除加载动画
+            $('#loading').fadeOut(1000)
+            setTimeout(function () {
+                $('#loading').remove()
+            }, 1300);
+        }
+
+        timeInit = () => {
+            setInterval(() => {
+                let date = new Date()
+                $('#time').text(getFormatDate)
+            }, 1000);
+        }
+        getFormatDate = () => {
+            let nowDate = new Date();
+            let year = nowDate.getFullYear();
+            let month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+            let date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+            let hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+            let minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+            let second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+            return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+        }
+        getScale = () => {
+            // 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+            const width = 5040
+            const height = 1620
+            let ww = window.innerWidth / width
+            let wh = window.innerHeight / height
+            return ww < wh ? ww : wh
+        }
+        // 页面渲染计算比例缩放
+        scalePage = () => {
+            setScale = debounce(() => {
+                // 获取到缩放比，设置它
+                let scale = this.getScale()
+                $('.scale-wrapper').css({
+                    'transform': 'scale(' + scale + ') translate(-50%, -50%)',
+                    '-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+                })
+            }, 200)
+            setScale()
+            window.addEventListener('resize', setScale)
+        }
+        // 防抖
+        debounce = (fun, delay) => {
+            let timer
+            return function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(fun, delay)
+            }
+        }
+
+        // 中间视图渲染
+        circleRander = () => {
+            let liSize = 25
+            let li = ''
+            for(let i=0; i<liSize; i++) {
+                li +=  `<div class="line-radius active" style="transform: rotate(${360/liSize*i}deg)"></div>`;
+            }
+            $('.line-radius-all').append(li);
+            setTimeout(() => {
+                $('.line-radius-all .line-radius').removeClass('active')
+            }, 2000);
+        }
+
+        // 目录链资产视图
+        assetsAreaRander = () =>{
+            // 组织机构
+            getOrgsData()
+            // 数据目录
+            getDataList()
+            // 应用系统
+            getAppData()
+            // 空间容量
+            getStorageData()
+        }
+        getOrgsData = ()=>{
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndex/1001/.byDay/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->orgsData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回
+            const orgsData = [
+                {
+                    "DISPLAYNAME": "组织机构",
+                    "VALUES": 85
+                },
+                {
+                    "DISPLAYNAME": "区级部门",
+                    "VALUES": 58
+                },
+                {
+                    "DISPLAYNAME": "街镇",
+                    "VALUES": 31
+                },
+                {
+                    "DISPLAYNAME": "社区",
+                    "VALUES": 27
+                }
+            ]
+            // 渲染DOM
+            const orgsDom = `<p class="title">${orgsData[0].DISPLAYNAME || ''}：<span>${orgsData[0].VALUES || ''}个</span></p>
+                        <div class="divider"></div>
+                        <ul class="data-box-list">
+                            <li>${orgsData[1].DISPLAYNAME || ''}：${orgsData[1].VALUES || ''}个</li>
+                            <li>${orgsData[2].DISPLAYNAME || ''}：${orgsData[2].VALUES || ''}个</li>
+                            <li>${orgsData[3].DISPLAYNAME || ''}：${orgsData[3].VALUES || ''}个</li>
+                        </ul>`
+            $('.assets .data-box.orgs').append(orgsDom)
+        }
+        getDataList = ()=>{
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndex/3001/.byDay/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->dataList并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回
+            const dataList = [
+                {
+                    "DISPLAYNAME": "数据目录",
+                    "VALUES": 112860
+                },
+                {
+                    "DISPLAYNAME": "库表目录",
+                    "VALUES": 103982
+                },
+                {
+                    "DISPLAYNAME": "资源目录",
+                    "VALUES": 6730
+                },
+                {
+                    "DISPLAYNAME": "服务目录",
+                    "VALUES": 2148
+                }
+            ]
+            // 渲染DOM
+            const dataListDom = `<p class="title">${dataList[0].DISPLAYNAME || ''}：<span>${dataList[0].VALUES || ''}个</span></p>
+                        <div class="divider"></div>
+                        <ul class="data-box-list">
+                            <li>${dataList[1].DISPLAYNAME || ''}：${dataList[1].VALUES || ''}个</li>
+                            <li>${dataList[2].DISPLAYNAME || ''}：${dataList[2].VALUES || ''}个</li>
+                            <li>${dataList[3].DISPLAYNAME || ''}：${dataList[3].VALUES || ''}个</li>
+                        </ul>`
+            $('.assets .data-box.datalist').append(dataListDom)
+        }
+        getAppData = ()=>{
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndex/2001/.byDay/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->appData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回
+            const appData = [
+                {
+                    "DISPLAYNAME": "应用系统",
+                    "VALUES": 337
+                },
+                {
+                    "DISPLAYNAME": "已上云",
+                    "VALUES": 298
+                },
+                {
+                    "DISPLAYNAME": "已上链",
+                    "VALUES": 290
+                },
+                {
+                    "DISPLAYNAME": "已编目",
+                    "VALUES": 134
+                }
+            ]
+            // 渲染DOM
+            const appDataDom = `<p class="title">${appData[0].DISPLAYNAME || ''}：<span>${appData[0].VALUES || ''}个</span></p>
+                        <div class="divider"></div>
+                        <ul class="data-box-list">
+                            <li>${appData[1].DISPLAYNAME || ''}：${appData[1].VALUES || ''}个</li>
+                            <li>${appData[2].DISPLAYNAME || ''}：${appData[2].VALUES || ''}个</li>
+                            <li>${appData[3].DISPLAYNAME || ''}：${appData[3].VALUES || ''}个</li>
+                        </ul>`
+            $('.assets .data-box.app').append(appDataDom)
+        }        
+        getStorageData = ()=>{
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndex/4001/.byDay/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->storageData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回
+            const storageData = [
+                {
+                    "DISPLAYNAME": "已使用空间",
+                    "VALUES": 4010
+                },
+                {
+                    "DISPLAYNAME": "结构化数据",
+                    "VALUES": 139
+                },
+                {
+                    "DISPLAYNAME": "非结构化数据",
+                    "VALUES": 3881
+                }
+            ]
+            // 渲染DOM
+            const storageDom = `<p class="title">${storageData[0].DISPLAYNAME || ''}：<span>${storageData[0].VALUES || ''}G</span></p>
+                        <div class="divider"></div>
+                        <ul class="data-box-list">
+                            <li>${storageData[1].DISPLAYNAME || ''}：${storageData[1].VALUES || ''}G</li>
+                            <li>${storageData[2].DISPLAYNAME || ''}：${storageData[2].VALUES || ''}G</li>
+                        </ul>`
+            $('.assets .data-box.storage').append(storageDom)
+        }
+        
+        // 目录链运行概览渲染
+        overViewRander = ()=>{
+            // 目录链运行概览渲染 - 两侧开放链与信创链
+            overViewSideRander()
+            // 目录链运行概览渲染 - 本月新增
+            overViewMonthRander()
+            // 目录链运行概览渲染 - 当前累计
+            overViewTotalRander()
+            // 目录链运行概览渲染 - 部门数据与增量
+            overViewBoxsRander()
+        }
+        // 目录链运行概览渲染 - 两侧开放链与信创链
+        overViewSideRander = () =>{
+            // 调用接口  两侧数据（开放连与信创链）
+            $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndexGroup/6001/.byDim/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->overViewSideData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回
+            const overViewSideData = [
+                {
+                    "DISPLAYNAME": "开放链,节点数",
+                    "VALUE": "4"
+                },
+                {
+                    "DISPLAYNAME": "开放链,智能合约数",
+                    "VALUE": "11"
+                },
+                {
+                    "DISPLAYNAME": "开放链,记录数",
+                    "VALUE": "38720"
+                },
+                {
+                    "DISPLAYNAME": "信创链,节点数",
+                    "VALUE": "6"
+                },
+                {
+                    "DISPLAYNAME": "信创链,智能合约数",
+                    "VALUE": "9"
+                },
+                {
+                    "DISPLAYNAME": "信创链,记录数",
+                    "VALUE": "78280"
+                }
+            ]
+            // 渲染DOM
+            $($($('.overview-left .t-num')[0]).find('span')[0]).text(overViewSideData[0].VALUE)
+            $($($('.overview-left .t-num')[1]).find('span')[0]).text(overViewSideData[1].VALUE)
+            $($($('.overview-left .t-num')[2]).find('span')[0]).text(overViewSideData[2].VALUE)
+            $($($('.overview-right .t-num')[0]).find('span')[0]).text(overViewSideData[3].VALUE)
+            $($($('.overview-right .t-num')[1]).find('span')[0]).text(overViewSideData[4].VALUE)
+            $($($('.overview-right .t-num')[2]).find('span')[0]).text(overViewSideData[5].VALUE)
+
+            
+            
+        }
+        
+        // 目录链运行概览渲染 - 本月新增
+        overViewMonthRander = () => {
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndexGroup/6003/.byDim.byMonthAdd/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->monthData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回 // 真实返回数据顺序要一致
+            const monthData = [
+                {
+                    "DISPLAYNAME": "本月新增,上链目录",
+                    "VALUE": "1"
+                },
+                {
+                    "DISPLAYNAME": "本月新增,上链需求",
+                    "VALUE": "2"
+                },
+                {
+                    "DISPLAYNAME": "本月新增,上链归集任务",
+                    "VALUE": "3"
+                },
+                {
+                    "DISPLAYNAME": "本月新增,上链可共享资源",
+                    "VALUE": "4"
+                },
+                {
+                    "DISPLAYNAME": "本月新增,上链安全共享资源",
+                    "VALUE": "5"
+                },
+                {
+                    "DISPLAYNAME": "本月新增,上链共享次数",
+                    "VALUE": "6"
+                }
+            ]
+            // 渲染DOM
+            let monthDataDom = ''
+            $.each(monthData, (index, item)=>{
+                monthDataDom += `<td><div class="tdkuang">${item.VALUE}${(index === 5?'<span> 万</span>':'')}</div></td>`
+            })
+            $('.overview-c-top .month-list').append(monthDataDom)
+        }
+
+        // 目录链运行概览渲染 - 当前累计
+        overViewTotalRander = () => {
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndexGroup/6002/.byDim.byTotal/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->totalData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回 // 真实返回数据顺序要一致
+            const totalData = [
+                {
+                    "DISPLAYNAME": "当日累计,上链目录",
+                    "VALUE": "1001"
+                },
+                {
+                    "DISPLAYNAME": "当日累计,上链需求",
+                    "VALUE": "1002"
+                },
+                {
+                    "DISPLAYNAME": "当日累计,上链归集任务",
+                    "VALUE": "1003"
+                },
+                {
+                    "DISPLAYNAME": "当日累计,上链可共享资源",
+                    "VALUE": "1004"
+                },
+                {
+                    "DISPLAYNAME": "当日累计,上链安全共享资源",
+                    "VALUE": "1005"
+                },
+                {
+                    "DISPLAYNAME": "当日累计,上链共享次数",
+                    "VALUE": "1006"
+                }
+            ]
+            // 渲染DOM
+            let totalDataDom = ''
+            $.each(totalData, (index, item)=>{
+                totalDataDom += `<td><div class="tdkuang">${item.VALUE}${(index === 5?'<span> 万</span>':'')}</div></td>`
+            })
+            $('.overview-c-top .total-list').append(totalDataDom)
+        }
+   
+        // 目录链运行概览渲染 - 部门数据
+        overViewBoxsRander = () => {
+             // 调用接口
+          $.ajax({
+              url: "",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->allBoxData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            let allBoxData = [{
+                    "DISPLAYNAME": "公安分局",
+                    "VALUE": "0"
+                },
+                {
+                    "DISPLAYNAME": "科经委",
+                    "VALUE": "1"
+                },
+                {
+                    "DISPLAYNAME": "生态环境局",
+                    "VALUE": "2"
+                },
+                {
+                    "DISPLAYNAME": "市场监管局",
+                    "VALUE": "3"
+                },
+                {
+                    "DISPLAYNAME": "统战部",
+                    "VALUE": "4"
+                },
+                {
+                    "DISPLAYNAME": "政法委",
+                    "VALUE": "5"
+                },
+                {
+                    "DISPLAYNAME": "地工委",
+                    "VALUE": "6"
+                },
+                {
+                    "DISPLAYNAME": "发改委",
+                    "VALUE": "7"
+                },
+                {
+                    "DISPLAYNAME": "商务委",
+                    "VALUE": "8"
+                },
+                {
+                    "DISPLAYNAME": "教育局",
+                    "VALUE": "9"
+                },
+                {
+                    "DISPLAYNAME": "国资委",
+                    "VALUE": "10"
+                },
+                {
+                    "DISPLAYNAME": "规划和自然资源局",
+                    "VALUE": "11"
+                },
+                {
+                    "DISPLAYNAME": "金融局",
+                    "VALUE": "12"
+                },
+                {
+                    "DISPLAYNAME": "档案局",
+                    "VALUE": "13"
+                },
+                {
+                    "DISPLAYNAME": "组织部",
+                    "VALUE": "14"
+                },
+                {
+                    "DISPLAYNAME": "民政局",
+                    "VALUE": "15"
+                },
+                {
+                    "DISPLAYNAME": "司法局",
+                    "VALUE": "16"
+                },
+                {
+                    "DISPLAYNAME": "财政局",
+                    "VALUE": "17"
+                },
+                {
+                    "DISPLAYNAME": "建交委",
+                    "VALUE": "18"
+                },
+                {
+                    "DISPLAYNAME": "农委",
+                    "VALUE": "19"
+                },
+                {
+                    "DISPLAYNAME": "卫健委",
+                    "VALUE": "20"
+                },
+                {
+                    "DISPLAYNAME": "城管执法局",
+                    "VALUE": "21"
+                },
+                {
+                    "DISPLAYNAME": "知识产权局",
+                    "VALUE": "22"
+                },
+                {
+                    "DISPLAYNAME": "应急管理局",
+                    "VALUE": "23"
+                },
+                {
+                    "DISPLAYNAME": "人社局",
+                    "VALUE": "24"
+                },
+                {
+                    "DISPLAYNAME": "文化影视局",
+                    "VALUE": "25"
+                }]
+            allBoxData.splice(9, 0, {DISPLAYNAME:'', VALUE:''});
+            // 只能展示前24个组织
+            allBoxData = allBoxData.slice(0, 25)
+            let boxsDom = ''
+            $.each(allBoxData, (index, item)=>{
+                boxsDom += `<div class="box-item">
+                                <div class="dept-name">${item.DISPLAYNAME}</div>
+                                <div class="dept-num"><span>${item.VALUE}</span><br><span> ${item.VALUE}</span></div>
+                            </div>`
+            })
+            $('.overview-pannel').append(boxsDom)
+
+            // 三秒后刷新增量数据
+            setTimeout(() => {
+                overViewBoxsDataChange()
+            }, 3000);
+        }
+        // 部门数据增量
+        overViewBoxsDataChange = () =>{
+            console.log("overViewBoxsDataChange -> overViewBoxsDataChange")
+            $('.line-radius-all .line-radius').removeClass('active')
+            $('.rockit-line').removeClass('active')
+         // 调用接口
+        //   $.ajax({
+        //       url: "",
+        //       type: 'GET', // or “POST”
+        //       dataType:"json", 
+        //       headers:{
+        //         "Content-Type": "application/json",
+        //       },
+        //       data: {},
+        //       success: function(res) {
+        //         // if(res.code == 200 && res.success) {
+        //         //   在这里赋值->changingData并渲染DOM
+        //         // arrList = res.data
+        //         // }
+        //       },
+        //       error:function(err){
+        //         //请求出错处理
+        //         console.log('err ==>', err);
+        //       }
+        //     })
+            let changingData = [
+                {
+                    "DISPLAYNAME": "公安分局",
+                    "VALUE": "1,1" // 开放链新增数量, 信创链新增数量
+                },
+                {
+                    "DISPLAYNAME": "科经委",
+                    "VALUE": "1,0"
+                },
+                {
+                    "DISPLAYNAME": "生态环境局",
+                    "VALUE": "0,1"
+                },
+                {
+                    "DISPLAYNAME": "市场监管局",
+                    "VALUE": "1,0"
+                },
+                {
+                    "DISPLAYNAME": "统战部",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "政法委",
+                    "VALUE": "1,0"
+                },
+                {
+                    "DISPLAYNAME": "地工委",
+                    "VALUE": "0,1"
+                },
+                {
+                    "DISPLAYNAME": "发改委",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "商务委",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "教育局",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "国资委",
+                    "VALUE": "0,0"
+                },
+                {
+                    "DISPLAYNAME": "规划和自然资源局",
+                    "VALUE": "0,0"
+                },
+                {
+                    "DISPLAYNAME": "金融局",
+                    "VALUE": "0,0"
+                },
+                {
+                    "DISPLAYNAME": "档案局",
+                    "VALUE": "0,0"
+                },
+                {
+                    "DISPLAYNAME": "组织部",
+                    "VALUE": "0,0"
+                },
+                {
+                    "DISPLAYNAME": "民政局",
+                    "VALUE": "0,0"
+                },
+                {
+                    "DISPLAYNAME": "司法局",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "财政局",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "建交委",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "农委",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "卫健委",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "城管执法局",
+                    "VALUE": "1,0"
+                },
+                {
+                    "DISPLAYNAME": "知识产权局",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "应急管理局",
+                    "VALUE": "1,1"
+                },
+                {
+                    "DISPLAYNAME": "人社局",
+                    "VALUE": "0,1"
+                },
+                {
+                    "DISPLAYNAME": "文化影视局",
+                    "VALUE": "1,0"
+                }]
+            changingData = changingData.map((item, index)=>{
+                item.VALUE = item.VALUE.split(',')
+                item.VALUE[0] = parseInt(item.VALUE[0])
+                item.VALUE[1] = parseInt(item.VALUE[1])
+                return item
+            })
+            changingData.splice(9, 0, {DISPLAYNAME: '', VALUE: [0,0]})
+            changingData = changingData.splice(0, 25)
+            let j = -1
+            $.each(changingData, (index, item)=>{
+                if(item.VALUE[0] || item.VALUE[1]) {
+                    j++
+                }
+                if(item.VALUE[0]){
+                    // 增量-开放链
+                    setTimeout(() => {
+                        $($('.line-radius-all .line-radius')[index]).addClass('active')
+                        setTimeout(() => {
+                            let numValue = parseInt($($($('.overview-pannel .box-item')[index]).find('.dept-num').find('span')[0]).text())
+                            $($($('.overview-pannel .box-item')[index]).find('.dept-num').find('span')[0]).text(item.VALUE[0] + numValue)
+                            $($('.line-radius-all .line-radius')[index]).removeClass('active')
+                            loadingAni()
+                            setTimeout(() => {
+                                $('.rockit-line.left').addClass('active')
+                                setTimeout(() => {
+                                    let num = parseInt($('.overview-left .changing-num').text()) + item.VALUE[0]
+                                    $('.overview-left .changing-num').text(num)
+                                    $('.rockit-line.left').removeClass('active')
+                                }, 1000);
+                            }, 2000);
+                        }, 2000);
+                    },  5000 * j);
+                }
+                if(item.VALUE[1]){
+                    // 增量-信创链
+                    setTimeout(() => {
+                        $($('.line-radius-all .line-radius')[index]).addClass('active')
+                        setTimeout(() => {
+                            if(!item.VALUE[0]){
+                                loadingAni()
+                            }
+                            let numValue = parseInt($($($('.overview-pannel .box-item')[index]).find('.dept-num').find('span')[1]).text())
+                            $($($('.overview-pannel .box-item')[index]).find('.dept-num').find('span')[1]).text(item.VALUE[1] + numValue)
+                            setTimeout(() => {
+                                $('.rockit-line.right').addClass('active')
+                                setTimeout(() => {
+                                    let num = parseInt($('.overview-right .changing-num').text()) + item.VALUE[1]
+                                    $('.overview-right .changing-num').text(num)
+                                    $('.rockit-line.right').removeClass('active')
+                                }, 1000);
+                            }, 2000);
+                        }, 2000);
+                    }, 5000 * j);
+                }
+                if(index === changingData.length -1){
+                    // 本轮结束后开启下一轮增量
+                    setTimeout(() => {
+                        overViewBoxsDataChange()
+                    }, (j + 1) * 5000 );
+                }
+            })
+        }
+
+        // 目录链共享应用场景渲染
+        shareScenesRander = () => {
+            // 应用场景统计信息渲染
+            shareScenesTotalRander()
+            // 场景共享列表柱形图渲染
+            shareScenesRankingRander()
+        }
+        // 应用场景统计信息渲染
+        shareScenesTotalRander = () =>{
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndex/8001/.byDay/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->shareScenesData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回 // 真实返回数据顺序要一致
+            const shareScenesData = [{
+                "DISPLAYNAME": "应用场景",
+                "VALUES": 24
+            },
+            {
+                "DISPLAYNAME": "平均需求满足度",
+                "VALUES": 0
+            },
+            {
+                "DISPLAYNAME": "累计共享调用次数",
+                "VALUES": 2301
+            }]
+            let shareScenesDom = ``
+            $.each(shareScenesData, (index, item)=>{
+                shareScenesDom += `<div class="apply-item clearfix">
+                            <img src="./images/${(index === 0? 'apply-icon': (index === 1? 'pingjun-icon':'share-icon'))}.png" alt="">
+                            <div class="item-c">
+                                <p><span>${item.VALUES}</span>类</p>
+                                <p>${item.DISPLAYNAME}</p>
+                            </div>
+                        </div>`
+            })
+            $('.apply-area .apply-total').append(shareScenesDom)
+        }
+        // 场景共享列表柱形图渲染
+        shareScenesRankingRander = () => {
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndexGroup/8002/.byDim/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->rankingData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回 // 真实返回数据顺序要一致
+            const rankingData = [
+                {
+                    "DISPLAYNAME": "场景1",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "11001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "11002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.15"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "11004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "11005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景2",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "12001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "12002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.25"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "12004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "12005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景3",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "11001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "11002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.35"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "11004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "11005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景4",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "12001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "12002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.45"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "12004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "12005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景5",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "11001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "11002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.75"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "11004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "11005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景6",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "12001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "12002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.85"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "12004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "12005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景7",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "11001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "11002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.20"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "11004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "11005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景8",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "12001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "12002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.65"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "12004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "12005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景9",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "11001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "11002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.15"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "11004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "11005"
+                        }
+                    ]
+                },
+                {
+                    "DISPLAYNAME": "场景10",
+                    "VALUE": [
+                        {
+                            "DISPLAYNAME": "需求数量",
+                            "VALUE": "11001"
+                        },
+                        {
+                            "DISPLAYNAME": "责任数量",
+                            "VALUE": "11002"
+                        },
+                        {
+                            "DISPLAYNAME": "需求满足度",
+                            "VALUE": "0.80"
+                        },
+                        {
+                            "DISPLAYNAME": "共享次数",
+                            "VALUE": "11004"
+                        },
+                        {
+                            "DISPLAYNAME": "安全共享次数",
+                            "VALUE": "11005"
+                        }
+                    ]
+                }
+            ]
+            let copyRankingData = [...rankingData]
+                let bigData = copyRankingData.sort((a, b)=>{
+                    return b.VALUE[3].VALUE - a.VALUE[3].VALUE
+                })
+                console.log("shareScenesRankingRander -> bigData", bigData)
+                // 拿到最大值 作为比例图基数
+                let bigValue = bigData[0].VALUE[3].VALUE * 1.05
+                let rankingDom = ``
+                $.each(rankingData, (index, item)=>{
+                    rankingDom += `<li class="line-item">
+                                    <div class="ranking">${(index+1 < 10 ? ('0' + (index + 1)) : index+1)}</div>
+                                    <span class="name">${item.DISPLAYNAME}</span>
+                                    <div class="progress-wrapper clearfix">
+                                        <div class="progress" style="width: ${item.VALUE[2].VALUE * 100}%;">
+                                            ${Math.round(item.VALUE[0].VALUE * item.VALUE[2].VALUE)}
+                                            <span class="p-value">${item.VALUE[2].VALUE * 100}%</span>
+                                        </div>
+                                        <span class="unprogress" style="width:calc(${(1 - item.VALUE[2].VALUE) * 100}% - 15px)">${Math.round(item.VALUE[0].VALUE * (1 - item.VALUE[2].VALUE))}</span>
+                                    </div>
+                                    <div class="db-progress-wrapper">
+                                        <div class="db-bar" style="width: ${item.VALUE[3].VALUE/bigValue*100}%;"><span>${item.VALUE[3].VALUE}</span></div>
+                                        <div class="db-bar" style="width: ${item.VALUE[4].VALUE/bigValue*100}%;"><span>${item.VALUE[4].VALUE}</span></div>
+                                    </div>
+                                </li>`
+                })
+                $('.apply-area .line-charts').append(rankingDom)
+        } 
+
+        // 部门目录块渲染
+        orgsAllRander = () =>{
+          // 调用接口
+          $.ajax({
+              url: "http://100.124.182.24:8080/default/rest/services/MeasureService/measureIndexGroup/9001/.byDept/dg",
+              type: 'GET', // or “POST”
+              dataType:"json", 
+              headers:{
+                "Content-Type": "application/json",
+              },
+              data: {},
+              success: function(res) {
+                // if(res.code == 200 && res.success) {
+                //   在这里赋值->orgsAllData并渲染DOM
+                // arrList = res.data
+                // }
+              },
+              error:function(err){
+                //请求出错处理
+                console.log('err ==>', err);
+              }
+            })
+            // 模拟数据成功返回 // 真实返回数据顺序要一致
+            let orgsAllData = [{
+                    "DISPLAYNAME": '部门01',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                },{
+                    "DISPLAYNAME": '部门02',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                },{
+                    "DISPLAYNAME": '部门03',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                },{
+                    "DISPLAYNAME": '部门04',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                },{
+                    "DISPLAYNAME": '部门05',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                },{
+                    "DISPLAYNAME": '部门06',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                },{
+                    "DISPLAYNAME": '部门07',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                },{
+                    "DISPLAYNAME": '部门08',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                },{
+                    "DISPLAYNAME": '部门09',
+                    "VALUES": [{
+                        "DISPLAYNAME": "应用系统总数",
+                        "VALUE": "A001"
+                    },{
+                        "DISPLAYNAME": "权责事项数量",
+                        "VALUE": "A002"
+                    },{
+                        "DISPLAYNAME": "业务目录数量",
+                        "VALUE": "A003"
+                    },{
+                        "DISPLAYNAME": "服务目录数量",
+                        "VALUE": "A004"
+                    },{
+                        "DISPLAYNAME": "资源目录数量",
+                        "VALUE": "A005"
+                    },{
+                        "DISPLAYNAME": "库表目录数量",
+                        "VALUE": "A006"
+                    }] 
+                }]
+            // 把数据补到7的倍数，展示的时候不留空白
+            const lastAmount = orgsAllData.length % 7
+            if(lastAmount != 0){
+                orgsAllData = orgsAllData.concat(orgsAllData.slice(0, 7 - lastAmount))
+            }
+            // 处理分割数组
+            orgsAllData = group(orgsAllData, 7)
+            let orgsAllDataDom = ''
+            // 根据数据与数据数量动态生成滚动页
+            $.each(orgsAllData, (index, item)=>{
+                orgsAllDataDom += `<div class="swiper-slide">
+                                    <ul class="org-list clearfix">
+                                        ${getOrgBlockDom(item)}
+                                    </ul>
+                                </div>`
+            })
+            $('#swiper-wrapper').append(orgsAllDataDom)
+
+            // <div class="swiper-slide">
+            //                 <ul class="org-list clearfix">
+            //                     <li class="org clearfix">
+            //                         <div class="orgname">区市场监督局</div>
+            //                         <div class="org-item">
+            //                             <p>应用系统</p>
+            //                             <p>25</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>权责事项</p>
+            //                             <p>86</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>业务目录</p>
+            //                             <p>112</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>服务目录</p>
+            //                             <p>110</p>
+            //                         </div>
+            //                         <div class="org-item warning">
+            //                             <p>资源目录</p>
+            //                             <p>238</p>
+            //                         </div>
+            //                         <div class="org-item danger">
+            //                             <p>预警数量</p>
+            //                             <p>12</p>
+            //                         </div>
+            //                     </li>
+            //                     <li class="org clearfix">
+            //                         <div class="orgname">区市场监督局</div>
+            //                         <div class="org-item">
+            //                             <p>应用系统</p>
+            //                             <p>25</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>权责事项</p>
+            //                             <p>86</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>业务目录</p>
+            //                             <p>112</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>服务目录</p>
+            //                             <p>110</p>
+            //                         </div>
+            //                         <div class="org-item warning">
+            //                             <p>资源目录</p>
+            //                             <p>238</p>
+            //                         </div>
+            //                         <div class="org-item danger">
+            //                             <p>预警数量</p>
+            //                             <p>12</p>
+            //                         </div>
+            //                     </li>
+            //                     <li class="org clearfix">
+            //                         <div class="orgname">区市场监督局</div>
+            //                         <div class="org-item">
+            //                             <p>应用系统</p>
+            //                             <p>25</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>权责事项</p>
+            //                             <p>86</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>业务目录</p>
+            //                             <p>112</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>服务目录</p>
+            //                             <p>110</p>
+            //                         </div>
+            //                         <div class="org-item warning">
+            //                             <p>资源目录</p>
+            //                             <p>238</p>
+            //                         </div>
+            //                         <div class="org-item danger">
+            //                             <p>预警数量</p>
+            //                             <p>12</p>
+            //                         </div>
+            //                     </li>
+            //                     <li class="org clearfix">
+            //                         <div class="orgname">区市场监督局</div>
+            //                         <div class="org-item">
+            //                             <p>应用系统</p>
+            //                             <p>25</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>权责事项</p>
+            //                             <p>86</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>业务目录</p>
+            //                             <p>112</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>服务目录</p>
+            //                             <p>110</p>
+            //                         </div>
+            //                         <div class="org-item warning">
+            //                             <p>资源目录</p>
+            //                             <p>238</p>
+            //                         </div>
+            //                         <div class="org-item danger">
+            //                             <p>预警数量</p>
+            //                             <p>12</p>
+            //                         </div>
+            //                     </li>
+            //                     <li class="org clearfix">
+            //                         <div class="orgname">区市场监督局</div>
+            //                         <div class="org-item">
+            //                             <p>应用系统</p>
+            //                             <p>25</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>权责事项</p>
+            //                             <p>86</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>业务目录</p>
+            //                             <p>112</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>服务目录</p>
+            //                             <p>110</p>
+            //                         </div>
+            //                         <div class="org-item warning">
+            //                             <p>资源目录</p>
+            //                             <p>238</p>
+            //                         </div>
+            //                         <div class="org-item danger">
+            //                             <p>预警数量</p>
+            //                             <p>12</p>
+            //                         </div>
+            //                     </li>
+            //                     <li class="org clearfix">
+            //                         <div class="orgname">区市场监督局</div>
+            //                         <div class="org-item">
+            //                             <p>应用系统</p>
+            //                             <p>25</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>权责事项</p>
+            //                             <p>86</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>业务目录</p>
+            //                             <p>112</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>服务目录</p>
+            //                             <p>110</p>
+            //                         </div>
+            //                         <div class="org-item warning">
+            //                             <p>资源目录</p>
+            //                             <p>238</p>
+            //                         </div>
+            //                         <div class="org-item danger">
+            //                             <p>预警数量</p>
+            //                             <p>12</p>
+            //                         </div>
+            //                     </li>
+            //                     <li class="org clearfix">
+            //                         <div class="orgname">区市场监督局</div>
+            //                         <div class="org-item">
+            //                             <p>应用系统</p>
+            //                             <p>25</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>权责事项</p>
+            //                             <p>86</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>业务目录</p>
+            //                             <p>112</p>
+            //                         </div>
+            //                         <div class="org-item">
+            //                             <p>服务目录</p>
+            //                             <p>110</p>
+            //                         </div>
+            //                         <div class="org-item warning">
+            //                             <p>资源目录</p>
+            //                             <p>238</p>
+            //                         </div>
+            //                         <div class="org-item danger">
+            //                             <p>预警数量</p>
+            //                             <p>12</p>
+            //                         </div>
+            //                     </li>
+            //                 </ul>
+            //             </div>
+        }
+        // 遍历数据生成滚每页的部门模块
+        getOrgBlockDom = (child)=>{
+                let childListDom = ``
+                $.each(child, (cindex, citem)=>{
+                console.log("getOrgBlockDom -> citem", citem)
+                    childListDom +=`<li class="org clearfix">
+                                        <div class="orgname">${citem.DISPLAYNAME}</div>
+                                        ${getChildListDom(citem.VALUES)}
+                                    </li>`
+                })
+                return childListDom
+            }
+        // 遍历数据生成滚每页的部门模块下的数据块
+        getChildListDom = (child)=>{
+                let childListDom = ``
+                $.each(child, (cindex, citem)=>{
+                    childListDom +=`<div class="org-item ${cindex === 0 && 'warning'} ${cindex === child.length - 1 && 'danger'}">
+                                        <p>${citem.DISPLAYNAME}</p>
+                                        <p>${citem.VALUE}</p>
+                                    </div>`
+                })
+                return childListDom
+            }
+        // 数组分割
+        group = (array, subGroupLength)=> {
+            let index = 0
+            const newArray = []
+            while (index < array.length) {
+            newArray.push(array.slice(index, index += subGroupLength))
+            }
+            return newArray
+        }
+        
+        loadingAni = () =>{
+            let time=100, myInterval;
+            myInterval = setInterval(function(){ 
+                if(time > 0){
+                    time--;
+                    loadPercent(time, 100);
+                } else {
+                    console.log('--------------------------------')
+                    clearInterval(myInterval)
+                }
+             }, 20);
+        }
+        // 圆环进度条
+        loadPercent= (x, y)=> {
+            var rotate = (x / y) * 360
+            var rotateRight = 0
+            var rotateLeft = 0
+            if (rotate < 180) {
+                rotateRight = rotate + (-45)
+
+            } else {
+                rotateRight = 135
+                rotateLeft = (rotate - 180 - 45)
+                $("#loop-lc").css({
+                    "-webkit-transform": "rotate(" + rotateLeft + "deg)",
+                })
+            }
+
+            $("#loop-rc").css({
+                "-webkit-transform": "rotate(" + rotateRight + "deg)",
+            })
+        }
+  
+        //全屏
+        fullScreen = () => {
+            var element = document.documentElement;
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            }
+        }
+        //退出全屏 
+        exitFullScreen = () => {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+  </script>
+</body>
+
+</html>

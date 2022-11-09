@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./js/swiper/swiper.min.css">
+    <title>XXXX综合信息大屏</title>
+    <style>
+        .swiper-container,
+        .swiper-wrapper,
+        .swiper-slide,
+        object,
+        embed {
+            width: 100%;
+            height: 100%;
+        }
+
+        .full-screen,
+        .exit-full-screen {
+            display: block;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            z-index: 9999;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .full-screen:hover,
+        .exit-full-screen:hover {
+            transform: scale(1.1);
+        }
+
+        .exit-full-screen {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <img src="./images/fullScreen.png" alt="" class="full-screen" onclick="fullScreen()">
+        <img src="./images/exitFullScreen.png" alt="" class="exit-full-screen" onclick="exitFullScreen()">
+        <div class="theme-select clearfix">
+            <span class="curr-theme-name"></span>
+            <img src="./images/expand-arrow.png" alt="">
+            <ul class="theme-list">
+                <li class="theme-item" theme="0">
+                    <span class="color darken"></span>
+                    <span class="theme-name">深蓝</span>
+                </li>
+                <li class="theme-item" theme="1">
+                    <span class="color"></span>
+                    <span class="theme-name">中蓝</span>
+                </li>
+                <li class="theme-item" theme="2">
+                    <span class="color lighten"></span>
+                    <span class="theme-name">浅蓝</span>
+                </li>
+            </ul>
+        </div>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <!--项目主体驾驶舱-->
+                <object src="theme.html">
+                    <embed src="theme.html"></embed>
+                </object>
+            </div>
+            <div class="swiper-slide">
+                <!--综合信息大屏-->
+                <object src="complex.html">
+                    <embed src="complex.html"></embed>
+                </object>
+            </div>
+            <div class="swiper-slide">
+                <!--人力综合看板-->
+                <object src="human_resources.html">
+                    <embed src="human_resources.html"></embed>
+                </object>
+            </div>
+            <div class="swiper-slide">
+                <!--采购综合看板-->
+                <object src="purchase.html">
+                    <embed src="purchase.html"></embed>
+                </object>
+            </div>
+            <div class="swiper-slide">
+                <!--MKJ看板-->
+                <object src="mkj.html">
+                    <embed src="mkj.html"></embed>
+                </object>
+            </div>
+            <!-- <div class="swiper-slide">Slide 3</div> -->
+        </div>
+
+        <!-- 如果需要导航按钮 -->
+        <!-- <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div> -->
+    </div>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/swiper/swiper.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            const currTheme = localStorage.getItem('zhj_theme')
+            if (currTheme === '0') {
+                $('.curr-theme-name').text('主题：深蓝')
+            } else if (currTheme === '2') {
+                $('.curr-theme-name').text('主题：浅蓝')
+            } else {
+                $('.curr-theme-name').text('主题：中蓝')
+            }
+            $('.theme-list').on('click', '.theme-item', e => {
+                const theme = $(e.currentTarget).attr('theme')
+                localStorage.setItem('zhj_theme', theme)
+                location.reload()
+            })
+            var mySwiper = new Swiper('.swiper-container', {
+                direction: 'horizontal', // 垂直切换选项
+                speed: 1000, // 切换速度
+                loop: true, // 循环模式选项
+                // autoplay: {
+                //     delay: 3000 // 3秒切换一次
+                // },
+                observer: true,
+                observeParents: true,
+                // 用户操作swiper之后，是否禁止autoplay
+                disableOnInteraction: false,
+                // 如果需要前进后退按钮
+                // navigation: {
+                //     nextEl: '.swiper-button-next',
+                //     prevEl: '.swiper-button-prev'
+                // }
+            })
+            // 监听全屏事件
+            window.onresize = function () {
+                var isFull = !!(document.webkitIsFullScreen || document.mozFullScreen ||
+                    document.msFullscreenElement || document.fullscreenElement
+                ); //!document.webkitIsFullScreen都为true。因此用!!
+                if (isFull == false) {
+                    $('.exit-full-screen').css('display', 'none')
+                    $('.full-screen').css('display', 'block')
+                } else {
+                    $('.full-screen').css('display', 'none')
+                    $('.exit-full-screen').css('display', 'block')
+                }
+            }
+        })
+        //全屏
+        function fullScreen() {
+            var element = document.documentElement;
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            }
+        }
+        //退出全屏 
+        function exitFullScreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+    </script>
+</body>
+
+</html>

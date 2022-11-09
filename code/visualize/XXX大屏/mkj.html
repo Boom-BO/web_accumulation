@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/mkj.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <title>MKJ看板</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div class="mkj theme-wrapper scale-wrapper">
+        <div id="loading">
+            <div class="loading_img">
+                <!-- 加载动画 -->
+                <img class="loading-ring-o" src="images/loading-ring-o.png">
+                <img class="loading-ring-i" src="images/loading-ring-i.png">
+            </div>
+        </div>
+        <div class="title-bar">
+            <p class="title-name">MKJ看板</p>
+            <span id="time"></span>
+            <div class="nav-btn">运营管理平台</div>
+        </div>
+        <div class="content clearfix">
+            <div class="header"></div>
+            <ul class="c-left">
+                <!-- <li class="li-item">
+                    <div class="title">D1  加快核产业转型升级，推进自主重大工程建设</div>
+                    <ul class="msg-list">
+                        <li class="msg-item clearfix">
+                            <p class="label"><span class="tag">已完成</span> D1-1:“华龙一号”国内示范工程及融合示范工程优化项目范工程及融合示范工程优化项目</p>
+                            <time>2020.06.01 ~ 2020.09.01</time>
+                        </li>
+                    </ul>
+                </li>
+                <div class="divider"></div> -->
+            </ul>
+            <ul class="c-right"></ul>
+        </div>
+    </div>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/global.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            resetTheme()
+            scalePage()
+            clearLoading()
+            timeInit()
+                headerInit()
+                contentInit()
+                scalePage()
+        })
+        clearLoading = () => {
+            //删除加载动画
+            $('#loading').fadeOut(1000)
+            setTimeout(function () {
+                $('#loading').remove()
+            }, 1300);
+        }
+        timeInit = () => {
+            setInterval(() => {
+                let date = new Date()
+                $('#time').text(getFormatDate)
+            }, 1000);
+        }
+        getFormatDate = () => {
+            let nowDate = new Date();
+            let year = nowDate.getFullYear();
+            let month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+            let date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+            let hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+            let minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+            let second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+            return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+        }
+        getScale = () => {
+            // 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+            const width = 1920
+            const height = 1080
+            let ww = window.innerWidth / width
+            let wh = window.innerHeight / height
+            return ww < wh ? ww : wh
+        }
+        // 页面渲染计算比例缩放
+        scalePage = () => {
+            setScale = debounce(() => {
+                // 获取到缩放比，设置它
+                let scale = this.getScale()
+                $('.scale-wrapper').css({
+                    'transform': 'scale(' + scale + ') translate(-50%, -50%)',
+                    '-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+                })
+            }, 200)
+            setScale()
+            window.addEventListener('resize', setScale)
+        }
+        // 防抖
+        debounce = (fun, delay) => {
+            let timer
+            return function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(fun, delay)
+            }
+        }
+        headerInit= ()=>{
+            const headerData = [{
+                id: '0',
+                name: '考核净利润',
+                icon: 'jinglirun',
+                scale: 0.75
+            },{
+                id: '1',
+                name: 'EAV',
+                icon: 'eav',
+                scale: 0.40
+            },{
+                id: '2',
+                name: '技术投入占比',
+                icon: 'zhanbi',
+                scale: 0.80
+            },{
+                id: '3',
+                name: '新签合同增长率',
+                icon: 'zengzhanglv',
+                scale: 0.85
+            },{
+                id: '4',
+                name: '应收账款',
+                icon: 'shoukuan',
+                scale: 0.90
+            },{
+                id: '5',
+                name: '存货',
+                icon: 'cunhuo',
+                scale: 0.100
+            }]
+            let headerDom = ''
+            $.each(headerData, (index, item)=>{
+                headerDom += '<div class="header-item">'+
+                    '<div class="title">'+
+                        '<img src="./images/mkj/'+ item.icon +'.png" alt="" class="icon">'+
+                        '<span class="label">'+ item.name +'</span>' +
+                    '</div>'+
+                    '<div class="progress-wrapper">'+
+                        '<div class="progress" style="width:'+ item.scale*100 +'%"></div>'+
+                    '</div>'+
+                '</div>'
+            })
+            $('.header').append(headerDom)
+        }
+        contentInit = ()=>{
+            const data = [{
+                id: '1',
+                title: '加快核产业转型升级，推进自主重大工程建设',
+                list: [{
+                    id:'1-1',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 2
+                },{
+                    id:'1-2',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 1
+                }]
+            },{
+                id: '2',
+                title: '加快核产业转型升级，推进自主重大工程建设',
+                list: [{
+                    id:'2-1',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 0
+                },{
+                    id:'2-2',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 0
+                }]
+            },{
+                id: '3',
+                title: '加快核产业转型升级，推进自主重大工程建设',
+                list: [{
+                    id:'3-1',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 0
+                },{
+                    id:'3-2',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 1
+                }]
+            },{
+                id: '4',
+                title: '加快核产业转型升级，推进自主重大工程建设',
+                list: [{
+                    id:'4-1',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 1
+                },{
+                    id:'4-2',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 2
+                }]
+            },{
+                id: '5',
+                title: '加快核产业转型升级，推进自主重大工程建设',
+                list: [{
+                    id:'5-1',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 0
+                },{
+                    id:'5-2',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 2
+                }]
+            },{
+                id: '6',
+                title: '加快核产业转型升级，推进自主重大工程建设',
+                list: [{
+                    id:'6-1',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 1
+                },{
+                    id:'6-2',
+                    title: '“华龙一号”国内示范工程及融合示范工程优化项目',
+                    time: '2020.06-09 - 2020.09.09',
+                    status: 2
+                }]
+            }]
+            let leftDom = ''
+            let rightDom = ''
+            $.each(data, (index, item)=>{
+                if(index<3){
+                    leftDom += '<li class="li-item">'+
+                    '<div class="title">D'+ (index+1) + '   '+ item.title +'</div>'
+                       + creatList(item.list, index) +
+                    '</li>'
+                }else{
+                    rightDom += '<li class="li-item">'+
+                    '<div class="title">D'+ (index+1) + '   '+ item.title +'</div>'
+                       + creatList(item.list, index) +
+                    '</li>'
+                }
+                if(index < 2){
+                    leftDom += '<div class="divider"></div>'
+                }
+                if(index <5 && index>=2){
+                    rightDom += '<div class="divider"></div>'
+                }
+            })
+            $('.c-left').append(leftDom)
+            $('.c-right').append(rightDom)
+        }
+        function creatList(list, pIndex){
+            const statusData = ['已停工', '在建中', '已完成']
+            let listDom = '<ul class="msg-list">'
+            $.each(list, (index, item)=>{
+                listDom += '<li class="msg-item clearfix">'+
+                        '<p class="label"><span class="tag '+ getBgColor(item.status) +'">'+ statusData[item.status] +'</span> D'+ (pIndex+1) +'-'+ (index+1) + (item.title || '') + '</p>'+
+                        '<time>'+ (item.time||'') +'</time>'+
+                        '</li>'
+            })
+            return listDom + '</ul>'
+        }
+        function getBgColor(status){
+            if(status === 0){
+                return 'danger'
+            }else if(status === 1){
+                return 'success'
+            } else {
+                return 'info'
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./css/normalize.css">
+		<link rel="stylesheet" href="./css/common.css">
+		<link rel="stylesheet" href="./css/mkj.css">
+		<link rel="stylesheet" href="./css/animate.min.css">
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
+		<title>科协一家数据汇总</title>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		<div class="mkj theme-wrapper scale-wrapper">
+			<div id="loading">
+				<div class="loading_img">
+					<!-- 加载动画 -->
+					<img class="loading-ring-o" src="images/loading-ring-o.png">
+					<img class="loading-ring-i" src="images/loading-ring-i.png">
+				</div>
+			</div>
+			<div class="title-bar">
+				<p class="title-name">科协一家数据汇总</p>
+				<span id="time"></span>
+				<!-- <div class="nav-btn">运营管理平台</div> -->
+			</div>	
+			<div class="content clearfix">
+				<div class="header"></div>
+				<div class="contain">
+					<div class="c-left">
+						<div class="card">
+							<div class="card-title">
+								<p>中国科协</p>
+								<!-- <a href="registerNum.html">更多></a> -->
+							</div>
+							<div class="card-contain">
+								<ul id="kexie" class="nav nav-tabs">
+									<li class="active"><a href="#jiguan" data-toggle="tab">
+											科协机关</a>
+									</li>
+									<li><a href="#zhishu" data-toggle="tab">直属单位</a></li>
+
+								</ul>
+								<div class="tab-content" style="height: 100%;">
+									<div class="tab-pane fade in active" id="jiguan">
+										<div class="top-3" id='top-3'>
+										</div>
+										<div class='td-title'>
+											<span style="width: 10%;">排名</span>
+											<span style="width: 60%;">名称</span>
+											<span style="width: 18%;">活跃人数</span>
+										</div>
+										<div id="rankingContent">
+
+										</div>
+									</div>
+									<!-- <div class="tab-pane fade" id="zhishu">
+
+										2 </div> -->
+								</div>
+
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-title">
+								<p>全国学会</p>
+								<!-- <a href="activeNum.html">更多></a> -->
+							</div>
+							<div class="card-contain">
+								<ul id="xuehui" class="nav nav-tabs">
+									<li class="active"><a href="#like" data-toggle="tab">
+											理科</a>
+										<span class="active-span"></span>
+									</li>
+									<li><a href="#gongke" data-toggle="tab">工科</a><span class="active-span"></span></li>
+									<li><a href="#nongke" data-toggle="tab">农科</a><span class="active-span"></span></li>
+									<li><a href="#yike" data-toggle="tab">医科</a><span class="active-span"></span></li>
+									<li><a href="#jiaochaxueke" data-toggle="tab">交叉学科</a><span class="active-span"></span></li>
+
+								</ul>
+								<div id="myTabContent" class="tab-content">
+									<div class="tab-pane fade in active" id="like">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>排名</th>
+													<th>名称</th>
+													<th>活跃人数</th>
+												</tr>
+											</thead>
+											<tbody id="like-tab">
+
+											</tbody>
+										</table>
+									</div>
+									<div class="tab-pane fade" id="gongke">
+
+										<table class="table">
+											<thead>
+												<tr>
+													<th>排名</th>
+													<th>名称</th>
+													<th>活跃人数</th>
+												</tr>
+											</thead>
+											<tbody id="gongke-tab">
+
+											</tbody>
+										</table>
+									</div>
+									<div class="tab-pane fade" id="nongke">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>排名</th>
+													<th>名称</th>
+													<th>活跃人数</th>
+												</tr>
+											</thead>
+											<tbody id="nongke-tab">
+
+											</tbody>
+										</table>
+									</div>
+									<div class="tab-pane fade" id="yike">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>排名</th>
+													<th>名称</th>
+													<th>活跃人数</th>
+												</tr>
+											</thead>
+											<tbody id="yike-tab">
+
+											</tbody>
+										</table>
+										</p>
+									</div>
+									<div class="tab-pane fade" id="jiaochaxueke">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>排名</th>
+													<th>名称</th>
+													<th>活跃人数</th>
+												</tr>
+											</thead>
+											<tbody id="jiaocha-tab">
+
+											</tbody>
+										</table>
+										</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="c-center">
+						<div id="c-map"></div>
+					</div>
+					<div class="c-right">
+						<div class="card">
+							<div class="card-title">
+								<p>活跃人数</p>
+								<a href="activeNum.html">更多></a>
+							</div>
+							<div class="card-contain">
+								<p style="color: rgba(106, 224, 248, 1); float: right;margin-right: 30px;">单位：人</p>
+								<div id="huoyueContent">
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-title">
+								<p>使用频次</p>
+								<a href="userRate.html">更多></a>
+							</div>
+							<div class="card-contain">
+								<div class="tab-title" id='shiyongPC'>
+									<div class="active">整体走势</div>
+									<div>单位排行</div>
+									<div>个人排行</div>
+								</div>
+								<div id="shiyongTabContent">
+								</div>
+								<div id="danweiPH">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>排名</th>
+												<th>名称</th>
+												<th>数量</th>
+											</tr>
+										</thead>
+										<tbody id="danweiPC-tab">
+
+										</tbody>
+									</table>
+								</div>
+								<div id="gerenPH">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>排名</th>
+												<th>名称</th>
+												<th>数量</th>
+											</tr>
+										</thead>
+										<tbody id="gerenPC-tab">
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contain contain-bottom">
+					<div class="card">
+						<div class="card-title">
+							<p>工作流</p>
+							<a href="workFlowMore.html">更多></a>
+						</div>
+						<div class="card-contain">
+							<div class="tab-title" id='tab-title_workFlow'>
+								<div class="active">整体走势</div>
+								<div>单位排行</div>
+								<div>个人排行</div>
+							</div>
+							<div id="workFlow">
+							</div>
+							<div id="danweiWF">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>排名</th>
+											<th>名称</th>
+											<th>数量</th>
+										</tr>
+									</thead>
+									<tbody id="danweiWF-tab">
+
+									</tbody>
+								</table>
+							</div>
+							<div id="gerenWF">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>排名</th>
+											<th>名称</th>
+											<th>数量</th>
+										</tr>
+									</thead>
+									<tbody id="gerenWF-tab">
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-title">
+							<p>工作台应用排行</p>
+							<a href="workAppMore.html">更多></a>
+						</div>
+						<div class="card-contain dis_flex">
+							<div class="left">
+								<div id="pie3D"></div>
+							</div>
+							<div class="right">
+								<div class='td-title'>
+									<span style="width: 40%;">排行</span>
+									<span style="width: 35%;text-align: left;">名称</span>
+									<span style="width: 18%;">使用频次</span>
+								</div>
+								<div id="pictorialBarDiv"></div>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-title">
+							<p>信息流使用走势</p>
+							<a href="infoUseMore.html">更多></a>
+						</div>
+						<div class="card-contain dis_flex">
+							<div id="infoUsed"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="./js/echarts.min.js"></script>
+		<script src="./js/echarts-gl.min.js"></script>
+		<script src="./js/china.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/mapOPtion.js"></script>
+		<script src="./js/frequencyInit.js"></script>
+		<script src="./js/workFlowInit.js"></script>
+		<script src="./js/pie3D.js"></script>
+		<script src="./js/pictorialBarInit.js"></script>
+		<script src="./js/infoUsedInit.js"></script>
+		<script src="./js/huoyueInit.js"></script>
+		<script src="./js/ranking.js"></script>
+		<script type="text/javascript">
+			let cMapOption = null
+			$(function() {
+				// $('#xuehui li:eq(0) a').tab('show');
+
+				scalePage()
+				clearLoading()
+				timeInit()
+				headerInit()
+				// 地图渲染
+				getArea()
+				//使用频次渲染（曲顶柱状图）
+				getUseByWeek()
+				//工作流
+				getWorkflow()
+				// pie3DInit()
+				// pictorialBarInit()
+				getApp()
+				getMsg()
+				getActiveByWeek()
+				// rankingInit()
+				getActiveRankingByKX()
+			})
+			clearLoading = () => {
+
+				// 接口全部加载完成
+				// if (getUseByWeekStatus && getAreaStatus && getActiveByWeekStatus && getMsgStatus && getWorkflow) {
+				// 	//删除加载动画
+					$('#loading').fadeOut(1000)
+					setTimeout(function() {
+						$('#loading').remove()
+					}, 1300);
+				// }
+
+			}
+			timeInit = () => {
+				setInterval(() => {
+					clearLoading()
+				}, 1000)
+
+				let date = new Date()
+				let timer = getFormatDate()
+				$('#time').text('数据更新时间：' + timer)
+			}
+			getFormatDate = () => {
+				let nowDate = new Date();
+				let year = nowDate.getFullYear();
+				let month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+				let date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+				let hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+				let minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+				let second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+				return year + "-" + month + "-" + date;
+			}
+			getScale = () => {
+				// 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+				const width = 1920
+				const height = 1080
+				let ww = window.innerWidth / width
+				let wh = window.innerHeight / height
+				return ww < wh ? ww : wh
+			}
+			// 页面渲染计算比例缩放
+			scalePage = () => {
+				setScale = debounce(() => {
+					// 获取到缩放比，设置它
+					let scale = this.getScale()
+					$('.scale-wrapper').css({
+						'transform': 'scale(' + scale + ') translate(-50%, -50%)',
+						'-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+					})
+				}, 200)
+				setScale()
+				window.addEventListener('resize', setScale)
+			}
+			// 防抖
+			debounce = (fun, delay) => {
+				let timer
+				return function() {
+					if (timer) {
+						clearTimeout(timer)
+					}
+					timer = setTimeout(fun, delay)
+				}
+			}
+			getActiveRankingByKX = () => {
+				$.ajax({
+					url: '/default/statistics/getActiveRankingByKX.sts',
+					type: 'post',
+					success: function(result) {
+
+						let zsdwStr = ''; //直属单位排行
+						let xh_gkStr = ''; //学会排行---工科
+						let xh_lkStr = ''; //学会排行---理科
+						let xh_nkStr = ''; //学会排行---农科
+						let xh_ykStr = ''; //学会排行---医科
+						let xh_jcStr = ''; //学会排行---交叉学科
+						if (result.resultCode == '1') {
+							getRanking(result.data.kx)
+							if (result.data.xh.lkList && result.data.xh.lkList.length > 0) {
+								result.data.xh.lkList.forEach((obj, index) => {
+									xh_lkStr += '<tr><td>';
+									if (index < 3) {
+										xh_lkStr += '<img src="./images/huangguan' + (index + 1) + '.png" />'
+									}
+									xh_lkStr += (index + 1) + '</td>' +
+										'<td>' + obj.orgName + '</td>' +
+										'<td>' + obj.activeNumber + '</td></tr>'
+								})
+								$('#like-tab').html(xh_lkStr)
+							}
+							if (result.data.xh.gkList && result.data.xh.gkList.length > 0) {
+								result.data.xh.gkList.forEach((obj, index) => {
+									xh_gkStr += '<tr><td>';
+									if (index < 3) {
+										xh_gkStr += '<img src="./images/huangguan' + (index + 1) + '.png" />'
+									}
+									xh_gkStr += (index + 1) + '</td>' +
+										'<td>' + obj.orgName + '</td>' +
+										'<td>' + obj.activeNumber + '</td></tr>'
+								})
+								$('#gongke-tab').html(xh_gkStr)
+							}
+							if (result.data.xh.nkList && result.data.xh.nkList.length > 0) {
+								result.data.xh.nkList.forEach((obj, index) => {
+									xh_nkStr += '<tr><td>';
+									if (index < 3) {
+										xh_nkStr += '<img src="./images/huangguan' + (index + 1) + '.png" />'
+									}
+									xh_nkStr += (index + 1) + '</td>' +
+										'<td>' + obj.orgName + '</td>' +
+										'<td>' + obj.activeNumber + '</td></tr>'
+								})
+								$('#nongke-tab').html(xh_nkStr)
+							}
+							if (result.data.xh.ykList && result.data.xh.ykList.length > 0) {
+								result.data.xh.ykList.forEach((obj, index) => {
+									xh_ykStr += '<tr><td>'
+									if (index < 3) {
+										xh_ykStr += '<img src="./images/huangguan' + (index + 1) + '.png" />'
+									}
+									xh_ykStr += (index + 1) + '</td>' +
+										'<td>' + obj.orgName + '</td>' +
+										'<td>' + obj.activeNumber + '</td></tr>'
+								})
+								$('#yike-tab').html(xh_ykStr)
+							}
+							if (result.data.xh.jxxkList && result.data.xh.jxxkList.length > 0) {
+								result.data.xh.jxxkList.forEach((obj, index) => {
+									xh_jcStr += '<tr><td>'
+									if (index < 3) {
+										xh_jcStr += '<img src="./images/huangguan' + (index + 1) + '.png" />'
+									}
+									xh_jcStr += (index + 1) + '</td>' +
+										'<td>' + obj.orgName + '</td>' +
+										'<td>' + obj.activeNumber + '</td></tr>'
+								})
+								$('#jiaocha-tab').html(xh_jcStr)
+							}
+
+						}
+					}
+				})
+			}
+			headerInit = () => {
+				let headerData = []
+				$.ajax({
+					url: "/default/statistics/getHeadNumber.sts",
+					type: 'post',
+					success: function(result) {
+						if (result.resultCode == '1') {
+							headerData = [{
+								id: '0',
+								name: '注册人数',
+								icon: 'renshu@2x',
+								num: result.data.settleInNumber > 100000 ? (result.data.settleInNumber / 10000).toFixed(2) : result.data.settleInNumber,
+								unit: result.data.settleInNumber > 100000 ? '万人' : '人',
+								url: 'registerNum.html',
+								des: '当前所有单位注册人数，点击查看各单位详情'
+							}, {
+								id: '1',
+								name: '活跃人数',
+								icon: 'huoyue@2x',
+								num: result.data.activeNumber > 100000 ? (result.data.activeNumber / 10000).toFixed(2) : result.data.activeNumber,
+								unit: result.data.activeNumber > 100000 ? '万人' : '人',
+								url: 'activeNum.html',
+								des: '本年度所有单位活跃人数，点击查看各单位详情'
+							}, {
+								id: '2',
+								name: '活跃组织',
+								icon: 'zuzhi@2x',
+								num: result.data.orgNode > 100000 ? (result.data.orgNode / 10000).toFixed(2) : result.data.orgNode,
+								unit: '',
+								url: 'activeNum.html',
+								des: '本年度所有活跃单位，点击查看各单位详情'
+
+							}, {
+								id: '3',
+								name: '连接人数',
+								icon: 'lianjie@2x',
+								num: result.data.linkNumber > 100000 ? (result.data.linkNumber / 10000).toFixed(2) : result.data.linkNumber,
+								unit: result.data.linkNumber > 100000 ? '万人' : '人',
+								url: ''
+							}, {
+								id: '4',
+								name: '使用频次',
+								icon: 'pinci@2x',
+								num: result.data.useNumber > 100000 ? (result.data.useNumber / 10000).toFixed(2) : result.data.useNumber,
+								unit: result.data.useNumber > 100000 ? '万次' : '次',
+								url: 'userRate.html',
+								des: '本年度所有单位使用科协一家的次数，点击查看各单位详情'
+							}, {
+								id: '5',
+								name: '粘性系数',
+								icon: 'nianxingxishu@2x',
+								num: result.data.viscosityCoefficient,
+								unit: '',
+								url: '',
+								des: '本年度使用频次/活跃人数，用于表示平均每人使用科协一家的频次'
+							}]
+							let headerDom = ''
+							let hoverStr = ''
+							$.each(headerData, (index, item) => {
+								if (item.url != '') {
+									headerDom += '<div class="header-item" onclick="openMore(\'' + item.url + '\')">'
+								} else {
+									headerDom += '<div class="header-item">'
+								}
+								headerDom +=
+									'<div class="title">' +
+									'<img src="./images/mkj/' + item.icon + '.png" alt="" class="icon">' +
+									'<div class="right">' +
+									'<div class="label">' + item.name + '</div><div class="num">' + item.num +
+									'<span class="unit">' + item.unit + '</span></div></div>' +
+									'</div>'
+								// if (item.id == 3) {
+								headerDom += '<img src="./images/zhexian.png" class="zhexian"/>'
+								if (item.id == 3 && result.data.linkList && result.data.linkList.length > 0) {
+									hoverStr = ''
+									result.data.linkList.forEach(obj => {
+										hoverStr += '<div class="name">' + obj.name + '</div><div class="value">' + obj.value + '</div>'
+
+									})
+									headerDom += '<div class="hover-div">' + hoverStr + '</div>'
+								} else if (item.id != 3 && item.des != '') {
+									hoverStr = '<div class="name">' + item.des + '</div>'
+									headerDom += '<div class="hover-div">' + hoverStr + '</div>'
+								}
+
+								// }
+								headerDom += '</div>'
+
+							})
+
+
+							$('.header').append(headerDom)
+							$('#hover-div').html(hoverStr)
+						}
+
+					}
+
+				});
+			}
+
+			function openMore(url) {
+				location.href = url
+			}
+		</script>
+	</body>
+
+</html>

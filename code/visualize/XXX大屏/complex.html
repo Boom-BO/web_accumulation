@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./css/normalize.css" />
+		<link rel="stylesheet" href="./css/common.css" />
+		<link rel="stylesheet" href="./css/general-info.css" />
+		<title>综合信息大屏</title>
+		<style type="text/css"></style>
+	</head>
+
+	<body>
+		<div class="general-info theme-wrapper scale-wrapper">
+			<div id="loading">
+				<div class="loading_img">
+					<!-- 加载动画 -->
+					<img class="loading-ring-o" src="images/loading-ring-o.png" />
+					<img class="loading-ring-i" src="images/loading-ring-i.png" />
+				</div>
+			</div>
+			<div class="title-bar">
+				<p class="title-name">综合信息大屏</p>
+				<span id="time"></span>
+				<div class="nav-btn">运营管理平台</div>
+			</div>
+			<div class="c-charts">
+				<div class="c-left clearfix">
+					<div class="progress-item" typeName="mainIncome">
+						<p class="progress-item-title iconfont">
+							&#xe677;&nbsp;&nbsp;主营收入
+						</p>
+						<div class="amount-line clearfix">
+							<span class="label">计划</span>
+							<span class="amount amount1">-亿</span>
+						</div>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<div class="amount-line clearfix">
+							<span class="label">当期累计</span>
+							<span class="amount amount2">-亿</span>
+						</div>
+					</div>
+					<div class="progress-item" typeName="totalProfit">
+						<p class="progress-item-title iconfont">
+							&#xe673;&nbsp;&nbsp;利润总额
+						</p>
+						<div class="amount-line clearfix">
+							<span class="label">计划</span>
+							<span class="amount amount1">-亿</span>
+						</div>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<div class="amount-line clearfix">
+							<span class="label">当期累计</span>
+							<span class="amount amount2">-亿</span>
+						</div>
+					</div>
+					<div class="progress-item" typeName="accountsReceivable">
+						<p class="progress-item-title iconfont">
+							&#xe6a0;&nbsp;&nbsp;应收账款
+						</p>
+						<div class="amount-line clearfix">
+							<span class="label">计划</span>
+							<span class="amount amount1">-亿</span>
+						</div>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<div class="amount-line clearfix">
+							<span class="label">当期累计</span>
+							<span class="amount amount2">-亿</span>
+						</div>
+					</div>
+					<div class="progress-item" typeName="stock">
+						<p class="progress-item-title iconfont">&#xea5f;&nbsp;&nbsp;存货</p>
+						<div class="amount-line clearfix">
+							<span class="label">计划</span>
+							<span class="amount amount1">-亿</span>
+						</div>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<div class="amount-line clearfix">
+							<span class="label">当期累计</span>
+							<span class="amount amount2">-亿</span>
+						</div>
+					</div>
+					<div class="progress-item" typeName="totalValue">
+						<p class="progress-item-title iconfont">
+							&#xe601;&nbsp;&nbsp;总产值
+						</p>
+						<div class="amount-line clearfix">
+							<span class="label">计划</span>
+							<span class="amount amount1">-亿</span>
+						</div>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<div class="amount-line clearfix">
+							<span class="label">当期累计</span>
+							<span class="amount amount2">-亿</span>
+						</div>
+					</div>
+					<div class="progress-item" typeName="totalCost">
+						<p class="progress-item-title iconfont">
+							&#xe650;&nbsp;&nbsp;总成本
+						</p>
+						<div class="amount-line clearfix">
+							<span class="label">计划</span>
+							<span class="amount amount1">-亿</span>
+						</div>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<div class="amount-line clearfix">
+							<span class="label">当期累计</span>
+							<span class="amount amount2">-亿</span>
+						</div>
+					</div>
+				</div>
+				<div class="c-center clearfix">
+					<div class="item-block">
+						<span class="iconfont"
+							>&#xe61a;<span class="label">&nbsp;&nbsp;项目看板</span></span
+						>
+					</div>
+					<div class="item-block">
+						<span class="iconfont"
+							>&#xe60d;<span class="label">&nbsp;&nbsp;市场开发</span></span
+						>
+					</div>
+					<div class="item-block">
+						<span class="iconfont"
+							>&#xe602;<span class="label">&nbsp;&nbsp;运营管理</span></span
+						>
+					</div>
+					<div class="item-block">
+						<span class="iconfont"
+							>&#xe612;<span class="label">&nbsp;&nbsp;财务分析</span></span
+						>
+					</div>
+					<div class="item-block">
+						<span class="iconfont"
+							>&#xe619;<span class="label">&nbsp;&nbsp;人力资源</span></span
+						>
+					</div>
+				</div>
+				<div class="c-right clearfix">
+					<div class="progress-item" typeName="profit">
+						<p class="progress-item-title iconfont">
+							&#xe615;&nbsp;&nbsp;净利润
+						</p>
+						<div class="amount-line clearfix">
+							<span class="label">计划</span>
+							<span class="amount amount1">-亿</span>
+						</div>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<div class="amount-line clearfix">
+							<span class="label">当期累计</span>
+							<span class="amount amount2">-亿</span>
+						</div>
+					</div>
+					<div class="progress-item" typeName="totalAssets">
+						<p class="progress-item-title iconfont">
+							&#xe608;&nbsp;&nbsp;资产总额
+						</p>
+						<div class="amount-line clearfix">
+							<span class="label">计划</span>
+							<span class="amount amount1">-亿</span>
+						</div>
+						<div class="progress-wrapper">
+							<div class="progress"></div>
+						</div>
+						<div class="amount-line clearfix">
+							<span class="label">当期累计</span>
+							<span class="amount amount2">-亿</span>
+						</div>
+					</div>
+					<div class="statistics clearfix">
+						<div class="statistics-item" stcName="liquidity">
+							<p class="statistics-label">流动资产</p>
+							<p class="statistics-value">--</p>
+						</div>
+						<div class="statistics-item" stcName="liabilities">
+							<p class="statistics-label">负债总额</p>
+							<p class="statistics-value">--</p>
+						</div>
+						<div class="statistics-item" stcName="stock">
+							<p class="statistics-label">存货</p>
+							<p class="statistics-value">--</p>
+						</div>
+						<div class="statistics-item" stcName="addedValue">
+							<p class="statistics-label">增加值</p>
+							<p class="statistics-value">--</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="b-charts">
+				<div class="b-chart b-left">
+					<p class="charts-title">重点单位产出情况（TOP5）</p>
+					<div id="org-output"></div>
+				</div>
+				<div class="b-chart b-center">
+					<p class="charts-title">经济分析曲线图</p>
+					<div id="economic-line"></div>
+				</div>
+				<div class="b-chart b-right">
+					<p class="charts-title">重点单位成本情况（TOP5）</p>
+					<div id="org-cost"></div>
+				</div>
+			</div>
+		</div>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="./js/echarts.min.js"></script>
+		<script src="./js/global.js"></script>
+		<script type="text/javascript">
+			let orgOutputOption = null
+			let economicOption = null
+			let orgCostOption = null
+			$(function () {
+				resetTheme()
+				scalePage()
+				clearLoading()
+				timeInit()
+				progressChartsInit()
+				statisticsInit()
+				bChartsInit()
+				scalePage()
+			})
+
+			clearLoading = () => {
+				//删除加载动画
+				$('#loading').fadeOut(1000)
+				setTimeout(function () {
+					$('#loading').remove()
+				}, 1300)
+			}
+
+			timeInit = () => {
+				setInterval(() => {
+					let date = new Date()
+					$('#time').text(getFormatDate)
+				}, 1000)
+			}
+			getFormatDate = () => {
+				let nowDate = new Date()
+				let year = nowDate.getFullYear()
+				let month =
+					nowDate.getMonth() + 1 < 10
+						? '0' + (nowDate.getMonth() + 1)
+						: nowDate.getMonth() + 1
+				let date =
+					nowDate.getDate() < 10 ? '0' + nowDate.getDate() : nowDate.getDate()
+				let hour =
+					nowDate.getHours() < 10
+						? '0' + nowDate.getHours()
+						: nowDate.getHours()
+				let minute =
+					nowDate.getMinutes() < 10
+						? '0' + nowDate.getMinutes()
+						: nowDate.getMinutes()
+				let second =
+					nowDate.getSeconds() < 10
+						? '0' + nowDate.getSeconds()
+						: nowDate.getSeconds()
+				return (
+					year +
+					'-' +
+					month +
+					'-' +
+					date +
+					' ' +
+					hour +
+					':' +
+					minute +
+					':' +
+					second
+				)
+			}
+			getScale = () => {
+				// 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+				const width = 1920
+				const height = 1080
+				let ww = window.innerWidth / width
+				let wh = window.innerHeight / height
+				return ww < wh ? ww : wh
+			}
+			// 页面渲染计算比例缩放
+			scalePage = () => {
+				setScale = debounce(() => {
+					// 获取到缩放比，设置它
+					let scale = this.getScale()
+					$('.scale-wrapper').css({
+						transform: 'scale(' + scale + ') translate(-50%, -50%)',
+						'-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+					})
+				}, 200)
+				setScale()
+				window.addEventListener('resize', setScale)
+			}
+			// 防抖
+			debounce = (fun, delay) => {
+				let timer
+				return function () {
+					if (timer) {
+						clearTimeout(timer)
+					}
+					timer = setTimeout(fun, delay)
+				}
+			}
+
+			// 进度条模块渲染
+			progressChartsInit = () => {
+				const leftChartData = [
+					{
+						id: '1',
+						type: 'mainIncome',
+						amount1: '20亿',
+						amount2: '30亿',
+						rote: '75%'
+					},
+					{
+						id: '2',
+						type: 'totalProfit',
+						amount1: '11亿',
+						amount2: '23亿',
+						rote: '48%'
+					},
+					{
+						id: '3',
+						type: 'accountsReceivable',
+						amount1: '15亿',
+						amount2: '15亿',
+						rote: '100%'
+					},
+					{
+						id: '4',
+						type: 'stock',
+						amount1: '8亿',
+						amount2: '40亿',
+						rote: '20%'
+					},
+					{
+						id: '5',
+						type: 'totalValue',
+						amount1: '11亿',
+						amount2: '24亿',
+						rote: '45.8%'
+					},
+					{
+						id: '6',
+						type: 'totalCost',
+						amount1: '44亿',
+						amount2: '52亿',
+						rote: '80%'
+					},
+					{
+						id: '7',
+						type: 'profit',
+						amount1: '44亿',
+						amount2: '52亿',
+						rote: '80%'
+					},
+					{
+						id: '8',
+						type: 'totalAssets',
+						amount1: '5亿',
+						amount2: '20亿',
+						rote: '20%'
+					}
+				]
+				$.each(leftChartData, (index, item) => {
+					$('.progress-item[typeName=' + item.type + '] .amount1').text(
+						item.amount1
+					)
+					$('.progress-item[typeName=' + item.type + '] .amount2').text(
+						item.amount2
+					)
+					setTimeout(() => {
+						$('.progress-item[typeName=' + item.type + '] .progress').css(
+							'width',
+							item.rote
+						)
+					}, 500)
+				})
+			}
+
+			// 右侧颜色块渲染
+			statisticsInit = () => {
+				const statisticsData = [
+					{
+						id: '1',
+						type: 'liquidity',
+						value: '1,870,990'
+					},
+					{
+						id: '2',
+						type: 'liabilities',
+						value: '70,990'
+					},
+					{
+						id: '3',
+						type: 'stock',
+						value: '300,000,000'
+					},
+					{
+						id: '4',
+						type: 'addedValue',
+						value: '900,000'
+					}
+				]
+				$.each(statisticsData, (index, item) => {
+					$(
+						'.statistics .statistics-item[stcName=' +
+							item.type +
+							'] .statistics-value'
+					).text(item.value)
+				})
+			}
+			// 底部图表渲染
+			bChartsInit = () => {
+				let orgOutputChart = echarts.init(document.getElementById('org-output'))
+				let economicChart = echarts.init(
+					document.getElementById('economic-line')
+				)
+				let orgCostChart = echarts.init(document.getElementById('org-cost'))
+				const darkColor = ['#7E6DFF', '#336ECF', '#FC41A8']
+				const highlightColor = ['#AA9FFF', '#609CFE']
+				const orgOutputData = [30860.21, 40876.32]
+				const months = [
+					'1月',
+					'2月',
+					'3月',
+					'4月',
+					'5月',
+					'6月',
+					'7月',
+					'8月',
+					'9月',
+					'10月',
+					'11月',
+					'12月'
+				]
+
+				orgOutputOption = {
+					grid: {
+						x: '120',
+						y: '20%'
+					},
+					// tooltip: {
+					//     trigger: 'axis'
+					// },
+					xAxis: [
+						{
+							type: 'value',
+							axisTick: {
+								show: false
+							},
+							axisLabel: {
+								show: false
+							},
+							//  改变x轴颜色
+							axisLine: {
+								show: false
+							},
+							splitLine: {
+								//网格线
+								show: false
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'category',
+							axisLabel: {
+								textStyle: {
+									color: '#fff',
+									fontSize: 20
+								}
+							},
+							axisTick: {
+								show: false
+							},
+							//  改变x轴颜色
+							axisLine: {
+								show: false
+							},
+							data: ['XX二二', 'XX二三']
+						}
+					],
+					series: [
+						{
+							type: 'bar',
+							itemStyle: {
+								normal: {
+									show: true,
+									barBorderRadius: 13
+								}
+							},
+							label: {
+								normal: {
+									show: true,
+									position: 'insideRight',
+									textStyle: {
+										color: '#fff',
+										fontSize: 16,
+										fontWeight: 'bold'
+									},
+									formatter: '{c}万元  '
+								}
+							},
+							barGap: '100%',
+							barCategoryGap: '2%',
+							barMaxWidth: 26,
+							data: (function () {
+								let itemArr = []
+								for (let i = 0; i < orgOutputData.length; i++) {
+									let item = {
+										value: orgOutputData[i],
+										itemStyle: {
+											normal: {
+												color: new echarts.graphic.LinearGradient(1, 1, 0, 0, [
+													{
+														offset: 0,
+														color: highlightColor[i]
+													},
+													{
+														offset: 1,
+														color: darkColor[i]
+													}
+												])
+											}
+										}
+									}
+									itemArr.push(item)
+								}
+								return itemArr
+							})()
+						}
+					]
+				}
+				orgOutputChart.setOption(orgOutputOption)
+
+				const orgCostData = [21000.21, 40876.32]
+				orgCostOption = {
+					grid: {
+						x: '120',
+						y: '20%'
+					},
+					xAxis: [
+						{
+							type: 'value',
+							axisTick: {
+								show: false
+							},
+							axisLabel: {
+								show: false
+							},
+							//  改变x轴颜色
+							axisLine: {
+								show: false
+							},
+							splitLine: {
+								//网格线
+								show: false
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'category',
+							axisLabel: {
+								textStyle: {
+									color: '#fff',
+									fontSize: 20
+								}
+							},
+							axisTick: {
+								show: false
+							},
+							//  改变x轴颜色
+							axisLine: {
+								show: false
+							},
+							data: ['XX二二', 'XX二三']
+						}
+					],
+					series: [
+						{
+							type: 'bar',
+							itemStyle: {
+								normal: {
+									show: true,
+									barBorderRadius: 13
+								}
+							},
+							label: {
+								normal: {
+									show: true,
+									position: 'insideRight',
+									textStyle: {
+										color: '#fff',
+										fontSize: 16,
+										fontWeight: 'bold'
+									},
+									formatter: '{c}万元  '
+								}
+							},
+							barGap: '100%',
+							barCategoryGap: '2%',
+							barMaxWidth: 26,
+							data: (function () {
+								let itemArr = []
+								for (let i = 0; i < orgCostData.length; i++) {
+									let item = {
+										value: orgCostData[i],
+										itemStyle: {
+											normal: {
+												color: new echarts.graphic.LinearGradient(1, 1, 0, 0, [
+													{
+														offset: 0,
+														color: highlightColor[i]
+													},
+													{
+														offset: 1,
+														color: darkColor[i]
+													}
+												])
+											}
+										}
+									}
+									itemArr.push(item)
+								}
+								return itemArr
+							})()
+						}
+					]
+				}
+				orgCostChart.setOption(orgCostOption)
+
+				economicOption = {
+					color: darkColor,
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {
+							// type: 'cross',
+							// crossStyle: {
+							//     color: '#fff'
+							// },
+							// lineStyle: {
+							//     type: 'dashed'
+							// },
+							lineStyle: {
+								color: {
+									type: 'linear',
+									x: 0,
+									y: 0,
+									x2: 0,
+									y2: 1,
+									colorStops: [
+										{
+											offset: 0,
+											color: 'rgba(0, 255, 233,0)'
+										},
+										{
+											offset: 0.5,
+											color: 'rgba(255, 255, 255,1)'
+										},
+										{
+											offset: 1,
+											color: 'rgba(0, 255, 233,0)'
+										}
+									],
+									global: false
+								}
+							}
+						}
+					},
+					grid: {
+						left: 25,
+						right: 25,
+						bottom: 25,
+						top: 50,
+						containLabel: true
+					},
+					legend: {
+						data: ['主营收入曲线', '利润总额曲线', '资产总额曲线'],
+						orient: 'horizontal',
+						show: true,
+						right: 20,
+						top: 0,
+						textStyle: {
+							color: '#fff',
+							fontWeight: 'blod'
+						},
+						borderRadius: 10
+					},
+					xAxis: {
+						type: 'category',
+						data: [
+							'1月',
+							'2月',
+							'3月',
+							'4月',
+							'5月',
+							'6月',
+							'7月',
+							'8月',
+							'9月',
+							'10月',
+							'11月',
+							'12月'
+						],
+						splitLine: {
+							show: false
+						},
+						axisTick: {
+							show: false
+						},
+						axisLine: {
+							show: false
+						},
+						axisLabel: {
+							color: '#fff',
+							textStyle: {
+								fontSize: 12
+							}
+						}
+					},
+					yAxis: {
+						type: 'value',
+						// max: max_value>=100? max_value + 100: max_value+10,
+						// max: max_value > 100 ? max_value * 2 : max_value + 10,
+						// interval: 10,
+						// nameLocation: "center",
+						axisLabel: {
+							color: '#fff',
+							textStyle: {
+								fontSize: 12
+							}
+						},
+						splitLine: {
+							show: true,
+							lineStyle: {
+								color: '#424470'
+							}
+						},
+						axisTick: {
+							show: false
+						},
+						axisLine: {
+							show: false
+						}
+					},
+					series: [
+						{
+							name: '主营收入曲线',
+							type: 'line',
+							smooth: true,
+							symbol: 'none',
+							data: [13, 1, 4, 44, 45, 322, 76, 80, 100, 50, 20, 40]
+						},
+						{
+							name: '利润总额曲线',
+							type: 'line',
+							smooth: true,
+							symbol: 'none',
+							data: [13, 54, 34, 344, 35, 53, 60, 80, 300, 280, 250, 290]
+						},
+						{
+							name: '资产总额曲线',
+							type: 'line',
+							smooth: true,
+							symbol: 'none',
+							data: [13, 2, 2, 32, 123, 23, 136, 34, 344, 35, 53, 120]
+						}
+					]
+				}
+				economicChart.setOption(economicOption)
+
+				let toolTipIndex = 0 // 轮播所在下标
+
+				setInterval(() => {
+					orgOutputOption.series[0].data[0].value += Math.floor(
+						Math.random() * 2600 + 1000
+					)
+					orgOutputOption.series[0].data[1].value += Math.floor(
+						Math.random() * 1000 + 500
+					)
+					orgCostOption.series[0].data[0].value += Math.floor(
+						Math.random() * 2600 + 1000
+					)
+					orgCostOption.series[0].data[1].value += Math.floor(
+						Math.random() * 1000 + 500
+					)
+					orgOutputChart.setOption(orgOutputOption)
+					orgCostChart.setOption(orgCostOption)
+
+					// toolTip轮播
+					economicChart.dispatchAction({
+						type: 'showTip',
+						seriesIndex: 0,
+						dataIndex: toolTipIndex
+					})
+					toolTipIndex++
+					if (toolTipIndex > economicOption.series[0].data.length) {
+						toolTipIndex = 0
+					}
+				}, 2000)
+				// 窗口尺寸变化时resize
+				$(window).resize(function () {
+					orgOutputChart.resize()
+					economicChart.resize()
+					orgCostChart.resize()
+				})
+			}
+		</script>
+	</body>
+</html>

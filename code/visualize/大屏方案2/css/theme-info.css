@@ -1,0 +1,206 @@
+.theme-info {
+    position: relative;
+    padding: 15px;
+    background: url(../images/darken-bg.png) no-repeat center/cover;
+    overflow: hidden;
+    user-select: none;
+}
+.theme-info .content {
+    position: relative;
+    /* display: flex; */
+    /* flex-flow: row nowrap; */
+    /* justify-content: space-between; */
+    width: 100%;
+    height: 100%;
+    margin: 20px 0 0 0;
+}
+.theme-info .content #c-map {
+    width: calc(50% + 100px);
+    height: calc(100% - 255px);
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.theme-info .content .c-left {
+    /* width: calc(25% - 20px); */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25%;
+    background-color: rgba(137,87,161,0.08);
+    border-radius: 10px;
+    z-index: 2;
+}
+.theme-info .content .c-right {
+    /* width: calc(25% - 20px); */
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 25%;
+    background-color: rgba(137,87,161,0.08);
+    border-radius: 10px;
+    z-index: 2;
+}
+
+/* .theme-info .content .c-center { */
+    /* float: left; */
+    /* width: calc(50% - 20px); */
+    /* width: 50%;
+    height: 100%; */
+    /* border-radius: 10px; */
+/* } */
+
+.theme-info .content .c-left .chart-item,
+.theme-info .content .c-right .chart-item {
+    width: 100%;
+    margin: 30px 0 0 0;
+    overflow: hidden;
+}
+.theme-info .content .c-left #pj-dn {
+    width: 100%;
+    height: 280px;
+}
+/* .theme-info .content .c-left .pj-dn-info {
+    float: left;
+    width: calc(50% - 15px);
+    margin: 0 15px 0 0;
+    height: 300px;
+} */
+
+.theme-info .content .c-left #pj-type-dn {
+    width: 100%;
+    height: 250px;
+}
+.theme-info .content .c-left #pj-stop-dn {
+    width: 100%;
+    height: 240px;
+}
+
+.theme-info .content .c-right #pj-build-dn {
+    width: 100%;
+    height: 280px;
+}
+
+
+.theme-info .content .c-date {
+    position: absolute;
+    display: inline-block;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+.theme-info .content .c-date .date-wrapper {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 12px;
+    font-size: 40px;
+    color: #00AEFF;
+    font-weight:600;
+    background: url(./../images/datePicker.png) no-repeat center/contain;
+}
+.theme-info .content .c-date .date-line {
+    display: inline-block;
+    font-size: 40px;
+    color: #00AEFF;
+    font-weight:600;
+}
+.theme-info .content .c-total {
+    position: absolute;
+    display: inline-block;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 0 0 10px #B562FF80,
+    0 0 20px #B562FF80,
+    0 0 30px #B562FF80;
+    z-index: 3;
+}
+.theme-info .content .c-total span {
+    font-size: 73px;
+    font-weight: 600;
+    letter-spacing: 8px;
+}
+.theme-info .content .c-num {
+    position: absolute;
+    display: inline-block;
+    width: 700px;
+    height: 50px;
+    padding: 0 15px;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: #00F6FF;
+    font-weight: bold;
+    line-height: 50px;
+    background-color: #0000FF30;
+    z-index: 3;
+}
+
+.theme-info .content .c-num p:nth-of-type(1) {
+    float: left;
+    line-height: 50px;
+}
+
+.theme-info .content .c-num p:nth-of-type(2) {
+    float: right;
+}
+
+.theme-info .content .c-num p span {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.theme-info .content .c-num p span:nth-of-type(2) {
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.theme-info .content .c-bottom {
+    position: absolute;
+    width: calc(50% - 50px);
+    height: 200px;
+    left: 50%;
+    bottom: 115px;
+    transform: translateX(-50%);
+    background-color: rgba(137,87,161,0.08);
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.theme-info .content .c-bottom #bar-chart {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+.divider {
+    position: relative;
+    width: calc(100% - 30px);
+    height: 1px;
+    margin: 0 auto;
+    background-color: #08D1EA;
+    border-radius: 1px;
+}
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    width: 6%;
+    height: 3px;
+    background-color: #08D1EA;
+    border-radius: 1.5px;
+}
+.divider::before {
+    left: 0;
+}
+.divider::after {
+    right: 0;
+}

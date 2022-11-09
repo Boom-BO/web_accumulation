@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/human-res.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <title>人力综合看板</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div class="human-res theme-wrapper scale-wrapper">
+        <div id="loading">
+            <div class="loading_img">
+                <!-- 加载动画 -->
+                <img class="loading-ring-o" src="images/loading-ring-o.png">
+                <img class="loading-ring-i" src="images/loading-ring-i.png">
+            </div>
+        </div>
+        <div class="title-bar">
+            <p class="title-name">人力综合看板</p>
+            <span id="time"></span>
+            <div class="nav-btn">查看报告</div>
+        </div>
+        <div class="content">
+            <div id="c-map"></div>
+            <div class="c-left">
+                <div class="chart-item">
+                    <p class="charts-title">岗位结构</p>
+                    <div id="pj-dn"></div>
+                    <ul id="legend">
+                    </ul>
+                    <!-- <div class="pj-dn-info"></div> -->
+                </div>
+                <div class="divider"></div>
+                <div class="chart-item">
+                    <p class="charts-title">用工形式</p>
+                    <div id="pj-type-dn"></div>
+                </div>
+                <div class="divider"></div>
+                <div class="chart-item">
+                    <p class="charts-title">干部人员</p>
+                    <div id="pj-stop-dn"></div>
+                </div>
+            </div>
+            <!-- <div class="c-center">
+                <div id="china-map"></div>
+            </div> -->
+            <div class="c-right">
+                <div class="chart-item">
+                    <p class="charts-title">学历结构</p>
+                    <div id="pj-build-dn"></div>
+                    <!-- <div class="pj-dn-info"></div> -->
+                </div>
+                <div class="divider"></div>
+                <div class="chart-item">
+                    <p class="charts-title">职称结构</p>
+                    <div id="job-name-dn"></div>
+                </div>
+                <div class="divider"></div>
+                <div class="chart-item">
+                    <p class="charts-title">专项人才</p>
+                    <div class="talent">
+                    </div>
+                </div>
+            </div>
+            <div class="c-num clearfix">
+                <p><span>在职人员总数</span><br><span>54,123,122</span></p>
+                <p><span>平均年龄</span><br><span>34岁</span></p>
+            </div>
+            <div class="c-bottom">
+                <div id="bar-chart"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/china.js"></script>
+    <script src="./js/global.js"></script>
+    <script type="text/javascript">
+        let pjBuildDnChart = null
+        let pjDn = null
+        let pjTypeDn = null
+        let pjStopDn = null
+        let pjInfo = null
+        let pjBuildDn = null
+        let jobNameDn = null
+        let cMapOption = null
+        let barOption = null
+        $(function () {
+            resetTheme()
+            scalePage()
+            clearLoading()
+            timeInit()
+
+                // 岗位结构图
+                jobInit()
+                // 用工形式渲染
+                pjTypeDnInit()
+                // 干部人员图
+                pjStopDnInit()
+                // 学历分布
+                pjBuildDnInit()
+                // 职称分布 job-name-dn
+                jobNamesInit()
+                // 地图渲染
+                mapInit()
+
+                // 柱状图
+                barinit()
+
+                // 
+                talentInit()
+                scalePage()
+            // 
+            // progressChartsInit()
+            // statisticsInit()
+            // bChartsInit()
+            //全屏
+            // $("#fullScreen").on("click",function(){
+            //     fullScreen();
+            // })
+            // //退出全屏
+            // $("#exitFullScreen").on("click",function(){
+            //     exitFullscreen();
+            // })
+        })
+
+        clearLoading = () => {
+            //删除加载动画
+            $('#loading').fadeOut(1000)
+            setTimeout(function () {
+                $('#loading').remove()
+            }, 1300);
+        }
+
+        timeInit = () => {
+            setInterval(() => {
+                let date = new Date()
+                $('#time').text(getFormatDate)
+            }, 1000);
+        }
+        getFormatDate = () => {
+            let nowDate = new Date();
+            let year = nowDate.getFullYear();
+            let month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+            let date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+            let hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+            let minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+            let second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+            return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+        }
+        getScale = () => {
+            // 固定好16:9的宽高比，计算出最合适的缩放比，宽高比可根据需要自行更改
+            const width = 1920
+            const height = 1080
+            let ww = window.innerWidth / width
+            let wh = window.innerHeight / height
+            return ww < wh ? ww : wh
+        }
+        // 页面渲染计算比例缩放
+        scalePage = () => {
+            setScale = debounce(() => {
+                // 获取到缩放比，设置它
+                let scale = this.getScale()
+                $('.scale-wrapper').css({
+                    'transform': 'scale(' + scale + ') translate(-50%, -50%)',
+                    '-webkit-transform': 'scale(' + scale + ') translate(-50%, -50%)'
+                })
+            }, 200)
+            setScale()
+            window.addEventListener('resize', setScale)
+        }
+        // 防抖
+        debounce = (fun, delay) => {
+            let timer
+            return function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(fun, delay)
+            }
+        }
+
+        // 岗位结构图渲染
+        jobInit = () => {
+            const colors = ['#7DA5F8', '#FEC006', '#FF6D82', '#AA9FFF']
+            const pjDnData = [{
+                value: 11234,
+                name: '管理岗'
+            }, {
+                value: 8234,
+                name: '技术岗'
+            }, {
+                value: 24234,
+                name: '生产岗'
+            }, {
+                value: 12342,
+                name: '工勤岗'
+            }]
+            let legendDom = ''
+            $.each(pjDnData, (index, item) => {
+                legendDom += '<li>' +
+                    '<span class="color-block" style="background: ' + colors[index] + '"></span>' +
+                    '<span class="label">' + item.name + '</span>' +
+                    '<span class="num">' + item.value + '</span>' +
+                    '</li>'
+            })
+            $('#legend').append(legendDom)
+            let pjDnChart = echarts.init(document.getElementById('pj-dn'));
+            pjDn = {
+                grid: {
+                    left: 15,
+                    top: 20,
+                    bottom: 20,
+                    right: 15
+                },
+                legend: {
+                    show: false,
+                    orient: 'vertical',
+                    top: 0,
+                    right: 10,
+                    itemWidth: 10,
+                    itemHeight: 10,
+                    itemGap: 0,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 14
+                    },
+                    formatter: (name) => {
+                        let curItem = pjDnData.filter(item => item.name === name)
+                        return '{n|' + name + '：' + curItem[0].value + '}'
+                    },
+                    textStyle: {
+                        rich: {
+                            n: {
+                                fontSize: 18,
+                                color: '#fff',
+                                padding: [0, 15, 50, 0]
+                            },
+                            m: {
+                                fontSize: 38,
+                                color: '#20FDFA',
+                                align: 'left',
+                                verticalAlign: 'bottom',
+                                padding: [0, 0, 0, -15]
+                            },
+                            u: {
+                                fontSize: 18,
+                                color: '#20FDFA',
+                                verticalAlign: 'bottom'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: "pie",
+                    center: ["28%", "50%"],
+                    radius: ["40%", "48%"],
+                    color: colors,
+                    startAngle: 210,
+                    // selectedMode: 'single',
+                    labelLine: {
+                        length: 10,
+                        length2: 50,
+                        lineStyle: {
+                            color: '#00F5FF',
+                            type: 'dashed'
+                        }
+                    },
+                    label: {
+                        normal: {
+                            formatter: "{b|{d}%}",
+                            padding: [0, -58, 25, -55],
+                            rich: {
+                                b: {
+                                    fontSize: 15
+                                }
+                            }
+                        },
+                    },
+                    data: pjDnData
+                }]
+            }
+            pjDnChart.setOption(pjDn)
+
+            // 窗口尺寸变化时resize
+            $(window).resize(function () {
+                pjDnChart.resize()
+            });
+        }
+
+        // 用工形式渲染
+        pjTypeDnInit = () => {
+            const pjTypeDnData = [{
+                name: '在      岗',
+                value: 200,
+                selected: true
+            }, {
+                name: '不  在 岗',
+                value: 400
+            }, {
+                name: '其他从业',
+                value: 242
+            }, {
+                name: '劳务频道',
+                value: 1231
+            }]
+            let pjTypeDnChart = echarts.init(document.getElementById('pj-type-dn'));
+            pjTypeDn = {
+                title: {
+                    text: 742,
+                    subtext: ' 总数',
+                    textStyle: {
+                        color: '#00FFFE',
+                        fontSize: 30,
+                    },
+                    subtextStyle: {
+                        fontSize: 20,
+                        color: '#00FFFE'
+                    },
+                    x: '28.5%',
+                    y: '37%',
+                },
+                grid: {
+                    left: 15,
+                    top: 20,
+                    bottom: 20,
+                    right: 15
+                },
+                legend: {
+                    show: true,
+                    orient: 'vertical',
+                    top: 70,
+                    right: 50,
+                    textStyle: {
+                        color: '#00FFFE',
+                        fontSize: 13,
+                        fontWeight: 'bold'
+                    },
+                    formatter: (name) => {
+                        let curItem = pjTypeDnData.filter(item => item.name === name)
+                        return '   ' + name + '   ' + curItem[0].value + '人'
+                    }
+                },
+                series: [{
+                    type: "pie",
+                    center: ["35%", "50%"],
+                    radius: ["52%", "65%"],
+                    color: ['#2BC191', '#00BFF3', '#8E33E1', '#FEC006'],
+                    startAngle: 90,
+                    selectedMode: 'single',
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: pjTypeDnData
+                }]
+            }
+            pjTypeDnChart.setOption(pjTypeDn)
+
+            // 窗口尺寸变化时resize
+            $(window).resize(function () {
+                pjTypeDnChart.resize()
+            });
+        }
+        // 干部人员图
+        pjStopDnInit = () => {
+            let pjStopDnChart = echarts.init(document.getElementById('pj-stop-dn'));
+            let data1 = []
+            let data2 = []
+            for (let i = 0; i < 30; i++) {
+                data1.push(Math.floor(Math.random() * 500 + 20))
+                data2.push(Math.floor(Math.random() * 500 + 20))
+            }
+            // const pjStopDnData = []
+            pjStopDn = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    top: '15%',
+                    right: '4%',
+                    left: '4%',
+                    bottom: '15%'
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: ['正局级', '副局级', '正处级', '副处级'],
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255,255,255,0.12)'
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#f6f6f6", //X轴文字颜色
+                            fontSize: 13
+                        },
+                        margin: 12
+                    },
+                    axisTick: {
+                        show: false
+                    }
+                }],
+                yAxis: [{
+                    axisLabel: {
+                        show: false,
+                        formatter: '{value}',
+                        color: '#e2e9ff',
+                    },
+                    axisLine: {
+                        show: false,
+                        lineStyle: {
+                            color: 'rgba(255,255,255,1)'
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255,255,255,0.12)'
+                        }
+                    }
+                }],
+                series: [{
+                    type: 'bar',
+                    data: [500, 1000, 2210, 1300],
+                    barWidth: 20,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#0ECFF8' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: '#0570E9' // 100% 处的颜色
+                            }], false),
+                            shadowBlur: 4,
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            lineHeight: 21.5,
+                            width: 70,
+                            height: 25,
+                            backgroundColor: 'rgba(0,160,221,0.1)',
+                            borderRadius: 200,
+                            position: ['-10', '-40'],
+                            distance: 1,
+                            formatter: [
+                                '    {d|●}',
+                                ' {a|{c}}     \n',
+                                '    {b|}'
+                            ].join(','),
+                            rich: {
+                                d: {
+                                    color: '#3CDDCF',
+                                },
+                                a: {
+                                    color: '#fff',
+                                    align: 'center',
+                                },
+                                b: {
+                                    width: 1,
+                                    height: 15,
+                                    borderWidth: 1,
+                                    borderColor: '#234e6c',
+                                    align: 'left'
+                                },
+                            }
+                        }
+                    }
+                }]
+            }
+            pjStopDnChart.setOption(pjStopDn)
+            let toolTipIndex = 0; // 轮播所在下标
+
+            setInterval(() => {
+                // toolTip轮播
+                pjStopDnChart.dispatchAction({
+                    type: 'showTip',
+                    seriesIndex: 0,
+                    dataIndex: toolTipIndex
+                });
+                toolTipIndex++;
+                if (toolTipIndex > pjStopDn.series[0].data.length) {
+                    toolTipIndex = 0;
+                }
+            }, 2000)
+            // 窗口尺寸变化时resize
+            $(window).resize(function () {
+                pjStopDnChart.resize()
+            });
+        }
+        // 学历结构
+        pjBuildDnInit = () => {
+            const pjBuildDnData = [{
+                num: 55,
+                value: 230.2,
+                name: '在建'
+            }, {
+                num: 280,
+                value: 624.5,
+                name: '待建'
+            }]
+            pjBuildDnChart = echarts.init(document.getElementById('pj-build-dn'));
+            pjBuildDn = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    top: '15%',
+                    right: '6%',
+                    left: '10%',
+                    bottom: '15%'
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: ['1年内', '2年内', '3年内', '4年内', '5年内'],
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255,255,255,0.12)'
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#f6f6f6", //X轴文字颜色
+                            fontSize: 13
+                        },
+                        margin: 12
+                    },
+                    axisTick: {
+                        show: false
+                    }
+                }],
+                yAxis: [{
+                    axisLabel: {
+                        formatter: '{value}',
+                        color: '#e2e9ff',
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#e2e9ff',
+                            width: 0.2
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255,255,255,0.12)'
+                        }
+                    }
+                }],
+                series: [{
+                    type: 'bar',
+                    data: [500, 1000, 2210, 1300, 600, 200],
+                    barWidth: 20,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#0ECFF8' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: '#0570E9' // 100% 处的颜色
+                            }], false),
+                            shadowBlur: 4,
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            lineHeight: 21.5,
+                            width: 70,
+                            height: 25,
+                            backgroundColor: 'rgba(0,160,221,0.1)',
+                            borderRadius: 200,
+                            position: ['-10', '-40'],
+                            distance: 1,
+                            formatter: [
+                                '    {d|●}',
+                                ' {a|{c}}     \n',
+                                '    {b|}'
+                            ].join(','),
+                            rich: {
+                                d: {
+                                    color: '#3CDDCF',
+                                },
+                                a: {
+                                    color: '#fff',
+                                    align: 'center',
+                                },
+                                b: {
+                                    width: 1,
+                                    height: 15,
+                                    borderWidth: 1,
+                                    borderColor: '#234e6c',
+                                    align: 'left'
+                                },
+                            }
+                        }
+                    }
+                }]
+            }
+            pjBuildDnChart.setOption(pjBuildDn)
+            let toolTipIndex = 0; // 轮播所在下标
+
+            setInterval(() => {
+                // toolTip轮播
+                pjBuildDnChart.dispatchAction({
+                    type: 'showTip',
+                    seriesIndex: 0,
+                    dataIndex: toolTipIndex
+                });
+                toolTipIndex++;
+                if (toolTipIndex > pjBuildDn.series[0].data.length) {
+                    toolTipIndex = 0;
+                }
+            }, 2000)
+
+            // 窗口尺寸变化时resize
+            $(window).resize(function () {
+                pjBuildDnChart.resize()
+            });
+        }
+        // 职称分布 
+        jobNamesInit = () => {
+            let pjStopDnChart = echarts.init(document.getElementById('job-name-dn'));
+            let data1 = []
+            let data2 = []
+            for (let i = 0; i < 12; i++) {
+                data1.push(Math.floor(Math.random() * 500 + 20))
+                data2.push(Math.floor(Math.random() * 500 + 20))
+            }
+            // const pjStopDnData = []
+            pjStopDn = {
+                color: ['#32B7E9', '#FC41A8'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        lineStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0,
+                                    color: 'rgba(0, 255, 233,0)'
+                                }, {
+                                    offset: 0.5,
+                                    color: 'rgba(255, 255, 255,1)',
+                                }, {
+                                    offset: 1,
+                                    color: 'rgba(0, 255, 233,0)'
+                                }],
+                                global: false
+                            }
+                        }
+                    }
+                },
+                grid: {
+                    left: 15,
+                    right: 15,
+                    bottom: 20,
+                    top: 30,
+                    containLabel: true
+                },
+                legend: {
+                    data: ['流入人员', '流出人员'],
+                    orient: 'horizontal',
+                    show: true,
+                    right: 20,
+                    top: 0,
+                    textStyle: {
+                        color: '#fff',
+                        fontWeight: 'blod'
+                    },
+                    borderRadius: 10
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    splitLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        color: '#fff',
+                        textStyle: {
+                            fontSize: 12
+                        }
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    // max: max_value>=100? max_value + 100: max_value+10,
+                    // max: max_value > 100 ? max_value * 2 : max_value + 10,
+                    // interval: 10,
+                    // nameLocation: "center",
+                    axisLabel: {
+                        color: '#fff',
+                        textStyle: {
+                            fontSize: 12
+                        },
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#424470'
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false
+                    }
+                },
+                series: [{
+                        name: '停工项目数',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        data: data1,
+                        areaStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: '#336ECF30'
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: 'rgba(108,80,243,0)'
+                                    }
+                                ], false),
+                                shadowColor: '#336ECF90',
+                                shadowBlur: 20
+                            }
+                        }
+                    },
+                    {
+                        name: '停工项目总额',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        data: data2,
+                        areaStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: '#FC41A830'
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: 'rgba(108,80,243,0)'
+                                    }
+                                ], false),
+                                shadowColor: '#FC41A890',
+                                shadowBlur: 20
+                            }
+                        }
+                    }
+                ]
+            }
+            pjStopDnChart.setOption(pjStopDn)
+            let toolTipIndex = 0; // 轮播所在下标
+
+            setInterval(() => {
+                // toolTip轮播
+                pjStopDnChart.dispatchAction({
+                    type: 'showTip',
+                    seriesIndex: 0,
+                    dataIndex: toolTipIndex
+                });
+                toolTipIndex++;
+                if (toolTipIndex > pjStopDn.series[0].data.length) {
+                    toolTipIndex = 0;
+                }
+            }, 2000)
+            // 窗口尺寸变化时resize
+            $(window).resize(function () {
+                pjStopDnChart.resize()
+            });
+        }
+        // 
+        talentInit = () => {
+            const talentData = [{
+                id: '1',
+                name: '一级建筑师',
+                value: '50',
+                percentage: '90%'
+            },{
+                id: '2',
+                name: '政府特殊津贴',
+                value: '90',
+                percentage: '50%'
+            },{
+                id: '3',
+                name: '中华技能大奖',
+                value: '50',
+                percentage: '80%'
+            },{
+                id: '4',
+                name: '全国技术能手',
+                value: '50',
+                percentage: '75%'
+            },{
+                id: '5',
+                name: '集团科技带头创新大奖',
+                value: '10',
+                percentage: '10%'
+            },{
+                id: '6',
+                name: '集团首席技师',
+                value: '7000',
+                percentage: '60%'
+            }]
+            let talenDom = ''
+            $.each(talentData, (index, item)=>{
+                talenDom += '<div class="talent-line clearfix">'+
+                        '<span class="label">'+ item.name +'</span>'+
+                        '<span class="progress-wrapper">'+
+                            '<span class="progress" style="width:'+ item.percentage +'"></span>'+
+                        '</span>'+
+                        '<span class="value">'+ item.value +'</span>'+
+                    '</div>'
+            })
+            $('.talent').append(talenDom)
+        }
+        mapInit = () => {
+            let cMap = echarts.init(document.getElementById('c-map'));
+            var data = [{
+                    name: '北京',
+                    value: 199
+                },
+                {
+                    name: '天津',
+                    value: 542
+                },
+                {
+                    name: '山西',
+                    value: 881
+                },
+                {
+                    name: '内蒙古',
+                    value: 457
+                },
+                {
+                    name: '辽宁',
+                    value: 657
+                },
+                {
+                    name: '河北',
+                    value: 167
+                },
+                {
+                    name: '台湾',
+                    value: 490
+                },
+                {
+                    name: '黑龙江',
+                    value: 167
+                },
+                {
+                    name: '吉林',
+                    value: 267
+                },
+                {
+                    name: '陕西',
+                    value: 367
+                },
+                {
+                    name: '甘肃',
+                    value: 567
+                },
+                {
+                    name: '宁夏',
+                    value: 627
+                },
+                {
+                    name: '青海',
+                    value: 677
+                },
+                {
+                    name: '新疆',
+                    value: 0
+                },
+                {
+                    name: '西藏',
+                    value: 1
+                },
+                {
+                    name: '四川',
+                    value: 637
+                },
+                {
+                    name: '重庆',
+                    value: 647
+                },
+                {
+                    name: '山东',
+                    value: 617
+                },
+                {
+                    name: '河南',
+                    value: 607
+                },
+                {
+                    name: '江苏',
+                    value: 167
+                },
+                {
+                    name: '安徽',
+                    value: 267
+                },
+                {
+                    name: '湖北',
+                    value: 367
+                },
+                {
+                    name: '浙江',
+                    value: 567
+                },
+                {
+                    name: '福建',
+                    value: 867
+                },
+                {
+                    name: '江西',
+                    value: 967
+                },
+                {
+                    name: '湖南',
+                    value: 267
+                },
+                {
+                    name: '贵州',
+                    value: 167
+                },
+                {
+                    name: '云南',
+                    value: 367
+                },
+                {
+                    name: '广东',
+                    value: 467
+                },
+                {
+                    name: '广西',
+                    value: 167
+                },
+                {
+                    name: '海南',
+                    value: 567
+                },
+                {
+                    name: '上海',
+                    value: 667
+                },
+            ];
+
+            var geoCoordMap = {};
+
+            /*获取地图数据*/
+            cMap.showLoading();
+            var mapFeatures = echarts.getMap('china').geoJson.features;
+            cMap.hideLoading();
+            mapFeatures.forEach(function (v) {
+                // 地区名称
+                var name = v.properties.name;
+                // 地区经纬度
+                geoCoordMap[name] = v.properties.cp;
+
+            });
+            cMapOption = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function (params) {
+                        if (params.data.value.length > 1) {
+                            return params.data.name + "：" + params.data.value[2] + "人"
+                        } else {
+                            return params.data.name + "：" + params.data.value + "人"
+                        }
+                    },
+                    extraCssText: 'font-size:18px;'
+                },
+                visualMap: {
+                    show: true,
+                    min: 0,
+                    max: 200,
+                    left: '5%',
+                    bottom: 80,
+                    calculable: true,
+                    seriesIndex: [0],
+                    inRange: {
+                        color: ['#122d69'] // 蓝绿
+                    }
+                },
+                geo: {
+                    show: true,
+                    map: 'china',
+                    top: 80,
+                    label: {
+                        normal: {
+                            show: false
+                        },
+                        emphasis: {
+                            show: false,
+                        }
+                    },
+                    zoom: 1, //当前视角的缩放比例
+                    roam: false, //是否开启平游或缩放
+                    itemStyle: {
+                        areaColor: '#122d96',
+                        borderColor: '#75a6f0',
+                        borderWidth: 4,
+                        shadowBlur: 20,
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 20,
+                        emphasis: {
+                            areaColor: '#4499d0'
+                        }
+                    },
+                    z: 1
+                },
+                series: [{
+                        type: 'scatter',
+                        coordinateSystem: 'geo',
+                        zoom: 1, //当前视角的缩放比例
+                        rippleEffect: {
+                            brushType: 'stroke'
+                        },
+                        showEffectOn: 'render',
+                        itemStyle: {
+                            normal: {
+                                color: {
+                                    type: 'radial',
+                                    x: 0.5,
+                                    y: 0.5,
+                                    r: 0.5,
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: '#96C5F0'
+                                    }, {
+                                        offset: 0.6,
+                                        color: '#345496'
+                                    }, {
+                                        offset: 1,
+                                        color: '#325092'
+                                    }],
+                                    global: false // 缺省为 false
+                                },
+                                borderWidth: 0
+                            }
+
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                color: {
+                                    type: 'radial',
+                                    x: 0.5,
+                                    y: 0.5,
+                                    r: 0.5,
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: 'rgba(0, 0,0, 0.3)' // 0% 处的颜色
+                                    }, {
+                                        offset: 0.3,
+                                        color: 'rgba(153,168,166,0.5)' // 0% 处的颜色
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgba(0, 255, 255, 1)' // 100% 处的颜色
+                                    }],
+                                    global: false
+                                },
+                                borderWidth: 0,
+                                borderColor: '#b4dccd'
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                color: '#fff',
+                                fontWeight: 'bold',
+                                position: 'inside',
+                                formatter: function (para) {
+                                    return '{cnNum|' + para.data.value[2] + '}' + '{txtFontsize|人}'
+                                },
+                                rich: {
+                                    cnNum: {
+                                        fontSize: 19,
+                                        fontWeight: 'bold',
+                                        color: '#fff',
+                                    },
+                                    txtFontsize: {
+                                        fontSize: 8,
+                                        color: '#fff'
+                                    }
+                                }
+                            },
+                            emphasis: {
+                                formatter: function (para) {
+                                    return '{cnNum|' + para.data.value[2] + '}' + '{txtFontsize|人}'
+                                },
+                                rich: {
+                                    cnNum: {
+                                        fontSize: 30,
+                                        fontWeight: 'bold',
+                                        color: '#fff',
+                                    },
+                                    txtFontsize: {
+                                        fontSize: 8,
+                                        color: '#fff'
+                                    }
+                                }
+                            }
+                        },
+                        symbol: 'circle',
+                        symbolSize: function (val) {
+                            return (val[2] / 10);
+                        },
+                        data: [{
+                                name: '北京',
+                                value: [116.405285, 39.904989, 199],
+                                visualMap: false
+                            },
+                            {
+                                name: '天津',
+                                value: [117.190182, 39.125596, 542],
+                                visualMap: false
+                            },
+                            {
+                                name: '山西',
+                                value: [112.549248, 37.857014, 881],
+                                visualMap: false
+                            },
+                            {
+                                name: '内蒙古',
+                                value: [111.670801, 40.818311, 457],
+                                visualMap: false
+                            },
+                            {
+                                name: '辽宁',
+                                value: [123.429096, 41.796767, 657],
+                                visualMap: false
+                            },
+
+                            {
+                                name: '河北',
+                                value: [114.502461, 38.045474, 167],
+                                visualMap: false
+                            },
+                            {
+                                name: '台湾',
+                                value: [121.5135, 25.0308, 490],
+                                visualMap: false
+                            },
+                            {
+                                name: '黑龙江',
+                                value: [127.9688, 45.368, 167],
+                                visualMap: false
+                            },
+                            {
+                                name: '吉林',
+                                value: [125.8154, 44.2584, 267],
+                                visualMap: false
+                            },
+                            {
+                                name: '陕西',
+                                value: [109.1162, 34.2004, 367],
+                                visualMap: false
+                            },
+                            {
+                                name: '甘肃',
+                                value: [103.5901, 36.3043, 567],
+                                visualMap: false
+                            },
+                            {
+                                name: '宁夏',
+                                value: [106.3586, 38.1775, 627],
+                                visualMap: false
+                            },
+                            {
+                                name: '青海',
+                                value: [101.4038, 36.8207, 677],
+                                visualMap: false
+                            },
+                            {
+                                name: '新疆',
+                                value: [87.9236, 43.5883, 0],
+                                visualMap: false
+                            },
+                            {
+                                name: '西藏',
+                                value: [91.11, 29.97, 1],
+                                visualMap: false
+                            },
+                            {
+                                name: '四川',
+                                value: [103.9526, 30.7617, 637],
+                                visualMap: false
+                            },
+                            {
+                                name: '重庆',
+                                value: [108.384366, 30.439702, 647],
+                                visualMap: false
+                            },
+                            {
+                                name: '山东',
+                                value: [117.1582, 36.8701, 617],
+                                visualMap: false
+                            },
+                            {
+                                name: '河南',
+                                value: [113.4668, 34.6234, 607],
+                                visualMap: false
+                            },
+                            {
+                                name: '江苏',
+                                value: [118.8062, 31.9208, 167],
+                                visualMap: false
+                            },
+                            {
+                                name: '安徽',
+                                value: [117.29, 32.0581, 267],
+                                visualMap: false
+                            },
+                            {
+                                name: '湖北',
+                                value: [114.3896, 30.6628, 367],
+                                visualMap: false
+                            },
+                            {
+                                name: '浙江',
+                                value: [119.5313, 29.8773, 567],
+                                visualMap: false
+                            },
+                            {
+                                name: '福建',
+                                value: [119.4543, 25.9222, 867],
+                                visualMap: false
+                            },
+                            {
+                                name: '江西',
+                                value: [116.0046, 28.6633, 967],
+                                visualMap: false
+                            },
+                            {
+                                name: '湖南',
+                                value: [113.0823, 28.2568, 267],
+                                visualMap: false
+                            },
+                            {
+                                name: '贵州',
+                                value: [106.6992, 26.7682, 167],
+                                visualMap: false
+                            },
+                            {
+                                name: '云南',
+                                value: [102.9199, 25.4663, 367],
+                                visualMap: false
+                            },
+                            {
+                                name: '广东',
+                                value: [113.12244, 23.009505, 467],
+                                visualMap: false
+                            },
+                            {
+                                name: '广西',
+                                value: [108.479, 23.1152, 167],
+                                visualMap: false
+                            },
+                            {
+                                name: '海南',
+                                value: [110.3893, 19.8516, 567],
+                                visualMap: false
+                            },
+                            {
+                                name: '上海',
+                                value: [121.4648, 31.2891, 667],
+                                visualMap: false
+                            },
+                        ],
+                        zlevel: 3,
+                    },
+                    {
+                        type: 'map',
+                        map: 'china',
+                        label: {
+                            normal: {
+                                show: true,
+                                color: '#fff', //字的颜色
+                                fontSize: 14,
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                areaColor: '#122d69',
+                                borderColor: '#75a6f0' //描边颜色
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                color: "#fff"
+                            },
+                            itemStyle: {
+                                areaColor: {
+                                    type: 'linear',
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: '#51F1FA' // 0% 处的颜色
+                                    }, {
+                                        offset: 1,
+                                        color: '#3EABD1' // 100% 处的颜色
+                                    }],
+                                },
+                                borderColor: '#75a6f0' //描边颜色
+                            }
+                        },
+                        z: 2,
+                        zoom: 1, //当前视角的缩放比例
+                        data: data
+                    }
+                ]
+            }
+            cMap.setOption(cMapOption)
+            // 窗口尺寸变化时resize
+            $(window).resize(function () {
+                cMap.resize()
+            });
+        }
+
+        barinit = () => {
+            let barChart = echarts.init(document.getElementById('bar-chart'));
+            const months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+            barOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    },
+                    confine: true
+                },
+                grid: {
+                    // top: 'middle',
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    top: '22%',
+                    containLabel: true
+                },
+                legend: {
+                    data: ['在职人数', '离职人数'],
+                    left: 20,
+                    top: 5,
+                    itemWidth: 10,
+                    itemHeight: 10,
+                    textStyle: {
+                        color: "#f6f6f6",
+                        fontSize: 14
+                    }
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: months,
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#f6f6f6", //X轴文字颜色
+                            fontSize: 13
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#42447070',
+                            width: 0.5
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    }
+                }],
+                yAxis: [{
+                    type: 'value',
+                    name: '',
+                    axisLabel: {
+                        formatter: '{value} ',
+                        textStyle: {
+                            color: "#f6f6f6", //X轴文字颜色
+                            fontSize: 13
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#42447070',
+                            width: 0.5
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#42447070'
+                        }
+                    }
+                }],
+                series: [{
+                        name: '储备项目数',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                // barBorderRadius: 5,
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: "#932AE1"
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: "#303E8C"
+                                    }
+                                ])
+                            }
+                        },
+                        data: [100, 150, 200, 150, 180, 210, 250, 270, 310, 280, 250, 320]
+                    },{
+                        name: '在建项目数',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                // barBorderRadius: 5,
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: "#F3C478"
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: "#F6AD62"
+                                    }
+                                ])
+                            }
+                        },
+                        data: [80, 60, 120, 280, 150, 230, 210, 190, 170, 200, 150, 110]
+                    }]
+            }
+            barChart.setOption(barOption)
+            let toolTipIndex = 0; // 轮播所在下标
+
+            setInterval(() => {
+                // toolTip轮播
+                barChart.dispatchAction({
+                    type: 'showTip',
+                    seriesIndex: 0,
+                    dataIndex: toolTipIndex
+                });
+                toolTipIndex++;
+                if (toolTipIndex > barOption.series[0].data.length) {
+                    toolTipIndex = 0;
+                }
+            }, 1500)
+            // 窗口尺寸变化时resize
+            $(window).resize(function () {
+                pjBuildDnChart.resize()
+            });
+        }
+    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+{
+	"id": "1862827",
+	"name": "XXX",
+	"font_family": "iconfont",
+	"css_prefix_text": "icon-",
+	"description": "",
+	"glyphs": [
+		{
+			"icon_id": "622773",
+			"name": "ZS打赏总额",
+			"font_class": "dashangzonge",
+			"unicode": "e601",
+			"unicode_decimal": 58881
+		},
+		{
+			"icon_id": "742123",
+			"name": "存储设备",
+			"font_class": "cunchushebei",
+			"unicode": "ea5f",
+			"unicode_decimal": 59999
+		},
+		{
+			"icon_id": "795554",
+			"name": "利润",
+			"font_class": "ai-profit",
+			"unicode": "e673",
+			"unicode_decimal": 58995
+		},
+		{
+			"icon_id": "2461523",
+			"name": "利润表-selected",
+			"font_class": "lirunbiaoselected",
+			"unicode": "e615",
+			"unicode_decimal": 58901
+		},
+		{
+			"icon_id": "2742661",
+			"name": "收入",
+			"font_class": "shouru",
+			"unicode": "e677",
+			"unicode_decimal": 58999
+		},
+		{
+			"icon_id": "4734126",
+			"name": "配置清单",
+			"font_class": "ic_configchecklist",
+			"unicode": "e602",
+			"unicode_decimal": 58882
+		},
+		{
+			"icon_id": "4734145",
+			"name": "发票",
+			"font_class": "ic_invoice",
+			"unicode": "e60c",
+			"unicode_decimal": 58892
+		},
+		{
+			"icon_id": "4734147",
+			"name": "市场",
+			"font_class": "ic_market",
+			"unicode": "e60d",
+			"unicode_decimal": 58893
+		},
+		{
+			"icon_id": "4734161",
+			"name": "销售业绩",
+			"font_class": "ic_saleperformance",
+			"unicode": "e612",
+			"unicode_decimal": 58898
+		},
+		{
+			"icon_id": "4734175",
+			"name": "管理员",
+			"font_class": "ic_admin",
+			"unicode": "e619",
+			"unicode_decimal": 58905
+		},
+		{
+			"icon_id": "5322184",
+			"name": "账单",
+			"font_class": "zhangdan",
+			"unicode": "e6a0",
+			"unicode_decimal": 59040
+		},
+		{
+			"icon_id": "5383802",
+			"name": "资产",
+			"font_class": "huabanfuben",
+			"unicode": "e650",
+			"unicode_decimal": 58960
+		},
+		{
+			"icon_id": "6241679",
+			"name": "现场看板",
+			"font_class": "xianchangkanban",
+			"unicode": "e62c",
+			"unicode_decimal": 58924
+		},
+		{
+			"icon_id": "9749395",
+			"name": "资产清单",
+			"font_class": "asset-management-list-of-assets",
+			"unicode": "e608",
+			"unicode_decimal": 58888
+		},
+		{
+			"icon_id": "11192513",
+			"name": "采销利润报表_ico@2x",
+			"font_class": "caixiaolirunbaobiao_icox",
+			"unicode": "e6c7",
+			"unicode_decimal": 59079
+		},
+		{
+			"icon_id": "11852258",
+			"name": "客户列表",
+			"font_class": "kehuliebiao",
+			"unicode": "e616",
+			"unicode_decimal": 58902
+		},
+		{
+			"icon_id": "14427417",
+			"name": "项目-线",
+			"font_class": "xiangmu-xian",
+			"unicode": "e61a",
+			"unicode_decimal": 58906
+		}
+	]
+}

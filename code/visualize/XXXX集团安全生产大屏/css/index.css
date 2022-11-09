@@ -1,0 +1,416 @@
+.AVS {
+    position: relative;
+    padding: 0 30px;
+    background: url(../images/bg.png) no-repeat center/cover;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.AVS .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.AVS .content .c-safe,
+.AVS .content .c-plan,
+.AVS .content .c-danger-work,
+.AVS .content .c-status {
+    float: left;
+    position: relative;
+    height: 460px;
+    padding: 25px 0 0 0;
+    background-color: rgba(32, 77, 162, 0.5);
+    border-radius: 10px;
+}
+
+.AVS .content .c-safe {
+    width: 590px;
+    margin-top: 10px;
+}
+.AVS .content .c-safe .safectr-list {
+    width: 100%;
+    padding: 0 30px;
+}
+.AVS .content .c-safe .safectr-list .safectr-item {
+    width: 100%;
+    height: 45px;
+    padding: 0 10px;
+    margin: 15px 0 0 0;
+    line-height: 45px;
+    background:-webkit-gradient(linear,left bottom, left top,from(rgba(11,58,129,0.5)),to(rgba(10,87,179,0.5)));
+    background:linear-gradient(0deg,rgba(11,58,129,0.5) 0%,rgba(10,87,179,0.5) 100%);
+    border-radius:10px;
+}
+.AVS .content .c-safe .safectr-list .safectr-item .icon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 18px;
+    width: 18px;
+}
+.AVS .content .c-safe .safectr-list .safectr-item .label {
+    display: inline-block;
+    vertical-align: middle;
+    width: 110px;
+    font-size: 16px;
+    margin-left: 10px;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.AVS .content .c-safe .safectr-list .safectr-item .info {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 150px);
+    margin: 0 0 0 5px;
+    font-size: 14px;
+    color: #00FFFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.AVS .content .c-safe .btn-row {
+    width: 100%;
+    padding: 0 30px;
+}
+.AVS .content .c-safe .btn-row .btn {
+    float: left;
+    width: calc(50% - 23px);
+    margin: 25px 0 0 0;
+    height: 55px;
+    background-color: rgba(5, 114, 233, 0.3);
+    border: 1.5px solid rgba(0, 174, 255, 0.3);
+    border-radius: 10px;
+    line-height: 55px;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.AVS .content .c-safe .btn-row .btn:nth-of-type(2) {
+    margin-left: 46px;
+}
+
+.AVS .content .c-safe .btn-row .btn:hover {
+    background-color: rgba(5, 114, 233, 0.5);
+}
+
+
+.AVS .content .c-safe .btn-row .active {
+    background:-webkit-gradient(linear,left bottom, left top,from(rgba(5,114,233,1)),to(rgba(14,203,248,1)));
+    background:linear-gradient(0deg,rgba(5,114,233,1) 0%,rgba(14,203,248,1) 100%);
+    border: none;
+}
+
+.AVS .content .c-plan {
+    width: 590px;
+    margin-top: 35px;
+}
+
+.AVS .content .c-danger-work {
+    width: calc(100% - 610px);
+    margin: 10px 0 0 20px;
+}
+
+.AVS .content .c-status {
+    width: calc(100% - 610px);
+    margin: 35px 0 0 20px;
+}
+
+.AVS .content .c-danger-work .dw-info {
+    width: 100%;
+    padding: 0 20px;
+}
+
+.AVS .content .c-danger-work .btn-row {
+    width: 100%;
+    margin: 10px 0 0 0;
+    -webkit-margin-before: 0;
+    margin-block-start: 0;
+    -webkit-margin-after: 0;
+    margin-block-end: 0;
+}
+
+.AVS .content .c-danger-work .btn-row .org-btn {
+    position: relative;
+    float: left;
+    margin: 10px 0 0 15px;
+    padding: 10px 25px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+    background: linear-gradient(181deg, #00418F 0%, #072961 100%);
+    /* border-radius:10px; */
+    /* clip-path: polygon(8% 0%, 92% 0%, 100% 25%, 100% 75%, 92% 100%, 8% 100%, 0% 75%, 0% 25%); */
+    -webkit-clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px);
+    clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px);
+    cursor: pointer;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    overflow: visible;
+    z-index: 0;
+}
+
+.AVS .content .c-danger-work .btn-row .org-btn:nth-of-type(1) {
+    margin-left: 0;
+}
+
+.AVS .content .c-danger-work .btn-row .org-btn.active {
+    background: #00D1FF;
+}
+
+.AVS .content .c-danger-work .btn-row .org-btn:hover::before {
+    background: linear-gradient(181deg, rgb(5, 79, 169) 0%, rgb(8, 46, 108) 100%);
+}
+
+.AVS .content .c-danger-work .btn-row .org-btn::before {
+    content: '';
+    position: absolute;
+    left: 1.5px;
+    top: 1.5px;
+    width: calc(100% - 3px);
+    height: calc(100% - 3px);
+    -webkit-clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px);
+    clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px);
+    background: linear-gradient(181deg, #00418F 0%, #072961 100%);
+    z-index: -1;
+}
+
+.AVS .content .c-danger-work .warehouse-list {
+    margin-top: 30px;
+    float: left;
+    width: 40%;
+    height: 350px;
+    /* margin: 10px 0 0 0; */
+    overflow: auto;
+}
+.AVS .content .c-danger-work .warehouse-list .warehouse-item-wrapper{
+    float: left;
+    width: 100px;
+    height: 104px;
+    padding: 0 10px;
+    margin: 0px 0 10px 27px;
+    overflow: hidden;
+}
+
+.AVS .content .c-danger-work .warehouse-list .warehouse-item {
+    position: relative;
+    width: 65px;
+    height: 65px;
+    margin: 0 auto;
+    -webkit-clip-path: polygon(98.66025% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%, 99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%, 77.66044% 91.06889%, 76.42788% 92.30146%, 75% 93.30127%, 73.4202% 94.03794%, 71.73648% 94.48909%, 70% 94.64102%, 30% 94.64102%, 28.26352% 94.48909%, 26.5798% 94.03794%, 25% 93.30127%, 23.57212% 92.30146%, 22.33956% 91.06889%, 21.33975% 89.64102%, 1.33975% 55%, 0.60307% 53.4202%, 0.15192% 51.73648%, 0% 50%, 0.15192% 48.26352%, 0.60307% 46.5798%, 1.33975% 45%, 21.33975% 10.35898%, 22.33956% 8.93111%, 23.57212% 7.69854%, 25% 6.69873%, 26.5798% 5.96206%, 28.26352% 5.51091%, 30% 5.35898%, 70% 5.35898%, 71.73648% 5.51091%, 73.4202% 5.96206%, 75% 6.69873%, 76.42788% 7.69854%, 77.66044% 8.93111%, 78.66025% 10.35898%);
+    clip-path: polygon(98.66025% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%, 99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%, 77.66044% 91.06889%, 76.42788% 92.30146%, 75% 93.30127%, 73.4202% 94.03794%, 71.73648% 94.48909%, 70% 94.64102%, 30% 94.64102%, 28.26352% 94.48909%, 26.5798% 94.03794%, 25% 93.30127%, 23.57212% 92.30146%, 22.33956% 91.06889%, 21.33975% 89.64102%, 1.33975% 55%, 0.60307% 53.4202%, 0.15192% 51.73648%, 0% 50%, 0.15192% 48.26352%, 0.60307% 46.5798%, 1.33975% 45%, 21.33975% 10.35898%, 22.33956% 8.93111%, 23.57212% 7.69854%, 25% 6.69873%, 26.5798% 5.96206%, 28.26352% 5.51091%, 30% 5.35898%, 70% 5.35898%, 71.73648% 5.51091%, 73.4202% 5.96206%, 75% 6.69873%, 76.42788% 7.69854%, 77.66044% 8.93111%, 78.66025% 10.35898%);
+    background: linear-gradient(181deg, #00418F 0%, #072961 100%);
+    /* background-color: #03377D; */
+    text-align: center;
+    cursor: pointer;
+}
+
+.AVS .content .c-danger-work .warehouse-list .warehouse-item-wrapper:nth-of-type(4n - 3) {
+    margin-left: 0;
+}
+
+.AVS .content .c-danger-work .warehouse-list .warehouse-item.active {
+    background: #00D1FF;
+    z-index: 0;
+}
+
+.AVS .content .c-danger-work .warehouse-list .warehouse-item:hover::before {
+    /* background-color: #124c96; */
+    background: linear-gradient(181deg, rgb(5, 79, 169) 0%, rgb(8, 46, 108) 100%);
+}
+
+.AVS .content .c-danger-work .warehouse-list .warehouse-item::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    -webkit-clip-path: polygon(98.66025% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%, 99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%, 77.66044% 91.06889%, 76.42788% 92.30146%, 75% 93.30127%, 73.4202% 94.03794%, 71.73648% 94.48909%, 70% 94.64102%, 30% 94.64102%, 28.26352% 94.48909%, 26.5798% 94.03794%, 25% 93.30127%, 23.57212% 92.30146%, 22.33956% 91.06889%, 21.33975% 89.64102%, 1.33975% 55%, 0.60307% 53.4202%, 0.15192% 51.73648%, 0% 50%, 0.15192% 48.26352%, 0.60307% 46.5798%, 1.33975% 45%, 21.33975% 10.35898%, 22.33956% 8.93111%, 23.57212% 7.69854%, 25% 6.69873%, 26.5798% 5.96206%, 28.26352% 5.51091%, 30% 5.35898%, 70% 5.35898%, 71.73648% 5.51091%, 73.4202% 5.96206%, 75% 6.69873%, 76.42788% 7.69854%, 77.66044% 8.93111%, 78.66025% 10.35898%);
+    clip-path: polygon(98.66025% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%, 99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%, 77.66044% 91.06889%, 76.42788% 92.30146%, 75% 93.30127%, 73.4202% 94.03794%, 71.73648% 94.48909%, 70% 94.64102%, 30% 94.64102%, 28.26352% 94.48909%, 26.5798% 94.03794%, 25% 93.30127%, 23.57212% 92.30146%, 22.33956% 91.06889%, 21.33975% 89.64102%, 1.33975% 55%, 0.60307% 53.4202%, 0.15192% 51.73648%, 0% 50%, 0.15192% 48.26352%, 0.60307% 46.5798%, 1.33975% 45%, 21.33975% 10.35898%, 22.33956% 8.93111%, 23.57212% 7.69854%, 25% 6.69873%, 26.5798% 5.96206%, 28.26352% 5.51091%, 30% 5.35898%, 70% 5.35898%, 71.73648% 5.51091%, 73.4202% 5.96206%, 75% 6.69873%, 76.42788% 7.69854%, 77.66044% 8.93111%, 78.66025% 10.35898%);
+    /* clip-path: polygon(85% 50%, 85% 50%, 85% 50%, 85% 50%, 85% 50%, 85% 50%, 85% 50%, 67.5% 80.31089%, 67.5% 80.31089%, 67.5% 80.31089%, 67.5% 80.31089%, 67.5% 80.31089%, 67.5% 80.31089%, 67.5% 80.31089%, 32.5% 80.31089%, 32.5% 80.31089%, 32.5% 80.31089%, 32.5% 80.31089%, 32.5% 80.31089%, 32.5% 80.31089%, 32.5% 80.31089%, 15% 50%, 15% 50%, 15% 50%, 15% 50%, 15% 50%, 15% 50%, 15% 50%, 32.5% 19.68911%, 32.5% 19.68911%, 32.5% 19.68911%, 32.5% 19.68911%, 32.5% 19.68911%, 32.5% 19.68911%, 32.5% 19.68911%, 67.5% 19.68911%, 67.5% 19.68911%, 67.5% 19.68911%, 67.5% 19.68911%, 67.5% 19.68911%, 67.5% 19.68911%, 67.5% 19.68911%); */
+    background: linear-gradient(181deg, #00418F 0%, #072961 100%);
+    /* background-color: #03377D; */
+    z-index: -1;
+}
+
+.AVS .content .c-danger-work .warehouse-list .warehouse-item .whitem-icon {
+    display: inline-block;
+    width: 35px;
+    margin-top: 13px;
+}
+
+.AVS .content .c-danger-work .warehouse-list .warehouse-item-wrapper .wh-item-label {
+    width: 100%;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #00D1FF;
+    text-align: center;
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    display:-webkit-box; 
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2; 
+}
+
+/* .AVS .content .c-danger-work .warehouse-list::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+    color: transparent;
+  } */
+/*定义滚动条样式（高宽及背景）*/
+.AVS .content .c-danger-work .warehouse-list::-webkit-scrollbar {
+    width: 6px;
+    /* 滚动条宽度， width：对应竖滚动条的宽度  height：对应横滚动条的高度*/
+    background: transparent;
+}
+
+/*定义滚动条轨道（凹槽）样式*/
+.AVS .content .c-danger-work .warehouse-list::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #00418F;
+    /* 较少使用 */
+    border-radius: 3px;
+}
+
+/*定义滑块 样式*/
+.AVS .content .c-danger-work .warehouse-list::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    height: 100px;
+    /* 滚动条滑块长度 */
+    background-color: #0b52a9;
+}
+
+.AVS .content .c-danger-work #monitor-line {
+    float: left;
+    width: 60%;
+    height: 350px;
+}
+
+.AVS .content .c-plan .plan-name {
+    padding: 0 25px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.AVS .content .c-plan .plan-name:nth-of-type(2) {
+    margin: 35px 0 0 0;
+}
+
+.AVS .content .c-plan .plan-name img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 18px;
+}
+
+.AVS .content .c-plan .plan-name span {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 0 5px;
+}
+
+.AVS .content .c-plan .progress-item {
+    padding: 0 25px;
+}
+
+.AVS .content .c-plan .progress-item .info {
+    margin: 20px 0 0 0;
+    font-size: 16px;
+    color: #0ECAF7;
+    line-height: 25px;
+}
+
+.AVS .content .c-plan .progress-item .info .rate {
+    float: left;
+
+}
+
+.AVS .content .c-plan .progress-item .info .num {
+    float: right;
+}
+
+.AVS .content .c-plan .progress-item .info:nth-of-type(2n) {
+    margin: 30px 0 0 0;
+    color: #A79CFF;
+}
+
+
+.AVS .content .c-plan .progress-item .progress-wrapper {
+    width: 100%;
+    height: 16px;
+    margin: 7px 0;
+    border-radius: 8px;
+    background-color: #303E8C;
+    overflow: hidden;
+}
+
+.AVS .content .c-plan .progress-item .progress-wrapper .progress {
+    width: 0;
+    height: 16px;
+    background: -webkit-gradient(linear, left bottom, left top, from(#0570E9), to(#0ECFF8));
+    background: linear-gradient(0deg, #0570E9 0%, #0ECFF8 100%);
+    border-radius: 8px;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+}
+
+.AVS .content .c-plan .progress-item .progress-wrapper:nth-of-type(2n) .progress {
+    background: -webkit-gradient(linear, left bottom, left top, from(#7E6DFF), to(#AA9FFF));
+    background: linear-gradient(0deg, #7E6DFF 0%, #AA9FFF 100%);
+}
+
+.AVS .content .c-status {
+    text-align: center;
+    overflow: hidden;
+}
+
+.AVS .content .c-status .tabs {
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.AVS .content .c-status .tabs .tab {
+    float: left;
+    width: 280px;
+    background: #1448A3;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.AVS .content .c-status .tabs .tab.active {
+    background: linear-gradient(-87deg, #00A1FD 0%, #1782EF 100%);
+}
+
+.AVS .content .c-status .charts-wrapper {
+    width: 200%;
+    margin: 20px 0 0 0;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+.AVS .content .c-status .charts-wrapper #danger-bar {
+    float: left;
+    width: 50%;
+    height: 370px;
+}
+
+.AVS .content .c-status .charts-wrapper #warning-chart {
+    float: left;
+    width: 50%;
+    height: 370px;
+    color: #9183ff;
+}
